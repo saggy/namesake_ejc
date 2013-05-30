@@ -78,11 +78,24 @@ function mainWindow() {
 	
 	function saveAnnotation(a){
 		var db = Ti.Database.open(dbName);
-		
+		Ti.API.info(a.noteText);
+		Ti.API.info(a.page);
+		Ti.API.info(a.pageNo);
+		Ti.API.info(a.note);
+		Ti.API.info(a.id);
+		console.log('\n');
 		var query = 'INSERT INTO annotation (note_text, note_html, page, page_no, start_id, end_id, type, note, highlight_color, create_date, modify_date) VALUES (?,?,?,?,?,?,?,?,?,?,?)';
-		db.execute(query, a.noteText, a.noteHtml, a.page, a.pageNo, a.startId, a.endId, a.aType, a.note, a.highlightColor, a.created, a.modified);
-		
+		var editQuery = 'UPDATE annotation SET note=?, modify_date=? WHERE annotation_id=?';
+		if(a.id == null){
+			db.execute(query, a.noteText, a.noteHtml, a.page, a.pageNo, a.startId, a.endId, a.aType, a.note, a.highlightColor, a.created, a.modified);
+		}
+		else{
+			db.execute(editQuery, a.note, a.modified, a.id);
+		}
 		db.close();	
+		if(a.aType == 'note'){
+			webView.reload();
+		}
 	}
 	
 
@@ -128,6 +141,7 @@ function mainWindow() {
 	
 	Ti.App.addEventListener('saveannotation',function(e){
 		saveAnnotation(e);
+
 	});
 	
 	Ti.App.addEventListener('gotopage', function(e){

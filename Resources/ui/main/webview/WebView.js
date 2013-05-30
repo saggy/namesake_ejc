@@ -53,7 +53,7 @@ function WebView(_args) {
 		//db.execute('DROP TABLE answer');
 		//db.execute('DROP TABLE annotation');
 		//db.execute('CREATE TABLE IF NOT EXISTS annotation (annotation_id INTEGER PRIMARY KEY, note_text TEXT, note_html TEXT, ' +
-		//			 'note_offset NUMERIC, note_parent_id TEXT, row_index INTEGER, page TEXT, page_no INTEGER, start_id NUMERIC, end_id NUMERIC, type TEXT, note TEXT, highlight_color TEXT, create_date TEXT, modify_date TEXT)');
+				//	 'note_offset NUMERIC, note_parent_id TEXT, row_index INTEGER, page TEXT, page_no INTEGER, start_id NUMERIC, end_id NUMERIC, type TEXT, note TEXT, highlight_color TEXT, create_date TEXT, modify_date TEXT)');
 		//db.execute('CREATE TABLE IF NOT EXISTS answer (answer_id INTEGER PRIMARY KEY, answer_elementid TEXT, answer_text TEXT, page TEXT, page_no INTEGER, type TEXT, create_date TEXT, modify_date TEXT)');
 		
 		var rs = db.execute('SELECT answer_elementid, answer_text FROM answer WHERE page=?',page);
@@ -67,13 +67,15 @@ function WebView(_args) {
 		}
 		rs.close();
 
-		rs = db.execute('SELECT annotation_id, type, start_id, end_id, note_html, note_text, highlight_color FROM annotation WHERE page=?',page);
+		rs = db.execute('SELECT annotation_id, type, start_id, end_id, note, note_html, note_text, highlight_color FROM annotation WHERE page=?',page);
 		while(rs.isValidRow()){
-			var a = {id: rs.fieldByName('annotation_id'), type: rs.fieldByName('type'), startId : rs.fieldByName('start_id'), endId : rs.fieldByName('end_id'), 
-						noteText : rs.fieldByName('note_text'), noteHtml : rs.fieldByName('note_html'), highlightColor : rs.fieldByName('highlight_color') };
+			var a = {id: rs.fieldByName('annotation_id'), type: rs.fieldByName('type'), startId : rs.fieldByName('start_id'), endId : rs.fieldByName('end_id'),
+						noteText : rs.fieldByName('note_text'), noteHtml : rs.fieldByName('note_html'), note: rs.fieldByName('note'), highlightColor : rs.fieldByName('highlight_color') };
+
 			switch(a.type){
 				case 'note':
-					Ti.App.fireEvent('app:addBookmark',a);
+console.log(a.note);
+					Ti.App.fireEvent('app:addNote',a);
 					break;
 				case 'bookmark':
 					Ti.App.fireEvent('app:addBookmark',a);
@@ -117,6 +119,7 @@ function WebView(_args) {
 		var annotation = {};
 		var ids = parseIds(e.html);
 		
+		annotation.id = null;
 		annotation.noteText = e.text;
 		annotation.noteHtml = e.html;
 		annotation.startId = ids.first;
@@ -132,6 +135,7 @@ function WebView(_args) {
 			case NOTE:
 				annotation.aType = 'note';
 				Ti.App.fireEvent('app:addNote', annotation);
+				
 				break;
 			case BOOKMARK:
 				annotation.aType = 'bookmark';
@@ -146,12 +150,7 @@ function WebView(_args) {
 				self.reload();
 				break;
 		}
-	
-
-		
-
-		
-		Ti.API.info(annotation.noteText);
+	Ti.API.info(annotation.noteText);
 		Ti.API.info(annotation.noteHtml);
 		Ti.API.info(annotation.type);
 		Ti.API.info(annotation.startId);

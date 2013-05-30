@@ -39,6 +39,15 @@ function findEnclosingP(id){
 	return $p;
 }
 
+function saveNote(note){
+
+	var annotation = JSON.parse(note.getAttribute('annotation'));
+	if(annotation.note==null || note.value != null){
+		annotation.note = note.value;
+		Ti.App.fireEvent('saveannotation', annotation);
+	}
+
+}
 
 Ti.App.addEventListener('app:answerquestion',function(e){
 	document.getElementById(e.elementId).innerHTML=e.text;
@@ -75,7 +84,7 @@ Ti.App.addEventListener('app:addHighlight', function(e){
 
 	for(var i = startId+1; i <= endId ; i++){
 		startTag =  "<span id=\"highlight"+i+"\" style=\"background-color:"+highlightColor+"\">";//startTag.replace(i-1,i);
-		target = '<span id="'+i+'">'//target.replace(i-1,i);
+		target = '<span id="'+i+'">';//target.replace(i-1,i);
 //alert(startTag + ' '+ target);
 		domString = domString.replace(target, endTag+startTag+target);
 	}
@@ -88,13 +97,23 @@ Ti.App.addEventListener('app:addHighlight', function(e){
 });
 
 Ti.App.addEventListener('app:addNote', function(e){
-	e.id = e.startId + '_' + e.endId;
+	var id = e.startId + '_' + e.endId;
 //alert(e.id);
-	var noteView = "<div id='note" + e.id + "'><span class='mynotesheader' onclick='saveNote(this)' id='header" + e.id + "'></span><textarea id='text" + e.id + "' onblur='saveNote(this)'></textarea></div>";
+	e.note = (e.note != null) ? e.note : '';
+	var annotation = JSON.stringify(e);
+	var noteView = "<div id='note" + id + "'><span class='mynotesheader' onclick='saveNote(this)' id='header" + id + "' annotation='"+annotation+
+			"'></span><textarea id='text" + id + "' onblur='saveNote(this)' annotation='"+annotation+"'>"+e.note +"</textarea></div>";
 	var $p = findEnclosingP(e.startId);
-	var pHtml = $p.html();
-	$p.html(pHtml+noteView);
+	var previous = $p.attr('note');
+	previous = typeof(previous) !=='undefined' ? previous : false;
+	
+	if(!previous){
+		var pHtml = $p.html();
+		$p.html(pHtml+noteView);
+		$p.attr('note', true);
+	}
 });
+
   </script>
   <script type="text/javascript" src="jquery-1.4.2.min.js" charset="utf-8">
 </script>
