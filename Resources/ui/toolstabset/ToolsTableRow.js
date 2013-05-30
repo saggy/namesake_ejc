@@ -53,7 +53,12 @@ function ToolsTableRow(_args){
 			Ti.App.fireEvent('editnote', ev);
 		});
 		
+	}  else  {
+		noteLabel.addEventListener('click', function(e){
+		Ti.App.fireEvent('gotopage', {pageNo: self.pageNo});
+		});
 	}
+	
 	self.add(noteLabel);
 	self.add(pageLabel);
 
