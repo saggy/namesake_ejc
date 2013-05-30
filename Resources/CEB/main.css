@@ -1,0 +1,215 @@
+ @font-face {
+    font-family: 'Arvo Italic';
+    src: url('Arvo-Italic.ttf') format(truetype);
+}
+
+ @font-face {
+    font-family: 'Arvo Regular';
+    src: url('Arvo-Regular.ttf') format(truetype);
+}
+
+
+
+body {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-left: 0px;
+    font-family: Georgia;
+    font-size: 18px;
+    margin-right: 0px;
+    min-height: 0px;
+}
+
+
+p {
+    margin-bottom: 0px;
+    background-color: 'auto';
+}
+
+p + p {
+    text-indent: 1.5em;
+    margin-top: 0px;
+}
+
+div#multicolumn4 {
+    -webkit-column-count: 1;
+    -webkit-column-gap: 20px;
+    column-gap: 20px;
+}
+
+div#multicolumn4 h1 {
+    -moz-column-span: all;
+    column-span: all;
+    -webkit-column-span: all;
+}
+
+#multicolumn4 {
+    -webkit-margin-top-collapse: separate;
+    -webkit-margin-bottom-collapse: separate;
+    margin-left: 80px;
+    margin-right: 0px;
+    width: auto;
+    height: auto;
+    text-align: justify;
+}
+
+.box h3 {
+color: rgb(203,117,48);
+font-family: 'Arvo Italic', Georgia;
+}
+
+p.x-CEBPericopeHead {
+color: rgb(203,117,48);
+font-family: 'Arvo Italic', Georgia;
+font-size: 24px;
+text-indent: 0em;
+margin-top:20px;
+}
+
+
+img.leftLament {
+float: left;
+margin-top: 40px;
+}
+
+img.floatR {
+float: right;
+margin-left: -1000px;
+margin-right: -150px;
+width: 120px;
+height: 120px;
+margin-top: -90px;
+margin-bottom: 1000px;
+}
+
+.spacer {
+  min-height: 80px;
+}
+
+.lpquestion p {
+   margin-left: 20px;
+   margin-right: 20px;
+   max-width: 200px;
+   font-family: 'Arvo Italic', Georgia;
+   font-size: 16px;
+}
+
+.lpverse {
+   margin-left: 20px;
+   margin-right: 20px;
+   max-width: 240px;
+   font-family: 'Arvo Italic', Georgia;
+   font-size: 14px;
+}
+
+.lptext p {
+   margin-left: 15px;
+   margin-right: 15px;
+   font-size: 16px;
+}
+
+.x-CEBChapterStart {
+margin-top: 15px;
+text-indent: 0em;
+}
+
+
+.x-CEBChapterNo  {  
+float: left;
+position:relative;
+color: rgb(163,87,53); 
+font-family: 'Arvo Regular';
+z-index: 10;
+font-size:56px;
+line-height:90px;
+margin-top: -18px;
+margin-bottom:-28px;
+margin-right: 5px;
+text-indent: 0em;
+
+}
+
+.x-CEBChapterStart2 {
+margin-top: 15px;
+text-indent: 0em;
+}
+
+
+
+
+
+.x-CEBBookTitle {
+display: none; 
+}
+
+
+
+ul, li {
+	list-style-type: none;
+}
+
+
+.x-CEBPoetryText1 {
+    font-family: 'Arvo Regular', Futura;
+    font-size: 18px;
+	text-align: left;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:0.1in;
+	margin-bottom:.0001pt;
+	text-indent:-0.1in;
+}
+
+.x-CEBPoetryText2 {
+    font-family: 'Arvo Regular', Futura;
+    font-size: 18px;
+	text-align: left;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:0.2in;
+	margin-bottom:.0001pt;
+	text-indent:-.1in;
+}
+
+.x-CEBPoetryText3 {
+    font-family: 'Arvo Regular', Futura;
+    font-size: 18px;
+	text-align: left;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:0.3in;
+	margin-bottom:.0001pt;
+	text-indent:-.1in;
+}
+
+.x-CEBPoetryText4 {
+    font-family: 'Arvo Regular', Futura;
+    font-size: 18px;
+	text-align: left;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:0.4in;
+	margin-bottom:.0001pt;
+	text-indent:-.1in;
+}
+
+.x-CEBPoetryText5 {
+    font-family: 'Arvo Regular', Futura;
+    font-size: 18px;
+	text-align: left;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:0.5in;
+	margin-bottom:.0001pt;
+	text-indent:-.1in;
+}
+
+        .no-copy {
+    -webkit-user-select: none;
+}
+

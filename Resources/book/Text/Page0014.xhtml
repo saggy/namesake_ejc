@@ -9,39 +9,108 @@
   <title></title>
   <link href="../Styles/umph.css" media="all and (orientation:portrait)" rel="stylesheet" type="text/css" />
   <link href="../Styles/umphLandscape.css" media="all and (orientation:landscape)" rel="stylesheet" type="text/css" />
-  <script charset="utf-8" src="../Misc/namesake.js" type="text/javascript">
-</script>
+    <script charset="utf-8"  type="text/javascript">
+function biblepop(verse)
+{
+	Ti.App.fireEvent('biblepop',{verse: verse});
+}
+
+function answer(element)
+{
+	Ti.App.fireEvent('answer',{id: element.id, question: element.getAttribute("question")});
+}
+
+function blankfill(element)
+{
+	Ti.App.fireEvent('blankfill',{id: element.id, correctAnswer: element.getAttribute("correctanswer")});
+}
+
+function playvideo(video)
+{
+	Ti.App.fireEvent('playvideo',{video: video});
+}
+
+
+Ti.App.addEventListener('app:answerquestion',function(e){
+	document.getElementById(e.elementId).innerHTML=e.text;
+});
+
+Ti.App.addEventListener('app:addBookmark', function(e){
+	var imageSrc = '../../images/buttons/menu.png';
+	var height = 20;
+	var width = 20;
+	var id = 'bookmark' + e.startId + '_' + e.endId;
+	var imageTag = '<img id="'+id+'" alt="" src="'+imageSrc+'" height="'+height+'" width="'+width+'" />';
+	var id = '#'+e.startId;
+	var $p = $(id).parent();
+	var pHtml = $p.html();
+	
+	//alert(pHtml);
+	if(pHtml.indexOf('<img id="bookmark') === -1){
+		$p.html(pHtml+imageTag);
+	}
+});
+
+Ti.App.addEventListener('app:addHighlight', function(e){
+
+  	var startId = e.startId, endId = e.endId, highlightColor = e.highlightColor;
+	var domString = document.body.innerHTML;
+	//alert(domString);
+	
+	var target = '<span id="'+startId+'">'
+	var startTag = "<span id=\"highlight"+startId+"\" style=\"background-color:"+highlightColor+"\">";
+	var endTag = "</span>";
+	
+	domString = domString.replace(target, startTag + target);
+
+	for(var i = startId+1; i <= endId ; i++){
+		startTag =  "<span id=\"highlight"+i+"\" style=\"background-color:"+highlightColor+"\">";//startTag.replace(i-1,i);
+		target = '<span id="'+i+'">'//target.replace(i-1,i);
+//alert(startTag + ' '+ target);
+		domString = domString.replace(target, endTag+startTag+target);
+	}
+
+	var endId = endId+1;
+	target = '<span id="'+endId+'">';//target.replace(endId, endId+1);
+	domString = domString.replace(target, endTag + target);
+	
+	document.body.innerHTML = domString;
+});
+
+  </script>
+  <script type="text/javascript" src="jquery-1.4.2.min.js" charset="utf-8"></script>
 </head>
 
 <body>
   <div id="wrapper" style="height: 100%;">
     <div style="width: 180px; height: 924px; float: left; padding: 5px; background-image: url(../Images/sidebar.png); background-attachment: fixed; display: table;">
-      <p class="noindentp" style="margin-top: 200px; font-family: TrebuchetMS; margin-left: 10px;"><span style="display: table-cell; vertical-align: middle; line-height: 30px;"><em>He took him outside and said, “Look up at the sky and count the stars—if indeed you can count them.” Then he said to him, “So shall your offspring be.”</em><br />
-      <span onclick="biblepop('Gen.15.5')">Genesis 15:5</span></span></p>
+      <p class="noindentp" style="margin-top: 200px; font-family: TrebuchetMS; margin-left: 10px;"><span style="display: table-cell; vertical-align: middle; line-height: 30px;">
+      	<em><span id='1'>H</span>e <span id='2'>t</span>ook <span id='3'>h</span>im <span id='4'>o</span>utside <span id='5'>a</span>nd <span id='6'>s</span>aid, <span id='7'>“</span>Look <span id='8'>u</span>p <span id='9'>a</span>t <span id='10'>t</span>he <span id='11'>s</span>ky <span id='12'>a</span>nd <span id='13'>c</span>ount <span id='14'>t</span>he <span id='15'>s</span>tars—if <span id='16'>i</span>ndeed <span id='17'>y</span>ou <span id='18'>c</span>an <span id='19'>c</span>ount <span id='20'>t</span>hem.” <span id='21'>T</span>hen <span id='22'>h</span>e <span id='23'>s</span>aid <span id='24'>t</span>o <span id='25'>h</span>im, <span id='26'>“</span>So <span id='27'>s</span>hall <span id='28'>y</span>our <span id='29'>o</span>ffspring <span id='30'>b</span>e.”</em><br />
+      <span onclick="biblepop('Gen.15.5')"><span id='31'>G</span>enesis <span id='32'>1</span>5:5</span></span></p>
     </div>
 
     <div style="height: 100%; margin-left: 200px;">
-      <p class="noindentp">the story of his future life as one filled with prosperity, and for them that meant growing up to be a father with lots of children.</p>
+      <p class="noindentp"><span id='33'>t</span>he <span id='34'>s</span>tory <span id='35'>o</span>f <span id='36'>h</span>is <span id='37'>f</span>uture <span id='38'>l</span>ife <span id='39'>a</span>s <span id='40'>o</span>ne <span id='41'>f</span>illed <span id='42'>w</span>ith <span id='43'>p</span>rosperity, <span id='44'>a</span>nd <span id='45'>f</span>or <span id='46'>t</span>hem <span id='47'>t</span>hat <span id='48'>m</span>eant <span id='49'>g</span>rowing <span id='50'>u</span>p <span id='51'>t</span>o <span id='52'>b</span>e <span id='53'>a</span> <span id='54'>f</span>ather <span id='55'>w</span>ith <span id='56'>l</span>ots <span id='57'>o</span>f <span id='58'>c</span>hildren.</p>
 
-      <p style="text-align: justify;">Without currency or stocks or investments, the measure of permanent wealth in that day was carried in your land and your children. So for baby Abram’s parents to wish him a houseful of children who would exalt his name—calling him “Exalted Father”—they were wishing a life of abundance on their baby boy.</p>
+      <p style="text-align: justify;"><span id='59'>W</span>ithout <span id='60'>c</span>urrency <span id='61'>o</span>r <span id='62'>s</span>tocks <span id='63'>o</span>r <span id='64'>i</span>nvestments, <span id='65'>t</span>he <span id='66'>m</span>easure <span id='67'>o</span>f <span id='68'>p</span>ermanent <span id='69'>w</span>ealth <span id='70'>i</span>n <span id='71'>t</span>hat <span id='72'>d</span>ay <span id='73'>w</span>as <span id='74'>c</span>arried <span id='75'>i</span>n <span id='76'>y</span>our <span id='77'>l</span>and <span id='78'>a</span>nd <span id='79'>y</span>our <span id='80'>c</span>hildren. <span id='81'>S</span>o <span id='82'>f</span>or <span id='83'>b</span>aby <span id='84'>A</span>bram’s <span id='85'>p</span>arents <span id='86'>t</span>o <span id='87'>w</span>ish <span id='88'>h</span>im <span id='89'>a</span> <span id='90'>h</span>ouseful <span id='91'>o</span>f <span id='92'>c</span>hildren <span id='93'>w</span>ho <span id='94'>w</span>ould <span id='95'>e</span>xalt <span id='96'>h</span>is <span id='97'>n</span>ame—calling <span id='98'>h</span>im <span id='99'>“</span>Exalted <span id='100'>F</span>ather”—they <span id='101'>w</span>ere <span id='102'>w</span>ishing <span id='103'>a</span> <span id='104'>l</span>ife <span id='105'>o</span>f <span id='106'>a</span>bundance <span id='107'>o</span>n <span id='108'>t</span>heir <span id='109'>b</span>aby <span id='110'>b</span>oy.</p>
 
-      <p style="text-align: justify;">On the day of her birth, little Exalted Father’s future wife was given a name that’s a bit easier for us to understand. Her parents looked at their little bundle of joy and named her “Princess,” a term of endearment that we might use as a nickname today. My Little Princess, they said, and that, in Hebrew, came out Sarai.</p>
+      <p style="text-align: justify;"><span id='111'>O</span>n <span id='112'>t</span>he <span id='113'>d</span>ay <span id='114'>o</span>f <span id='115'>h</span>er <span id='116'>b</span>irth, <span id='117'>l</span>ittle <span id='118'>E</span>xalted <span id='119'>F</span>ather’s <span id='120'>f</span>uture <span id='121'>w</span>ife <span id='122'>w</span>as <span id='123'>g</span>iven <span id='124'>a</span> <span id='125'>n</span>ame <span id='126'>t</span>hat’s <span id='127'>a</span> <span id='128'>b</span>it <span id='129'>e</span>asier <span id='130'>f</span>or <span id='131'>u</span>s <span id='132'>t</span>o <span id='133'>u</span>nderstand. <span id='134'>H</span>er <span id='135'>p</span>arents <span id='136'>l</span>ooked <span id='137'>a</span>t <span id='138'>t</span>heir <span id='139'>l</span>ittle <span id='140'>b</span>undle <span id='141'>o</span>f <span id='142'>j</span>oy <span id='143'>a</span>nd <span id='144'>n</span>amed <span id='145'>h</span>er <span id='146'>“</span>Princess,” <span id='147'>a</span> <span id='148'>t</span>erm <span id='149'>o</span>f <span id='150'>e</span>ndearment <span id='151'>t</span>hat <span id='152'>w</span>e <span id='153'>m</span>ight <span id='154'>u</span>se <span id='155'>a</span>s <span id='156'>a</span> <span id='157'>n</span>ickname <span id='158'>t</span>oday. <span id='159'>M</span>y <span id='160'>L</span>ittle <span id='161'>P</span>rincess, <span id='162'>t</span>hey <span id='163'>s</span>aid, <span id='164'>a</span>nd <span id='165'>t</span>hat, <span id='166'>i</span>n <span id='167'>H</span>ebrew, <span id='168'>c</span>ame <span id='169'>o</span>ut <span id='170'>S</span>arai.</p>
 
-      <p style="text-align: justify;">The Little Princess grew up to marry the Exalted Father, and even more strange than Abram’s name must have sounded at birth was the irony that he grew up—grew old, even—and had no children at all. It must have been awkward to introduce himself to someone as Exalted Father and have to answer the inevitable question: <i>So . . . how many children do you have?</i> The Exalted Father was the father of none. He and his wife, Sarai, had been married so long that their friends had children—grandchildren even. But Abram and Sarai were childless. And in a culture that placed such high value on the number of offspring one had, this was a devastating blow.</p>
+      <p style="text-align: justify;"><span id='171'>T</span>he <span id='172'>L</span>ittle <span id='173'>P</span>rincess <span id='174'>g</span>rew <span id='175'>u</span>p <span id='176'>t</span>o <span id='177'>m</span>arry <span id='178'>t</span>he <span id='179'>E</span>xalted <span id='180'>F</span>ather, <span id='181'>a</span>nd <span id='182'>e</span>ven <span id='183'>m</span>ore <span id='184'>s</span>trange <span id='185'>t</span>han <span id='186'>A</span>bram’s <span id='187'>n</span>ame <span id='188'>m</span>ust <span id='189'>h</span>ave <span id='190'>s</span>ounded <span id='191'>a</span>t <span id='192'>b</span>irth <span id='193'>w</span>as <span id='194'>t</span>he <span id='195'>i</span>rony <span id='196'>t</span>hat <span id='197'>h</span>e <span id='198'>g</span>rew <span id='199'>u</span>p—grew <span id='200'>o</span>ld, <span id='201'>e</span>ven—and <span id='202'>h</span>ad <span id='203'>n</span>o <span id='204'>c</span>hildren <span id='205'>a</span>t <span id='206'>a</span>ll. <span id='207'>I</span>t <span id='208'>m</span>ust <span id='209'>h</span>ave <span id='210'>b</span>een <span id='211'>a</span>wkward <span id='212'>t</span>o <span id='213'>i</span>ntroduce <span id='214'>h</span>imself <span id='215'>t</span>o <span id='216'>s</span>omeone <span id='217'>a</span>s <span id='218'>E</span>xalted <span id='219'>F</span>ather <span id='220'>a</span>nd <span id='221'>h</span>ave <span id='222'>t</span>o <span id='223'>a</span>nswer <span id='224'>t</span>he <span id='225'>i</span>nevitable <span id='226'>q</span>uestion: <i><span id='227'>S</span>o <span id='228'>.</span> <span id='229'>.</span> <span id='230'>.</span> <span id='231'>h</span>ow <span id='232'>m</span>any <span id='233'>c</span>hildren <span id='234'>d</span>o <span id='235'>y</span>ou <span id='236'>h</span>ave?</i> <span id='237'>T</span>he <span id='238'>E</span>xalted <span id='239'>F</span>ather <span id='240'>w</span>as <span id='241'>t</span>he <span id='242'>f</span>ather <span id='243'>o</span>f <span id='244'>n</span>one. <span id='245'>H</span>e <span id='246'>a</span>nd <span id='247'>h</span>is <span id='248'>w</span>ife, <span id='249'>S</span>arai, <span id='250'>h</span>ad <span id='251'>b</span>een <span id='252'>m</span>arried <span id='253'>s</span>o <span id='254'>l</span>ong <span id='255'>t</span>hat <span id='256'>t</span>heir <span id='257'>f</span>riends <span id='258'>h</span>ad <span id='259'>c</span>hildren—grandchildren <span id='260'>e</span>ven. <span id='261'>B</span>ut <span id='262'>A</span>bram <span id='263'>a</span>nd <span id='264'>S</span>arai <span id='265'>w</span>ere <span id='266'>c</span>hildless. <span id='267'>A</span>nd <span id='268'>i</span>n <span id='269'>a</span> <span id='270'>c</span>ulture <span id='271'>t</span>hat <span id='272'>p</span>laced <span id='273'>s</span>uch <span id='274'>h</span>igh <span id='275'>v</span>alue <span id='276'>o</span>n <span id='277'>t</span>he <span id='278'>n</span>umber <span id='279'>o</span>f <span id='280'>o</span>ffspring <span id='281'>o</span>ne <span id='282'>h</span>ad, <span id='283'>t</span>his <span id='284'>w</span>as <span id='285'>a</span> <span id='286'>d</span>evastating <span id='287'>b</span>low.</p>
 
-      <p style="text-align: justify;">Abram is seventy-five years old when we are first introduced to him and his wife in Scripture (<span onclick="biblepop('Gen.12.4')">Genesis 12:4</span>). And Sarai—well, let’s just say she’s no spring chick either. It’s to these two card-carrying members of AARP that God appears and begins to make outlandish and epic promises. From their first meeting in Genesis 12 and again in Genesis 17—where, by the way, we learn that Abram is ninety-nine years old—God promises that they will become the parents of many offspring—from a great nation in chapter 12 to many nations in chapter 17. And in chapter 15, God gives Abram a powerful visual to go with this promise.</p>
-
-      <p><br /></p>
-
-      <p class="command" style="text-align: justify;">Read <span onclick="biblepop('Gen.15.5')">Genesis 15:5</span>. God promised Abram that his offspring would number like <span correctanswer="stars" id="blankfill1" onclick="blankfill(this)">_____________</span>.</p>
+      <p style="text-align: justify;"><span id='288'>A</span>bram <span id='289'>i</span>s <span id='290'>s</span>eventy-five <span id='291'>y</span>ears <span id='292'>o</span>ld <span id='293'>w</span>hen <span id='294'>w</span>e <span id='295'>a</span>re <span id='296'>f</span>irst <span id='297'>i</span>ntroduced <span id='298'>t</span>o <span id='299'>h</span>im <span id='300'>a</span>nd <span id='301'>h</span>is <span id='302'>w</span>ife <span id='303'>i</span>n <span id='304'>S</span>cripture <span id='305'>(</span><span onclick="biblepop('Gen.12.4')"><span id='306'>G</span>enesis <span id='307'>1</span>2:4</span><span id='308'>)</span>. <span id='309'>A</span>nd <span id='310'>S</span>arai—well, <span id='311'>l</span>et’s <span id='312'>j</span>ust <span id='313'>s</span>ay <span id='314'>s</span>he’s <span id='315'>n</span>o <span id='316'>s</span>pring <span id='317'>c</span>hick <span id='318'>e</span>ither. <span id='319'>I</span>t’s <span id='320'>t</span>o <span id='321'>t</span>hese <span id='322'>t</span>wo <span id='323'>c</span>ard-carrying <span id='324'>m</span>embers <span id='325'>o</span>f <span id='326'>A</span>ARP <span id='327'>t</span>hat <span id='328'>G</span>od <span id='329'>a</span>ppears <span id='330'>a</span>nd <span id='331'>b</span>egins <span id='332'>t</span>o <span id='333'>m</span>ake <span id='334'>o</span>utlandish <span id='335'>a</span>nd <span id='336'>e</span>pic <span id='337'>p</span>romises. <span id='338'>F</span>rom <span id='339'>t</span>heir <span id='340'>f</span>irst <span id='341'>m</span>eeting <span id='342'>i</span>n <span id='343'>G</span>enesis <span id='344'>1</span>2 <span id='345'>a</span>nd <span id='346'>a</span>gain <span id='347'>i</span>n <span id='348'>G</span>enesis <span id='349'>1</span>7—where, <span id='350'>b</span>y <span id='351'>t</span>he <span id='352'>w</span>ay, <span id='353'>w</span>e <span id='354'>l</span>earn <span id='355'>t</span>hat <span id='356'>A</span>bram <span id='357'>i</span>s <span id='358'>n</span>inety-nine <span id='359'>y</span>ears <span id='360'>o</span>ld—God <span id='361'>p</span>romises <span id='362'>t</span>hat <span id='363'>t</span>hey <span id='364'>w</span>ill <span id='365'>b</span>ecome <span id='366'>t</span>he <span id='367'>p</span>arents <span id='368'>o</span>f <span id='369'>m</span>any <span id='370'>o</span>ffspring—from <span id='371'>a</span> <span id='372'>g</span>reat <span id='373'>n</span>ation <span id='374'>i</span>n <span id='375'>c</span>hapter <span id='376'>1</span>2 <span id='377'>t</span>o <span id='378'>m</span>any <span id='379'>n</span>ations <span id='380'>i</span>n <span id='381'>c</span>hapter <span id='382'>1</span>7. <span id='383'>A</span>nd <span id='384'>i</span>n <span id='385'>c</span>hapter <span id='386'>1</span>5, <span id='387'>G</span>od <span id='388'>g</span>ives <span id='389'>A</span>bram <span id='390'>a</span> <span id='391'>p</span>owerful <span id='392'>v</span>isual <span id='393'>t</span>o <span id='394'>g</span>o <span id='395'>w</span>ith <span id='396'>t</span>his <span id='397'>p</span>romise.</p>
 
       <p><br /></p>
 
-      <p style="text-align: justify;">In the time of Abram and Sarai, the stars were an even more meaningful spectacle than they are to us today. Without electricity or pollution, there were even more stars visible in the night sky, and people spent more time gazing at them because there was little else to see after dark. The stars were a beautiful gallery of art, a map to guide their way, and a great and magnificent mystery. When God promised Abram and Sarai offspring as numerous as the stars in <span onclick="biblepop('Gen.15.5')">Genesis 15:5</span>, it was a mind-blowing prospect.</p>
+      <p class="command" style="text-align: justify;"><span id='398'>R</span>ead <span onclick="biblepop('Gen.15.5')"><span id='399'>G</span>enesis <span id='400'>1</span>5:5</span><span id='401'>.</span> <span id='402'>G</span>od <span id='403'>p</span>romised <span id='404'>A</span>bram <span id='405'>t</span>hat <span id='406'>h</span>is <span id='407'>o</span>ffspring <span id='408'>w</span>ould <span id='409'>n</span>umber <span id='410'>l</span>ike <span correctanswer="stars" id="blankfill1" onclick="blankfill(this)">_____________</span>.</p>
 
       <p><br /></p>
 
-      <p class="command" style="text-align: justify;">Read <span onclick="biblepop('Isa.40.26')">Isaiah 40:26</span>. What does it say about the names of the stars and God’s relationship to them?</p>
+      <p style="text-align: justify;"><span id='411'>I</span>n <span id='412'>t</span>he <span id='413'>t</span>ime <span id='414'>o</span>f <span id='415'>A</span>bram <span id='416'>a</span>nd <span id='417'>S</span>arai, <span id='418'>t</span>he <span id='419'>s</span>tars <span id='420'>w</span>ere <span id='421'>a</span>n <span id='422'>e</span>ven <span id='423'>m</span>ore <span id='424'>m</span>eaningful <span id='425'>s</span>pectacle <span id='426'>t</span>han <span id='427'>t</span>hey <span id='428'>a</span>re <span id='429'>t</span>o <span id='430'>u</span>s <span id='431'>t</span>oday. <span id='432'>W</span>ithout <span id='433'>e</span>lectricity <span id='434'>o</span>r <span id='435'>p</span>ollution, <span id='436'>t</span>here <span id='437'>w</span>ere <span id='438'>e</span>ven <span id='439'>m</span>ore <span id='440'>s</span>tars <span id='441'>v</span>isible <span id='442'>i</span>n <span id='443'>t</span>he <span id='444'>n</span>ight <span id='445'>s</span>ky, <span id='446'>a</span>nd <span id='447'>p</span>eople <span id='448'>s</span>pent <span id='449'>m</span>ore <span id='450'>t</span>ime <span id='451'>g</span>azing <span id='452'>a</span>t <span id='453'>t</span>hem <span id='454'>b</span>ecause <span id='455'>t</span>here <span id='456'>w</span>as <span id='457'>l</span>ittle <span id='458'>e</span>lse <span id='459'>t</span>o <span id='460'>s</span>ee <span id='461'>a</span>fter <span id='462'>d</span>ark. <span id='463'>T</span>he <span id='464'>s</span>tars <span id='465'>w</span>ere <span id='466'>a</span> <span id='467'>b</span>eautiful <span id='468'>g</span>allery <span id='469'>o</span>f <span id='470'>a</span>rt, <span id='471'>a</span> <span id='472'>m</span>ap <span id='473'>t</span>o <span id='474'>g</span>uide <span id='475'>t</span>heir <span id='476'>w</span>ay, <span id='477'>a</span>nd <span id='478'>a</span> <span id='479'>g</span>reat <span id='480'>a</span>nd <span id='481'>m</span>agnificent <span id='482'>m</span>ystery. <span id='483'>W</span>hen <span id='484'>G</span>od <span id='485'>p</span>romised <span id='486'>A</span>bram <span id='487'>a</span>nd <span id='488'>S</span>arai <span id='489'>o</span>ffspring <span id='490'>a</span>s <span id='491'>n</span>umerous <span id='492'>a</span>s <span id='493'>t</span>he <span id='494'>s</span>tars <span id='495'>i</span>n <span onclick="biblepop('Gen.15.5')"><span id='496'>G</span>enesis <span id='497'>1</span>5:5</span><span id='498'>,</span> <span id='499'>i</span>t <span id='500'>w</span>as <span id='501'>a</span> <span id='502'>m</span>ind-blowing <span id='503'>p</span>rospect.</p>
+
+      <p><br /></p>
+
+      <p class="command" style="text-align: justify;">Read <span onclick="biblepop('Isa.40.26')"><span id='504'>I</span>saiah <span id='505'>4</span>0:26</span><span id='506'>.</span> <span id='507'>W</span>hat <span id='508'>d</span>oes <span id='509'>i</span>t <span id='510'>s</span>ay <span id='511'>a</span>bout <span id='512'>t</span>he <span id='513'>n</span>ames <span id='514'>o</span>f <span id='515'>t</span>he <span id='516'>s</span>tars <span id='517'>a</span>nd <span id='518'>G</span>od’s <span id='519'>r</span>elationship <span id='520'>t</span>o <span id='521'>t</span>hem?</p>
 
       <div class="answer" id="answer2" onclick="answer(this)" question="What does Isaiah 40:26 say about the names of the stars and God’s relationship to them?"></div>
     </div>
