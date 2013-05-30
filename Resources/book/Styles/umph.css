@@ -219,7 +219,7 @@ hr{color:#000;}
 }
 
 textarea {
- background: url(Images/ynxjD.png) repeat-y;
+ background: url(../Images/ynxjD.png) repeat-y;
  width: 580px;
  height: 150px;
  font: normal 18px Noteworthy-Light;
@@ -233,7 +233,7 @@ textarea {
 }
 
 .mynotesheader {
- background: url(Images/notesHeader.png) no-repeat;
+ background: url(../Images/notesHeader.png) no-repeat;
  background-position: left;
  background-color: #FF0000;
  float: left;

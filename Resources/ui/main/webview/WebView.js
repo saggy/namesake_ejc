@@ -67,12 +67,13 @@ function WebView(_args) {
 		}
 		rs.close();
 
-		rs = db.execute('SELECT type, start_id, end_id, note_html, note_text, highlight_color FROM annotation WHERE page=?',page);
+		rs = db.execute('SELECT annotation_id, type, start_id, end_id, note_html, note_text, highlight_color FROM annotation WHERE page=?',page);
 		while(rs.isValidRow()){
-			var a = {type: rs.fieldByName('type'), startId : rs.fieldByName('start_id'), endId : rs.fieldByName('end_id'), 
+			var a = {id: rs.fieldByName('annotation_id'), type: rs.fieldByName('type'), startId : rs.fieldByName('start_id'), endId : rs.fieldByName('end_id'), 
 						noteText : rs.fieldByName('note_text'), noteHtml : rs.fieldByName('note_html'), highlightColor : rs.fieldByName('highlight_color') };
 			switch(a.type){
 				case 'note':
+					Ti.App.fireEvent('app:addBookmark',a);
 					break;
 				case 'bookmark':
 					Ti.App.fireEvent('app:addBookmark',a);
@@ -134,19 +135,21 @@ function WebView(_args) {
 				break;
 			case BOOKMARK:
 				annotation.aType = 'bookmark';
+				Ti.App.fireEvent('saveannotation', annotation);
 				Ti.App.fireEvent('app:addBookmark', annotation);
 				break;
 			case HIGHLIGHT:
 				annotation.aType = 'highlight';
 				annotation.highlightColor = '#FFFF00';
+				Ti.App.fireEvent('saveannotation', annotation);
 				//Ti.App.fireEvent('app:addHighlight', annotation);
 				self.reload();
 				break;
 		}
 	
-		if(e.index != NOTE){
-			Ti.App.fireEvent('saveannotation', annotation);
-		}
+
+		
+
 		
 		Ti.API.info(annotation.noteText);
 		Ti.API.info(annotation.noteHtml);
