@@ -30,6 +30,7 @@ function playvideo(video)
 	Ti.App.fireEvent('playvideo',{video: video});
 }
 
+<<<<<<< HEAD
 function findEnclosingP(id){
 	id = '#' + id;
 	var $p = $(id).parent();
@@ -48,6 +49,8 @@ function saveNote(note){
 	}
 
 }
+=======
+>>>>>>> 7253179ec39f1090d023f9b9157449a7fd6fa6a3
 
 Ti.App.addEventListener('app:answerquestion',function(e){
 	document.getElementById(e.elementId).innerHTML=e.text;
@@ -59,9 +62,8 @@ Ti.App.addEventListener('app:addBookmark', function(e){
 	var width = 20;
 	var id = 'bookmark' + e.startId + '_' + e.endId;
 	var imageTag = '<img id="'+id+'" alt="" src="'+imageSrc+'" height="'+height+'" width="'+width+'" />';
-	var id = e.startId;
-	
-	var $p = findEnclosingP(id);
+	var id = '#'+e.startId;
+	var $p = $(id).parent();
 	var pHtml = $p.html();
 	
 	//alert(pHtml);
@@ -96,6 +98,7 @@ Ti.App.addEventListener('app:addHighlight', function(e){
 	document.body.innerHTML = domString;
 });
 
+<<<<<<< HEAD
 Ti.App.addEventListener('app:addNote', function(e){
 	var id = e.startId + '_' + e.endId;
 //alert(e.id);
@@ -114,9 +117,10 @@ Ti.App.addEventListener('app:addNote', function(e){
 	}
 });
 
+=======
+>>>>>>> 7253179ec39f1090d023f9b9157449a7fd6fa6a3
   </script>
-  <script type="text/javascript" src="jquery-1.4.2.min.js" charset="utf-8">
-</script>
+  <script type="text/javascript" src="jquery-1.4.2.min.js" charset="utf-8"></script>
 </head>
 
 <body>
