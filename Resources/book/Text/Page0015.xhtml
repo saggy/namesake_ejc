@@ -30,15 +30,6 @@ function playvideo(video)
 	Ti.App.fireEvent('playvideo',{video: video});
 }
 
-function findEnclosingP(id){
-	id = '#' + id;
-	var $p = $(id).parent();
-	while($p[0].nodeName != 'P'){ 
-		$p = $p.parent();
-	}
-	return $p;
-}
-
 
 Ti.App.addEventListener('app:answerquestion',function(e){
 	document.getElementById(e.elementId).innerHTML=e.text;
@@ -50,9 +41,8 @@ Ti.App.addEventListener('app:addBookmark', function(e){
 	var width = 20;
 	var id = 'bookmark' + e.startId + '_' + e.endId;
 	var imageTag = '<img id="'+id+'" alt="" src="'+imageSrc+'" height="'+height+'" width="'+width+'" />';
-	var id = e.startId;
-	
-	var $p = findEnclosingP(id);
+	var id = '#'+e.startId;
+	var $p = $(id).parent();
 	var pHtml = $p.html();
 	
 	//alert(pHtml);
@@ -87,17 +77,8 @@ Ti.App.addEventListener('app:addHighlight', function(e){
 	document.body.innerHTML = domString;
 });
 
-Ti.App.addEventListener('app:addNote', function(e){
-	e.id = e.startId + '_' + e.endId;
-//alert(e.id);
-	var noteView = "<div id='note" + e.id + "'><span class='mynotesheader' onclick='saveNote(this)' id='header" + e.id + "'></span><textarea id='text" + e.id + "' onblur='saveNote(this)'></textarea></div>";
-	var $p = findEnclosingP(e.startId);
-	var pHtml = $p.html();
-	$p.html(pHtml+noteView);
-});
   </script>
-  <script type="text/javascript" src="jquery-1.4.2.min.js" charset="utf-8">
-</script>
+  <script type="text/javascript" src="jquery-1.4.2.min.js" charset="utf-8"></script>
 </head>
 
 <body>
