@@ -60,12 +60,17 @@ Ti.App.addEventListener('app:addBookmark', function(e){
 	var width = 20;
 	var id = 'bookmark' + e.startId + '_' + e.endId;
 	var imageTag = '<img id="'+id+'" alt="" src="'+imageSrc+'" height="'+height+'" width="'+width+'" />';
-	var id = '#'+e.startId;
-	var $p = $(id).parent();
+	var id = e.startId;
+	var $p = findEnclosingP(id);
 	var pHtml = $p.html();
 	
 	//alert(pHtml);
-	if(pHtml.indexOf('<img id="bookmark') === -1){
+
+	if(pHtml.indexOf("<div id='note") !== -1){
+		pHtml.replace("<div id='note", imageTag+"<div id='note");
+		$p.html(pHtml);
+	}
+	else if(pHtml.indexOf('<img id="bookmark') === -1){
 		$p.html(pHtml+imageTag);
 	}
 });

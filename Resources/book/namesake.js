@@ -48,8 +48,8 @@ Ti.App.addEventListener('app:addBookmark', function(e){
 	var width = 20;
 	var id = 'bookmark' + e.startId + '_' + e.endId;
 	var imageTag = '<img id="'+id+'" alt="" src="'+imageSrc+'" height="'+height+'" width="'+width+'" />';
-	var id = '#'+e.startId;
-	var $p = $(id).parent();
+	var id = e.startId;
+	var $p = findEnclosingP(id);
 	var pHtml = $p.html();
 	
 	//alert(pHtml);
