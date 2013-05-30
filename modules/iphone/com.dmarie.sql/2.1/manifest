@@ -1,0 +1,18 @@
+#
+# this is your module manifest and used by Titanium
+# during compilation, packaging, distribution, etc.
+#
+version: 2.1
+apiversion: 2
+description: SQLCipher Titanium module
+author: Gary Hayenga
+license: Titanium Store
+copyright: Copyright (c) 2012 by DMarie Direct
+
+
+# these should not be edited
+name: dmariesql
+moduleid: com.dmarie.sql
+guid: d0754e99-99f3-49cf-a178-b43d7671e92a
+platform: iphone
+minsdk: 1.8.1

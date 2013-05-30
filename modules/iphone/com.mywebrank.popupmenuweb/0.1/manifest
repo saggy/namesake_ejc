@@ -1,0 +1,18 @@
+#
+# this is your module manifest and used by Titanium
+# during compilation, packaging, distribution, etc.
+#
+version: 0.1
+apiversion: 2
+description: This module extends the Titanium TiUIWebView to allow custom buttons in UIMenuController.
+author: Guti
+license: Specify your license
+copyright: Copyright (c) 2013 by MyWebRank
+
+
+# these should not be edited
+name: PopupMenuWeb
+moduleid: com.mywebrank.popupmenuweb
+guid: 10f0a3fb-8d3f-4297-8072-b26926c2543f
+platform: iphone
+minsdk: 3.0.2.GA

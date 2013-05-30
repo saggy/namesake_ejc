@@ -1,0 +1,282 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta content="text/html; charset=ISO-8859-1"
+      http-equiv="Content-Type">
+    <title>dMarie SQL Module</title>
+  </head>
+  <body>
+    <h1>SQLite with SQLCipher and Full-text Indexing</h1>
+    <h2>Titanium Module: com.dmarie.sql</h2>
+    This module replaces the native SQLite module(s) with a more robust
+    version that supports SQLCipher encryption and FTS3 full-text
+    indexing.<br>
+    <br>
+    <h2>Installation</h2>
+    Make sure you have a reference to the module in your tiapp.xml file:<br>
+    <pre>&nbsp;&nbsp;&nbsp; &lt;modules&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;module version="2.1"&gt;com.dmarie.sql&lt;/module&gt;<br>&nbsp;&nbsp;&nbsp; &lt;/modules&gt;</pre>
+    <span style="font-weight: bold;">Note:</span> When using Titanium
+    Mobile SDK version 1.7.x, use version 1.x of com.dmarie.sql. When
+    using Titanium Mobile SDK version 1.8.x, use version 2.x of
+    com.dmarie.sql.<br>
+    <br>
+    <h2>Using the Module</h2>
+    To access this module from JavaScript, you would do the following:<span
+      style="font-family: monospace;"></span><br>
+    <pre> var dmariesql = require("com.dmarie.sql"); </pre>
+    The dmariesql variable is a reference to the Module
+    object.&nbsp;&nbsp;&nbsp; <br>
+    <br>
+    <h2>Native Methods<br>
+    </h2>
+    <p>This section describes all the methods contained in the native
+      module, com.dmarie.sql.&nbsp; <span style="font-weight: bold;"><br>
+        Note, however, that it is not necessary to call these methods
+        directly.&nbsp; Instead, you can use the CommonJS wrapper
+        "db.js" instead.&nbsp; See the CommonJS "db.js" wrapper
+        documentation below for details.</span><br>
+    </p>
+    <pre><big><big><big><span style="background-color:yellow;">open_db(filename, password)</span><br></big></big></big></pre>
+    <p>Open a database file. </p>
+    <h3>parameters:</h3>
+    <p><span style="font-weight: bold;">filename:</span>&nbsp; This is
+      the full path and file name of the database to open.&nbsp; If the
+      database does not exist, it will be created.<br>
+      example: /sdcard/mydatabase.db<br>
+    </p>
+    <p><span style="font-weight: bold;">password:</span> This is either
+      an encryption key for the database, the string "DEFAULT", or an
+      empty string.</p>
+    <p>If a string (other than "DEFAULT") is passed, then this string
+      will be used as the encryption key for the database.<br>
+      If the string "DEFAULT" is passed, then the value of
+      Titanium.App.guid will be used as the encryption key.<br>
+      If an empty string "" is passed, the database will not be
+      encrypted.<br>
+    </p>
+    <h3>return value: </h3>
+    <p>This method returns the full path and file name of the database
+      that was opened.<br>
+      example: /sdcard/mydatabase.db&nbsp;&nbsp;&nbsp; <br>
+    </p>
+    <pre><big><big><big><span style="background-color: yellow;">execute(sql)<br></span></big></big></big></pre>
+    <p>Execute a SQL statement on the currently open database file.</p>
+    <h3>parameters:</h3>
+    <p><span style="font-weight: bold;">sql:</span>&nbsp; This is a
+      string containing sql code to execute on the currently open
+      database.<br>
+      example: create table people (firstName TEXT, lastName TEXT,
+      address TEXT, city TEXT, state TEXT, zip TEXT)<br>
+    </p>
+    <h3>return value:</h3>
+    null &nbsp;&nbsp; <br>
+    <pre><big><big><big><span style="background-color: yellow;">select(sql)<br></span></big></big></big></pre>
+    <p>Execute a SQL <span style="font-style: italic;">select</span>
+      statement on the currently open database file and return the data
+      as a nested array of strings.<br>
+    </p>
+    <h3>parameters:</h3>
+    <p><span style="font-weight: bold;">sql:</span>&nbsp; This is a
+      string containing sql code to execute on the currently open
+      database.&nbsp; It must be a "select" statement.<br>
+      example: select firstName, lastName, address, city, state, zip
+      from people </p>
+    <h3>return value:</h3>
+    IOS<br>
+    <br>
+    This method returns a regular SQLite recordset object. (<a
+      href="http://www.sqlite.org/lang_select.html">http://www.sqlite.org/lang_select.html</a>)<br>
+    <br>
+    ANDROID<br>
+    <br>
+    This method returns a nested array of strings.&nbsp; The first
+    element (element 0) of the array contains an array of field names in
+    the result set.&nbsp; All remaining elements (element 1 to n)
+    contain arrays of results.<br>
+    <pre> var results = SQLOBJ.select("select firstName, lastName, address, city, state, zip from people"); &nbsp; </pre>
+    &nbsp;&nbsp;&nbsp;&nbsp; results[0] contains an array of field names
+    ["firstName", "lastName", "address", "city", "state", "zip"]<br>
+    &nbsp;&nbsp;&nbsp; &nbsp;results[1-n] = contain arrays of data
+    ["Joe", "Smith", "123 Main St", "Anycity", "ST", "99999"]<br>
+    <br>
+    <pre><big><big><big><span style="background-color: yellow;">close_db()<br></span></big></big></big></pre>
+    <p>Close the currently open database file.</p>
+    <h3>parameters:</h3>
+    <p>none<br>
+    </p>
+    <h3>return value:</h3>
+    null &nbsp;&nbsp; <br>
+    <br>
+    <h2>CommonJS Wrapper:&nbsp; db.js</h2>
+    Included with the module is a JavaScript wrapper, db.js, that makes
+    using this module easier.&nbsp; This wrapper also maintains
+    source-code compatiblity with most existing SQLite code.<br>
+    <h3>Installation</h3>
+    Simply copy the file db.js into the /Resources folder of your
+    project.<br>
+    <h3>Using the JavaScript CommonJS Wrapper:&nbsp; db.js</h3>
+    To access this module from JavaScript, you would do the following:<span
+      style="font-family: monospace;"><br>
+    </span>
+    <pre><span style="font-family: monospace;"></span>&nbsp;&nbsp;&nbsp;&nbsp; var db = require("db.js"); </pre>
+    The db variable is a reference to the CommonJS
+    object.&nbsp;&nbsp;&nbsp; <br>
+    <br>
+    <h3>Properties</h3>
+    <pre><big><big><big><span style="background-color: yellow;">dbPath<br></span></big></big></big></pre>
+    <p>This is the path where all database files exist.&nbsp; It must
+      contain a trailing slash.<br>
+      <br>
+      example:<br>
+    </p>
+    <pre>var db = require("db.js");<br>db.dbPath = "/sdcard/"; // put all database files in the root of the sdcard</pre>
+    <h3>Methods</h3>
+    <pre><big><big><big><span style="background-color:yellow;">openDB(filename, password)</span><br></big></big></big></pre>
+    <p>Open a database file and return a handle to the open database
+      object. </p>
+    <h3>parameters:</h3>
+    <p><span style="font-weight: bold;">filename:</span>&nbsp; This file
+      name of the database to open (in the folder specified by
+      dbPath.)&nbsp; If the database does not exist, it will be created.<br>
+      example: mydatabase.db<br>
+    </p>
+    <p><span style="font-weight: bold;">password:</span> This is either
+      an encryption key for the database, the string "DEFAULT", or an
+      empty string.</p>
+    <p>If a string (other than "DEFAULT") is passed, then this string
+      will be used as the encryption key for the database.<br>
+      If the string "DEFAULT" is passed, then the value of
+      Titanium.App.guid will be used as the encryption key.<br>
+      If an empty string "" is passed, the database will not be
+      encrypted.<br>
+    </p>
+    <h3>return value: </h3>
+    <p>This method returns a handle to the database object that was
+      opened.<br>
+      <br>
+      example: <br>
+    </p>
+    <pre>var db = require("db.js");<br>var myDatabase db.openDB("myDatabase.db", "secretPassword"); // encrypt the database with the key: secretPassword<br><br></pre>
+    <h3>Database Object Methods</h3>
+    <p>The following methods can only be called on a database object
+      returned by the openDB method.<br>
+    </p>
+    <pre><big><big><big><span style="background-color:yellow;">close()</span><br></big></big></big></pre>
+    <p>Close the currently open database.<br>
+    </p>
+    <h3>parameters:</h3>
+    <p>none<br>
+    </p>
+    <h3>return value: </h3>
+    <p>null<br>
+      <br>
+      example: <br>
+    </p>
+    <pre>var db = require("db.js");<br>var myDatabase db.openDB("myDatabase.db", "secretPassword"); // encrypt the database with the key: secretPassword<br>myDatabase.close();<br><br><br><big><big><big><span style="background-color:yellow;">dbAttach(filename, alias, key)</span></big></big></big>
+
+</pre>
+    <p>Attach another database to the currently open database object
+      using the SQLite <span style="font-style: italic;">attach</span>
+      command.<br>
+    </p>
+    <h3>parameters:</h3>
+    <p><span style="font-weight: bold;">filename:</span>&nbsp; This is a
+      string containing a fully-qualified path and filename for the file
+      to attach.<br>
+      example: /sdcard/MyJoinedDatabase.db<br>
+    </p>
+    <p><span style="font-weight: bold;">alias:</span>&nbsp; This is a
+      string to use as the alias for the attached database<br>
+      example: alias<br>
+    </p>
+    <p><span style="font-weight: bold;">key:</span>&nbsp; This is a
+      string containing the encryption key used to open the attached
+      database.<br>
+      example: secretPassword<br>
+    </p>
+    <h3>return value:</h3>
+    null&nbsp; <br>
+    <p> example: <br>
+    </p>
+    <pre> var db = require("db.js");
+var myDatabase db.openDB("myDatabase.db", "secretPassword"); // encrypt the database with the key: secretPassword
+myDatabase.dbAttach("/sdcard/MyJoinedDatabase.db","alias","secretPassword"); // join in MyJoinedDatabase with key of "secretPassword"
+myDatabase.execute("select firstName, lastName, alias.otherData as otherData from people " +<br> "join alias.otherTable on people.lastName = alias.otherTable.lastName");</pre>
+    <pre><br></pre>
+    <pre><big><big><big><span style="background-color:yellow;">execute(sql)</span> (non-select statments)</big></big></big>
+</pre>
+    <p>Execute a SQL statement on the currently open database object.<br>
+    </p>
+    <h3>parameters:</h3>
+    <p><span style="font-weight: bold;">sql:</span>&nbsp; This is a
+      string containing sql code to execute on the currently open
+      database object.<br>
+      example: create table people (firstName TEXT, lastName TEXT,
+      address TEXT, city TEXT, state TEXT, zip TEXT)<br>
+    </p>
+    <h3>return value:</h3>
+    null&nbsp; <br>
+    <p> example: <br>
+    </p>
+    <pre>var db = require("db.js");<br>var myDatabase db.openDB("myDatabase.db", "secretPassword"); // encrypt the database with the key: secretPassword<br>myDatabase.execute("create table people (firstName TEXT, lastName TEXT, address TEXT, city TEXT, state TEXT, zip TEXT)");</pre>
+    <br>
+    <pre><big><big><big><span style="background-color:yellow;">execute(sql) or select(sql)</span> (select statments)</big></big></big>
+</pre>
+    <p>Execute a SQL select statement on the currently open database
+      object and return a recordset object.<br>
+    </p>
+    <h3>parameters:</h3>
+    <p><span style="font-weight: bold;">sql:</span>&nbsp; This is a
+      string containing sql code to execute on the currently open
+      database object.&nbsp; It must be a "select" statement.<br>
+      example: select firstName, lastName, address, city, state, zip
+      from people </p>
+    <h3>return value:</h3>
+    This method returns a recordset object.<br>
+    <p> example: <br>
+    </p>
+    <pre>var db = require("db.js");<br>var myDatabase db.openDB("myDatabase.db", "secretPassword"); // encrypt the database with the key: secretPassword<br>var rows = myDatabase.execute("select firstName, lastName, address, city, state, zip from people");<br>while (rows.isValidRow())<br>{<br> Titanium.API.info("name: " + rows.fieldByName("firstName") + " " + rows.fieldByName("lastName"));<br> rows.next();<br>}<br>rows.close(); // close the recordset<br>myDatabase.close(); // close the database<br></pre>
+    <br>
+    <h3>Recordset Object Properties</h3>
+    <p><span style="background-color: yellow; font-weight: bold;">length</span>
+      <br>
+      returns the number records in the Recordset object<br>
+    </p>
+    <pre>Ti.API.info("Result Count: " + rows.length)</pre>
+    <p> </p>
+    <h3>Recordset Object Methods</h3>
+    <span style="background-color: yellow; font-weight: bold;"></span><span
+      style="background-color: yellow; font-weight: bold;">fieldName(#)</span>
+    <br>
+    returns the name of the field at the specified column number<br>
+    <pre>Ti.API.info("The field at position 1 is called: " + rows.fieldName(1));<br>
+<span style="background-color: yellow; font-weight: bold;"></span><span style="background-color: yellow; font-weight: bold;">field(#)</span> </pre>
+    returns the data for the current row in the specified column number<br>
+    <pre>Ti.API.info("The current row data in field #1 is: " + rows.field(1));<br></pre>
+    <span style="background-color: yellow; font-weight: bold;"></span><span
+      style="background-color: yellow; font-weight: bold;">fieldByName(name)</span><br>
+    returns the data for the current row in the specified column (by
+    column name)<br>
+    <pre>Ti.API.info("First Name: " + rows.fieldByName("firstName"));<br></pre>
+    <span style="background-color: yellow; font-weight: bold;"></span><span
+      style="background-color: yellow; font-weight: bold;">next()</span><br>
+    moves to the next row of data<br>
+    <pre>rows.next();<br></pre>
+    <span style="background-color: yellow; font-weight: bold;"></span><span
+      style="background-color: yellow; font-weight: bold;">isValidRow()</span><br>
+    returns true if the current row has valid data, false if it does not<br>
+    <pre>while (rows.isValidRow()) <br>{<br> rows.next();<br>}<br></pre>
+    <span style="background-color: yellow; font-weight: bold;"></span><span
+      style="background-color: yellow; font-weight: bold;">fieldCount()<br>
+    </span>returns the number of fields (colums) in the Recordset object<br>
+    <pre>Ti.API.info("Field Count: " + rows.fieldCount());<br></pre>
+    <span style="background-color: yellow; font-weight: bold;"></span><span
+      style="background-color: yellow; font-weight: bold;">close()<br>
+    </span>closes the current Recordset object<span style="font-family:
+      monospace;"><br>
+    </span>
+    <pre><span style="font-family: monospace;"></span>rows.close();<br><br><br></pre>
+    copyright 2010-2012 dMarie Direct Inc, all right reserved.<br>
+    <br>
+  </body>
+</html>

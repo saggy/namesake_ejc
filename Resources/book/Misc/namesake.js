@@ -1,0 +1,66 @@
+function biblepop(verse)
+{
+	Ti.App.fireEvent('biblepop',{verse: verse});
+}
+
+function answer(element)
+{
+	Ti.App.fireEvent('answer',{id: element.id, question: element.getAttribute("question")});
+}
+
+function blankfill(element)
+{
+	Ti.App.fireEvent('blankfill',{id: element.id, correctAnswer: element.getAttribute("correctanswer")});
+}
+
+function playvideo(video)
+{
+	Ti.App.fireEvent('playvideo',{video: video});
+}
+
+
+Ti.App.addEventListener('app:answerquestion',function(e){
+	document.getElementById(e.elementId).innerHTML=e.text;
+});
+
+Ti.App.addEventListener('app:addBookmark', function(e){
+	var imageSrc = '../../images/buttons/menu.png';
+	var height = 20;
+	var width = 20;
+	var id = 'bookmark' + e.startId + '_' + e.endId;
+	var imageTag = '<img id="'+id+'" alt="" src="'+imageSrc+'" height="'+height+'" width="'+width+'" />';
+	var id = '#'+e.startId;
+	var $p = $(id).parent();
+	var pHtml = $p.html();
+	
+	//alert(pHtml);
+	if(pHtml.indexOf('<img id="bookmark') === -1){
+		$p.html(pHtml+imageTag);
+	}
+});
+
+Ti.App.addEventListener('app:highlight', function(e){
+
+  	var startId = e.startId, endId = e.endId, highlightColor = e.highlightColor;
+	var domString = document.body.innerHTML;
+	//alert(domString);
+	
+	var target = '<span id="'+startId+'">'
+	var startTag = "<span id=\"highlight"+startId+"\" style=\"background-color:"+highlightColor+"\">";
+	var endTag = "</span>";
+	
+	domString = domString.replace(target, startTag + target);
+
+	for(var i = startId+1; i <= endId ; i++){
+		startTag =  "<span id=\"highlight"+i+"\" style=\"background-color:"+highlightColor+"\">";//startTag.replace(i-1,i);
+		target = '<span id="'+i+'">'//target.replace(i-1,i);
+//alert(startTag + ' '+ target);
+		domString = domString.replace(target, endTag+startTag+target);
+	}
+
+	var endId = endId+1;
+	target = '<span id="'+endId+'">';//target.replace(endId, endId+1);
+	domString = domString.replace(target, endTag + target);
+	
+	document.body.innerHTML = domString;
+});

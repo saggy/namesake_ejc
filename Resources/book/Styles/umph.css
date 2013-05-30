@@ -1,0 +1,243 @@
+@font-face
+{
+font-family: abbey;
+src: url('../Fonts/DearSarah-Regular.ttf'); /* IE9 */
+}
+
+@font-face
+{
+font-family: century;
+font-weight: normal;
+src: url('../Fonts/century.ttf'); /* IE9 */
+}
+
+@font-face
+{
+font-family: century;
+font-weight: normal;
+font-style: italic;
+src: url('../Fonts/century-italic.ttf'); /* IE9 */
+}
+
+@font-face
+{
+font-family: century;
+font-weight: bold;
+src: url('../Fonts/centuryoldstyle-bold.ttf'); /* IE9 */
+}
+
+
+p
+{
+text-indent:1em;
+font-family: century;
+font-size: 16px;
+padding:2px; 
+text-indent:25px; 
+margin:0px;
+}
+
+table
+{
+font-family: century;
+font-size: 16px;
+}
+
+h2
+{
+font-family: abbey;
+font-size: 36px;
+}
+
+h3
+{
+font-family: abbey;
+font-size: 24px;
+color:#00AAA6;
+margin-top:2em;
+}
+
+h4
+{
+font-family: Palatino;
+font-size: 30px;
+font-weight: normal;
+margin-top: -20px;
+}
+
+h5
+{
+font-family: Palatino;
+font-size: 30px;
+font-weight: normal;
+}
+
+ul, li {
+	list-style-type: none;
+}
+
+body { padding:5px; color:#000000; height: 100%;}
+img { border: 0 none; }
+a {text-decoration:none;}
+.author { font-weight:bold; }
+.caption { font-style:inherit; }
+.imgborder { padding:3px; }
+.tablecontainer { padding: 5px; }
+.bodytxt { }
+.imageleft { text-align:left }
+.imageright { text-align:right }
+.imagecentre { text-align:center }
+.imagejustify { text-align:justify }
+.pleft { text-align:left; }
+.pright { text-align:right }
+.pcentre { text-align:center }
+.pjustify { text-align:justify }
+.subhead { font-weight:bold }
+.pfirst{ text-indent:2px; }
+.pfirst:first-letter { color:#000000; font-size:xx-large; }
+.pleft1 { text-align:justify;margin-left:0px;text-indent:0px; }
+.infobox{float: left; width:40%; margin:10px 10px 10px 10px;}
+.infobox4{float:right; width:35%; margin:10px 10px 10px 10px;}
+.pleft3 { text-align:justify;margin-left:30px; margin-right:30px;text-indent:0px; }
+.pleft4 { text-align:justify;margin-left:30px; margin-right:30px;text-indent:0px; }
+.pleft5{ text-align:justify;margin-left:50px; margin-right:30px;text-indent:5px; }
+.pleft6{ text-align:justify;margin-left:70px; margin-right:15px;text-indent:5px; }
+.pleft7 { text-align:justify;margin-left:30px; margin-right:30px; }
+.pleft8 { text-align:justify;margin-left:30px; margin-right:30px;text-indent:20px; }
+.pleft9 { text-align:justify;margin-left:15px; text-indent:0px; }
+.bcolor{border:0px solid #000;background-color:#CCCCCC;}
+.dc{font-size:150%; line-height:.55em;}
+.ni{text-indent:0px;}
+.pjustifyn{text-indent:-20px;text-align:justify;margin-left:20px; }
+.pjustifyn1{text-indent:-20px;text-align:justify;margin-left:40px; }
+hr{color:#000;}
+.noindentp {
+    text-indent:0em;
+}
+.noindent
+{
+    text-indent:0em;
+	font-family:"Times New Roman", serif;
+	font-size: 100%;
+	margin-top:0em;
+	margin-bottom:0em;
+	text-align:justify;
+}
+
+#center td {
+   vertical-align: middle;
+   text-align: center;
+}
+
+.PoetryText1 {
+    font-family: Palatino;
+    font-size: 16px;
+	text-align: left;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:0.1in;
+	margin-bottom:.0001pt;
+	text-indent:-0.1in;
+	font-style:italic;
+}
+
+.PoetryText2 {
+     font-family: Palatino;
+    font-size: 16px;
+	text-align: left;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:0.2in;
+	margin-bottom:.0001pt;
+	text-indent:-.1in;
+	font-style:italic;
+}
+
+.PoetryText3 {
+     font-family: Palatino;
+    font-size: 16px;
+	text-align: left;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:0.3in;
+	margin-bottom:.0001pt;
+	text-indent:-.1in;
+	font-style:italic;
+}
+
+.PoetryText4 {
+     font-family: Palatino;
+    font-size: 16px;
+	text-align: left;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:0.4in;
+	margin-bottom:.0001pt;
+	text-indent:-.1in;
+	font-style:italic;
+}
+
+.PoetryText5 {
+     font-family: Palatino;
+    font-size: 16px;
+	text-align: left;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:0.5in;
+	margin-bottom:.0001pt;
+	text-indent:-.1in;
+	font-style:italic;
+}
+
+.command {
+	text-indent:0em;
+    font-family: Palatino;
+	font-weight: bold;
+	font-size: 16px;
+	margin-left: 2em;
+}
+
+
+.answer {
+    min-height: 4em;
+	width: 100%;
+}
+
+.answertable {
+   margin-left: 1em;
+	font-size: 16px;
+}
+
+.shortanswer {
+    min-height: 1em;
+	width: 100%;
+}
+
+textarea {
+ background: url(Images/ynxjD.png) repeat-y;
+ width: 580px;
+ height: 150px;
+ font: normal 18px Noteworthy-Light;
+ line-height: 25px;
+ padding: 2px 110px;
+ border: solid 1px #ddd;
+     display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+}
+
+.mynotesheader {
+ background: url(Images/notesHeader.png) no-repeat;
+ background-position: left;
+ background-color: #FF0000;
+ float: left;
+ height: 35px;
+ width: 580px;
+  margin-top: 10px;
+}
