@@ -15,6 +15,7 @@ function ToolsTableRow(_args){
 		note: note
 	});
 	
+
 	var pageLabel = Ti.UI.createLabel({
 		zIndex: 5,
 		left: 0,
@@ -28,7 +29,7 @@ function ToolsTableRow(_args){
 		noteText: noteText,
 		pageNo: pageNo,
 		note: note
-	})
+	});
 
 	var noteLabel = Ti.UI.createLabel({
 		zIndex: 5,
@@ -37,7 +38,7 @@ function ToolsTableRow(_args){
 		text: note,
 		right: 0,
 		top: 0,
-		width: 350,
+		width: 300,
 		height: 50,
 		id: id,
 		rowIndex: rowIndex,
@@ -50,17 +51,10 @@ function ToolsTableRow(_args){
 	pageLabel.addEventListener('click', function(e){
 		Ti.App.fireEvent('gotopage', {pageNo: self.pageNo});
 	});
-	if(type == 'note'){
-		noteLabel.addEventListener('click',function(e){
-			var ev = { text: self.noteText, html: self.noteHtml}
-			Ti.App.fireEvent('editnote', ev);
-		});
-		
-	}  else  {
-		noteLabel.addEventListener('click', function(e){
-		Ti.App.fireEvent('gotopage', {pageNo: self.pageNo});
-		});
-	}
+
+	noteLabel.addEventListener('click', function(e){
+	Ti.App.fireEvent('gotopage', {pageNo: self.pageNo});
+	});
 	
 	self.add(noteLabel);
 	self.add(pageLabel);

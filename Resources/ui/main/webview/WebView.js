@@ -51,9 +51,9 @@ function WebView(_args) {
 		var page = self.getUrl().split('/').splice(-3).join('/');
 		//var db = Ti.Database.open(dbName);
 		//db.execute('DROP TABLE answer');
-		db.execute('DROP TABLE annotation');
-		db.execute('CREATE TABLE IF NOT EXISTS annotation (annotation_id INTEGER PRIMARY KEY, note_text TEXT, note_html TEXT, ' +
-					 'note_offset NUMERIC, note_parent_id TEXT, row_index INTEGER, page TEXT, page_no INTEGER, start_id NUMERIC, end_id NUMERIC, type TEXT, note TEXT, highlight_color TEXT, create_date TEXT, modify_date TEXT)');
+		//db.execute('DROP TABLE annotation');
+		//db.execute('CREATE TABLE IF NOT EXISTS annotation (annotation_id INTEGER PRIMARY KEY, note_text TEXT, note_html TEXT, ' +
+					// 'note_offset NUMERIC, note_parent_id TEXT, row_index INTEGER, page TEXT, page_no INTEGER, start_id NUMERIC, end_id NUMERIC, type TEXT, note TEXT, highlight_color TEXT, create_date TEXT, modify_date TEXT)');
 		//db.execute('CREATE TABLE IF NOT EXISTS answer (answer_id INTEGER PRIMARY KEY, answer_elementid TEXT, answer_text TEXT, page TEXT, page_no INTEGER, type TEXT, create_date TEXT, modify_date TEXT)');
 		
 		var rs = db.execute('SELECT answer_elementid, answer_text FROM answer WHERE page=?',page);
