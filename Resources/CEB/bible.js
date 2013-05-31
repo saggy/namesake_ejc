@@ -95,6 +95,7 @@ var bible =             [{title:'Genesis', url: '01-Genesis-CEB.html', xml: '01-
 		var verses = getElementsByAttribute(document.body, "*", "verse", ShortBookName +"." + chapter + "." + verse);
 		//verses[0].scrollIntoView(true);
 		$("body,html,document").scrollTop($(verses[0]).offset().top);
+		window.scrollBy(0,-10); //fudge it a bit, I don't want it at exact top.
 	}
 
 
@@ -111,4 +112,12 @@ var bible =             [{title:'Genesis', url: '01-Genesis-CEB.html', xml: '01-
 	
 	    return params;
 	}
+	
+	function showRef(element, id) {
+		var ref = document.getElementById(id);
+		$("body,html,document").scrollTop($(ref).offset().top);
+		
+	}
+		
+		//this, '1Sam.1.22!note.g')
 	

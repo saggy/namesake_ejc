@@ -163,8 +163,21 @@ function mainWindow() {
 		verse = e.verse.split('.');
 	
 		bibleWindow = new BibleWindow({book:verse[0], chapter:verse[1], verse:verse[2]});
-		self.add(bibleWindow);
 		
+	var pHeight = Ti.Platform.displayCaps.platformHeight;
+	
+		
+		var invisView = Titanium.UI.createButton({
+   			top: pHeight / 2,
+   			right: 0,
+   			width: 1,
+  			height: 1
+		});
+		
+		self.add(invisView);
+
+		bibleWindow.show({view: invisView, animated:true});
+		self.remove(invisView);
 		
 	});
 	Ti.App.addEventListener('blankfill', function(e) {

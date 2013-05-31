@@ -5,40 +5,33 @@ function BibleWindow(_args){
 	Ti.include(bibleDir+'bible.js');
 	
 	var htmlFile;
+	var longBookName;
+	
 	for(var i = 0; i < bible.length; i++){
 		if(bible[i].shortName == book){
 			htmlFile = bible[i].url;
+			longBookName = bible[i].title;
 		}
 	}
 	
 	var url = bibleDir + htmlFile + '?' + 'book=' + book + '&' + 'chapter=' + chapter + '&' + 'verse=' + verse;
 	
-	var self = Ti.UI.createView({
-		height: 650,
-		width: 450,
-
-	})
+	var self = Ti.UI.iPad.createPopover({
+            width:500, 
+            height:600,
+            arrowDirection: false,
+            title: longBookName + ' ' + _args.chapter,
+            borderColor: '#0096DE'
+            });
 	
 	var webView = Ti.UI.createWebView({
-		top: 55,
-		height: 595,
-		width: 450,
-		borderWidth: 5,
-		borderColor: '#0096DE',
-		scalesPageToFit: true,
+		scalesPageToFit: false,
 		contentWidth: 'auto',
 		contentHeight: 'auto',
-		url : url,
+		url : url
 	});
 	
-	var CloseButton = require('ui/controls/CloseButton'),
-		closeButton = new CloseButton();
-		
-	closeButton.addEventListener('click', function(e){
-		self.hide();
-		Ti.App.fireEvent('closebible',e);
-	})	
-	self.add(closeButton);
+
 	self.add(webView);
 	return self;
 }

@@ -46,8 +46,8 @@ div#multicolumn4 h1 {
 #multicolumn4 {
     -webkit-margin-top-collapse: separate;
     -webkit-margin-bottom-collapse: separate;
-    margin-left: 80px;
-    margin-right: 0px;
+    margin-left: 20px;
+    margin-right:20px;
     width: auto;
     height: auto;
     text-align: justify;
