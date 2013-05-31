@@ -10,6 +10,7 @@
   <link href="../Styles/umph.css" media="all and (orientation:portrait)" rel="stylesheet" type="text/css" />
   <link href="../Styles/umphLandscape.css" media="all and (orientation:landscape)" rel="stylesheet" type="text/css" />
   <script charset="utf-8"  type="text/javascript">
+  //<![CDATA[
 function biblepop(verse)
 {
 	Ti.App.fireEvent('biblepop',{verse: verse});
@@ -118,7 +119,7 @@ Ti.App.addEventListener('app:addNote', function(e){
 		$p.attr('note', true);
 	}
 });
-
+//]]>
   </script>
   <script type="text/javascript" src="jquery-1.4.2.min.js" charset="utf-8"></script>
 </head>

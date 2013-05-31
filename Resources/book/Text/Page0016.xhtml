@@ -9,7 +9,8 @@
   <title></title>
   <link href="../Styles/umph.css" media="all and (orientation:portrait)" rel="stylesheet" type="text/css" />
   <link href="../Styles/umphLandscape.css" media="all and (orientation:landscape)" rel="stylesheet" type="text/css" />
- <script charset="utf-8"  type="text/javascript">
+  <script charset="utf-8"  type="text/javascript">
+  //<![CDATA[
 function biblepop(verse)
 {
 	Ti.App.fireEvent('biblepop',{verse: verse});
@@ -30,6 +31,25 @@ function playvideo(video)
 	Ti.App.fireEvent('playvideo',{video: video});
 }
 
+function findEnclosingP(id){
+	id = '#' + id;
+	var $p = $(id).parent();
+	while($p[0].nodeName != 'P'){ 
+		$p = $p.parent();
+	}
+	return $p;
+}
+
+function saveNote(note){
+
+	var annotation = JSON.parse(note.getAttribute('annotation'));
+	if(annotation.note==null || note.value != null){
+		annotation.note = note.value;
+		Ti.App.fireEvent('saveannotation', annotation);
+	}
+
+}
+
 
 Ti.App.addEventListener('app:answerquestion',function(e){
 	document.getElementById(e.elementId).innerHTML=e.text;
@@ -41,12 +61,17 @@ Ti.App.addEventListener('app:addBookmark', function(e){
 	var width = 20;
 	var id = 'bookmark' + e.startId + '_' + e.endId;
 	var imageTag = '<img id="'+id+'" alt="" src="'+imageSrc+'" height="'+height+'" width="'+width+'" />';
-	var id = '#'+e.startId;
-	var $p = $(id).parent();
+	var id = e.startId;
+	var $p = findEnclosingP(id);
 	var pHtml = $p.html();
 	
 	//alert(pHtml);
-	if(pHtml.indexOf('<img id="bookmark') === -1){
+
+	if(pHtml.indexOf("<div id='note") !== -1){
+		pHtml.replace("<div id='note", imageTag+"<div id='note");
+		$p.html(pHtml);
+	}
+	else if(pHtml.indexOf('<img id="bookmark') === -1){
 		$p.html(pHtml+imageTag);
 	}
 });
@@ -65,7 +90,7 @@ Ti.App.addEventListener('app:addHighlight', function(e){
 
 	for(var i = startId+1; i <= endId ; i++){
 		startTag =  "<span id=\"highlight"+i+"\" style=\"background-color:"+highlightColor+"\">";//startTag.replace(i-1,i);
-		target = '<span id="'+i+'">'//target.replace(i-1,i);
+		target = '<span id="'+i+'">';//target.replace(i-1,i);
 //alert(startTag + ' '+ target);
 		domString = domString.replace(target, endTag+startTag+target);
 	}
@@ -77,6 +102,24 @@ Ti.App.addEventListener('app:addHighlight', function(e){
 	document.body.innerHTML = domString;
 });
 
+Ti.App.addEventListener('app:addNote', function(e){
+	var id = e.startId + '_' + e.endId;
+//alert(e.id);
+	e.note = (e.note != null) ? e.note : '';
+	var annotation = JSON.stringify(e);
+	var noteView = "<div id='note" + id + "'><span class='mynotesheader' onclick='saveNote(this)' id='header" + id + "' annotation='"+annotation+
+			"'></span><textarea id='text" + id + "' onblur='saveNote(this)' annotation='"+annotation+"'>"+e.note +"</textarea></div>";
+	var $p = findEnclosingP(e.startId);
+	var previous = $p.attr('note');
+	previous = typeof(previous) !=='undefined' ? previous : false;
+	
+	if(!previous){
+		var pHtml = $p.html();
+		$p.html(pHtml+noteView);
+		$p.attr('note', true);
+	}
+});
+//]]>
   </script>
   <script type="text/javascript" src="jquery-1.4.2.min.js" charset="utf-8"></script>
 </head>

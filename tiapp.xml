@@ -38,9 +38,9 @@
         </splash>
         <theme>default</theme>
     </mobileweb>
-   <modules>
-    <module version="0.1" platform="iphone">com.mywebrank.popupmenuweb</module>
-    <module platform="iphone" version="2.1">com.dmarie.sql</module>
+    <modules>
+        <module platform="iphone" version="0.1">com.mywebrank.popupmenuweb</module>
+        <module platform="iphone" version="2.1">com.dmarie.sql</module>
     </modules>
     <deployment-targets>
         <target device="blackberry">false</target>
@@ -50,5 +50,5 @@
         <target device="mobileweb">false</target>
         <target device="tizen">false</target>
     </deployment-targets>
-    <sdk-version>2.1.4.v20121109124659</sdk-version>
+    <sdk-version>3.1.0.v20130301200224</sdk-version>
 </ti:app>
