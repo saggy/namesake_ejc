@@ -191,6 +191,8 @@ function mainWindow() {
         responseDialog.open({	        modal:true,
             							modalTransitionStyle: Ti.UI.iPhone.MODAL_TRANSITION_STYLE_FLIP_HORIZONTAL,
             							modalStyle: Ti.UI.iPhone.MODAL_PRESENTATION_FORMSHEET});
+            							
+          							
 
 
 		responseDialog.addEventListener('done', function(ev){
@@ -204,6 +206,7 @@ function mainWindow() {
 
 			answer.type = 'fillintheblank';
 			saveAnswer(answer);
+			responseDialog.close();
 
 		});
 	});
@@ -212,10 +215,12 @@ function mainWindow() {
 		var answer = findAnswer({id: e.id});
 		
 		var responseDialog = new ResponseDialog({question: e.question, answer: answer.text});
-
+		
         responseDialog.open({	        modal:true,
             							modalTransitionStyle: Ti.UI.iPhone.MODAL_TRANSITION_STYLE_FLIP_HORIZONTAL,
-            							modalStyle: Ti.UI.iPhone.MODAL_PRESENTATION_FORMSHEET});
+            							modalStyle: Ti.UI.iPhone.MODAL_PRESENTATION_FORMSHEET
+            							});
+            							
 
 
 		responseDialog.addEventListener('done', function(ev){
@@ -238,6 +243,7 @@ function mainWindow() {
 			}
 			
 			saveAnswer(answer);
+			responseDialog.close();
 
 		});
 	});

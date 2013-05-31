@@ -44,7 +44,7 @@ function ResponseDialog(_args){
 		borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
 		verticalAlign: Ti.UI.TEXT_VERTICAL_ALIGNMENT_TOP,
 		autocapitalization: Titanium.UI.TEXT_AUTOCAPITALIZATION_NONE,
-		value: answer
+		value: _args.answer
 	});
 	
 	whiteBox.add(question);
@@ -56,13 +56,15 @@ function ResponseDialog(_args){
 		textField.blur();
 		
 		self.fireEvent('done',{text: textField.getValue()});
-		self.close();
 		
 	});
 	cancel.addEventListener('click', function(e){
 		textField.blur();
 		self.close();
 	});
+	
+	
+	
 	return self;
 }
 
