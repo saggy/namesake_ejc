@@ -57,6 +57,11 @@ function ToolsWindow(_args){
 			//highlights
 			case 3:
 				toolsTable = new ToolsTable({type: tools[idx]});
+				toolsTable.addEventListener('resize',function(e){
+					toolsH = 50*(3+toolsTable.rowCount);
+					self.setHeight(toolsH);
+				});
+				
 				self.add(toolsTable);
 				current = toolsTable;
 				toolsH = 50*(3+toolsTable.rowCount);

@@ -19,6 +19,7 @@ function ToolsTable(_args) {
 		right: 0,
 		borderRadius: 10,
 		width: 400,
+		height: 'auto',
 		backgroundColor:'#000000'
 	});
 	
@@ -49,6 +50,7 @@ function ToolsTable(_args) {
 		
 	});
 	var table = Ti.UI.createTableView({
+		height: 'auto',
 		zIndex: 3,
   		top: 50,
   		right: 0,
@@ -70,21 +72,30 @@ function ToolsTable(_args) {
 		}
 		database.close();
 	});
+	
 	table.addEventListener('delete', function(e){
 		var database = Ti.Database.open('namesake');
 		var update = 'UPDATE annotation SET row_index=? WHERE annotation_id=?';	
 		var drop = 'DELETE FROM annotation WHERE annotation_id=?';
 		var index = e.index;
 		var id = e.row.id;
+		
 		table.deleteRow(index, {animationStyle: Ti.UI.iPhone.RowAnimationStyle.UP});
 		database.execute(drop, id);
 		
-		var rowData = table.data[0].rows;
-		for(var i in rowData){
-			id = rowData[i].id;
-			rowData[i].rowIndex = i;
+		var rs = database.execute('SELECT annotation_id FROM annotation WHERE type=? ORDER BY row_index',type);
+		var i = 0;
+		while(rs.isValidRow()){
+			id = rs.fieldByName('annotation_id');
 			database.execute(update, i, id);
+			i++;
+			rs.next();
 		}
+		rs.close();
+		
+		self.rowCount--;
+		self.fireEvent('resize',{type: type});
+		database.close();
 	});
 	
 	
