@@ -59,7 +59,7 @@ function ToolsWindow(_args){
 				toolsTable = new ToolsTable({type: tools[idx]});
 				self.add(toolsTable);
 				current = toolsTable;
-				toolsH = 50*(2+toolsTable.rowCount);
+				toolsH = 50*(3+toolsTable.rowCount);
 				self.setHeight(toolsH);
 				toolsTable.show();
 				break;

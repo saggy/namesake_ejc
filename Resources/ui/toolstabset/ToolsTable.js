@@ -14,15 +14,81 @@ function ToolsTable(_args) {
 	}
 	var db = Ti.Database.open('namesake');
 	var rs = db.execute(query);
+	var self = Ti.UI.createView({
+		top: 100,
+		right: 0,
+		borderRadius: 10,
+		width: 400,
+		backgroundColor:'#000000'
+	});
 	
-	var self = Ti.UI.createTableView({
+	var edit = Ti.UI.createButton({
 		zIndex: 3,
-  		top: 100,
+		top: 0,
+		right: 0,
+		title: 'Edit'
+	});
+	edit.addEventListener('click',function(e){
+		table.moving = true;
+		table.editing = true;
+		edit.hide();
+		done.show();
+	});
+	var done = Ti.UI.createButton({
+		zIndex: 3,
+		top: 0,
+		right: 0,
+		title: 'Done',
+		style: Ti.UI.iPhone.SystemButtonStyle.BORDERED
+	});
+	done.addEventListener('click', function(e){
+		table.moving = false;
+		table.editing = false;
+		done.hide();
+		edit.show();
+		
+	});
+	var table = Ti.UI.createTableView({
+		zIndex: 3,
+  		top: 50,
   		right: 0,
   		borderRadius:10,
   		width:400,
-  		backgroundColor: '#FFFFFF'
+  		backgroundColor: '#FFFFFF',
+  		editable: true,
+  		moveable: true
 	});
+	table.addEventListener('move',function(e){
+		var database = Ti.Database.open('namesake');
+		var query = 'UPDATE annotation SET row_index=? WHERE annotation_id=?';		
+		var rowData = table.data[0].rows;
+		for(var i in rowData){
+			var id = rowData[i].id;
+			rowData[i].rowIndex = i;
+			database.execute(query, i, id);
+			//table.data[0].rows[i].rowIndex = i;
+		}
+		database.close();
+	});
+	table.addEventListener('delete', function(e){
+		var database = Ti.Database.open('namesake');
+		var update = 'UPDATE annotation SET row_index=? WHERE annotation_id=?';	
+		var drop = 'DELETE FROM annotation WHERE annotation_id=?';
+		var index = e.index;
+		var id = e.row.id;
+		table.deleteRow(index, {animationStyle: Ti.UI.iPhone.RowAnimationStyle.UP});
+		database.execute(drop, id);
+		
+		var rowData = table.data[0].rows;
+		for(var i in rowData){
+			id = rowData[i].id;
+			rowData[i].rowIndex = i;
+			database.execute(update, i, id);
+		}
+	});
+	
+	
+	
 	
 	var ToolsTableRow = require('ui/toolstabset/ToolsTableRow');
 	var tableData = [];
@@ -40,7 +106,12 @@ function ToolsTable(_args) {
 	}
 
 	self.rowCount = i;
-	self.setData(tableData);
+	table.setData(tableData);
+	
+	self.add(done);
+	done.hide();
+	self.add(edit);
+	self.add(table);
 	
 	rs.close();
 	db.close();
