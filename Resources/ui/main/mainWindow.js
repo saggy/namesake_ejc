@@ -93,9 +93,6 @@ function mainWindow() {
 			db.execute(editQuery, a.note, a.modified, a.id);
 		}
 		db.close();	
-		if(a.aType == 'note'){
-			webView.reload();
-		}
 	}
 	
 
@@ -141,7 +138,9 @@ function mainWindow() {
 	
 	Ti.App.addEventListener('saveannotation',function(e){
 		saveAnnotation(e);
-
+		if(e.aType == 'note'){
+			webView.reload();
+		}
 	});
 	
 	Ti.App.addEventListener('gotopage', function(e){

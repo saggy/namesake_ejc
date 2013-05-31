@@ -135,7 +135,7 @@ console.log(a.note);
 			case NOTE:
 				annotation.aType = 'note';
 				Ti.App.fireEvent('app:addNote', annotation);
-				
+
 				break;
 			case BOOKMARK:
 				annotation.aType = 'bookmark';
