@@ -5,16 +5,16 @@ function MenuTableRow(_args){
 		className: 'forumEvent',
 		selectedBackgroundColor : '#0096DE',
 		height: 50,
-		width: 300,
+		width: 350,
 		rowIndex: index
 	});
 
 	var chapter = Ti.UI.createLabel({
 		zIndex: 5,
-		color: '#FFFFFF',
-		backgroundColor: '#FF0000',
+		color: 'black',
+		backgroundColor: 'white',
 		text: title,
-		left: 0,
+		left: 10,
 		top: 0,
 		width: 300,
 		height: 50,
@@ -23,12 +23,14 @@ function MenuTableRow(_args){
 
 	self.add(chapter);
 	if(children){
-		var MoreButton = require('ui/controls/MoreButton'),
+		/*var MoreButton = require('ui/controls/MoreButton'),
 			moreButton = new MoreButton();
 		moreButton.setZIndex(6);
 		moreButton.rowIndex = index;
 	
 		self.add(moreButton);
+		*/
+		self.hasDetail = true;
 	}
 
 	return self;

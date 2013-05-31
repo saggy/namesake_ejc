@@ -38,8 +38,8 @@ function mainWindow() {
 
 	// show menu
 	menuButton.addEventListener('click', function(e){
-		self.add(menuWindow);
-		menuWindow.show();
+		//self.add(menuWindow);
+		menuWindow.show({view: menuButton, animated:true});
 	});
 
 	// show tools

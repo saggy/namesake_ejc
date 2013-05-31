@@ -4,8 +4,7 @@ function MenuView(_args) {
   		top: 100,
   		right: 0,
   		borderRadius:10,
-  		width:400,
-  		height:700,
+  		width:450,
   		backgroundColor: '#FFFFFF'
 	});
 

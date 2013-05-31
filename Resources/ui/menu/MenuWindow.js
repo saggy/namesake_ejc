@@ -2,47 +2,33 @@ function MenuWindow(_args){
 	var webView = _args.webView;
 	
 	Ti.include('book/book.js');
-	var self = Ti.UI.createView({
-  		top: 0,
-  		left: 15,
-  		width:300,
-  		height:750
-	});
+	var self = Ti.UI.iPad.createPopover({
+            width:350, 
+            height: 400,
+            arrowDirection: Ti.UI.iPad.POPOVER_ARROW_DIRECTION_UP,
+            backgroundColor: '#FFFFFF',
+            title: 'Content'
+            });
 	
-	var CloseButton = require('ui/controls/CloseButton'),
-		closeButton = new CloseButton();
-
-	self.add(closeButton);
-	
-	closeButton.addEventListener('click', function(e){
-		self.hide();
-	});
-	
-	
-	var MenuTitle = require('ui/menu/MenuTitle'),
-		menuTitle = new MenuTitle({title: 'Content'});
+	var emptyView = Titanium.UI.createView({});
+	self.leftNavButton = emptyView
 		
 
 	var toc = book[0]['toc'];
-	var defaultH = 50*(toc.length+2);
+	var defaultH = 50*(toc.length);
+
 	self.setHeight(defaultH);
 	
 	
 	var MenuTable = require('ui/menu/MenuTable'),
 		menuTable = new MenuTable();
 	var MenuTableRow = require('ui/menu/MenuTableRow');
-	var MenuButton = require('ui/main/navbar/menubutton/MenuButton');
 	
 
 	var tableData = [];
-	var backButton = new MenuButton();
+	var backButton = Titanium.UI.createImageView({height: 38, width: 44, top: 0, left:0, backgroundImage: 'images/buttons/backArrow.png'}); 
 
-	backButton.setTop(50);
-	backButton.setZIndex(5);
-	self.add(backButton);
-	backButton.hide();
 
-	self.add(menuTitle);
 	
 
 	for(var i = 0; i < toc.length; i++){
@@ -58,18 +44,20 @@ function MenuWindow(_args){
 			row.addEventListener('click', function(e){
 				//self.hide(menuTable);
 				//menuTable = new MenuTable();			
-				menuTitle.setText(toc[this.rowIndex]['chapter']);
-				backButton.show();
+				self.setTitle(toc[this.rowIndex]['chapter']);
+				//backButton.show();
+				self.leftNavButton = backButton;
 				
 				backButton.addEventListener('click',function(e){
 					menuTable.setData(tableData);
 					self.setHeight(defaultH);
-					menuTitle.setText('Content');
-					backButton.hide();
+					self.setTitle('Content');
+					//backButton.hide();
+					self.leftNavButton = emptyView;
 				});
 
 				var sections = toc[this.rowIndex]['sections'];
-				self.setHeight(50*(sections.length));
+				self.setHeight(50*(sections.length-2));
 				var data = [];
 				for(var j = 1; j < sections.length-1; j++){
 					title = (typeof sections[j]['subtitle'] === 'undefined') ? sections[j]['section'] : sections[j]['section']+ ': '+sections[j]['subtitle'];
