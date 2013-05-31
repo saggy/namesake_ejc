@@ -65,6 +65,7 @@ function MenuWindow(_args){
 					row2.addEventListener('click', function(e){
 						page = sections[this.rowIndex]['page'];
 						changePage(page);
+						self.hide();
 					});
 					data.push(row2);
 				}
