@@ -80,7 +80,7 @@ function ToolsTable(_args) {
 		var index = e.index;
 		var id = e.row.id;
 		
-		table.deleteRow(index, {animationStyle: Ti.UI.iPhone.RowAnimationStyle.UP});
+		table.deleteRow(index);
 		database.execute(drop, id);
 		
 		var rs = database.execute('SELECT annotation_id FROM annotation WHERE type=? ORDER BY row_index',type);
@@ -95,6 +95,7 @@ function ToolsTable(_args) {
 		
 		self.rowCount--;
 		self.fireEvent('resize',{type: type});
+		Ti.App.fireEvent('reload', {});
 		database.close();
 	});
 	
