@@ -53,7 +53,12 @@ Ti.App.addEventListener('app:addBookmark', function(e){
 	var pHtml = $p.html();
 	
 	//alert(pHtml);
-	if(pHtml.indexOf('<img id="bookmark') === -1){
+
+	if(pHtml.indexOf("<div id='note") !== -1){
+		pHtml.replace("<div id='note", imageTag+"<div id='note");
+		$p.html(pHtml);
+	}
+	else if(pHtml.indexOf('<img id="bookmark') === -1){
 		$p.html(pHtml+imageTag);
 	}
 });
@@ -93,11 +98,17 @@ Ti.App.addEventListener('app:addNote', function(e){
 			"'></span><textarea id='text" + id + "' onblur='saveNote(this)' annotation='"+annotation+"'>"+e.note +"</textarea></div>";
 	var $p = findEnclosingP(e.startId);
 	var previous = $p.attr('note');
-	previous = typeof(previous) !=='undefined' ? previous : false;
+	previous = previous ? previous : false;
+	//previous = previous=='true' ? true : false;
 	
 	if(!previous){
+		var pHtml = $p[0].outerHTML;
+		pHtml.replace('<p', "<p note='true'");
+		$p[0].outerHTML = pHtml + noteView;
+		/*
 		var pHtml = $p.html();
-		$p.html(pHtml+noteView);
-		$p.attr('note', true);
+		$p.html(pHtml+noteView);*/
+		$p = findEnclosingP(e.startId);
+		$p.attr('note', true)
 	}
 });

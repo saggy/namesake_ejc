@@ -1,5 +1,5 @@
 function ToolsTableRow(_args){
-	var type = _args.type, index = _args.index, noteHtml = _args.noteHtml, noteText = _args.noteText, 
+	var type = _args.type, id = _args.id, rowIndex = _args.rowIndex, noteHtml = _args.noteHtml, noteText = _args.noteText, 
 			pageNo = _args.pageNo, note = _args.note;
 	var self = Ti.UI.createTableViewRow({
 		zIndex: 4,
@@ -7,7 +7,8 @@ function ToolsTableRow(_args){
 		selectedBackgroundColor : '#0096DE',
 		height: 50,
 		width: 400,
-		rowIndex: index,
+		id: id,
+		rowIndex: rowIndex,
 		noteHtml: noteHtml,
 		noteText: noteText,
 		pageNo: pageNo,
@@ -21,7 +22,8 @@ function ToolsTableRow(_args){
 		backgroundColor: '#000000',
 		color: '#FFFFFF',
 		text: 'p. '+ pageNo,
-		rowIndex: index,
+		id: id,
+		rowIndex: rowIndex,
 		noteHtml: noteHtml,
 		noteText: noteText,
 		pageNo: pageNo,
@@ -37,7 +39,8 @@ function ToolsTableRow(_args){
 		top: 0,
 		width: 350,
 		height: 50,
-		rowIndex: index,
+		id: id,
+		rowIndex: rowIndex,
 		noteText: noteHtml,
 		noteText: noteText,
 		pageNo: pageNo,

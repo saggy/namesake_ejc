@@ -3,13 +3,13 @@ function ToolsTable(_args) {
 	var query = '';
 	switch(type){
 		case 'note':
-			query = "SELECT note_html, note_text, page_no, note FROM annotation WHERE type='note' ORDER BY modify_date DESC";
+			query = "SELECT annotation_id, note_html, note_text, page_no, note, row_index FROM annotation WHERE type='note' ORDER BY row_index";
 			break;
 		case 'bookmark':
-			query = "SELECT note_html, note_text, page_no, note FROM annotation WHERE type='bookmark' ORDER BY modify_date DESC";
+			query = "SELECT annotation_id, note_html, note_text, page_no, note, row_index FROM annotation WHERE type='bookmark' ORDER BY row_index";
 			break;
 		case 'highlight':
-			query = "SELECT note_html, note_text, page_no, note FROM annotation WHERE type='highlight' ORDER BY modify_date DESC";
+			query = "SELECT annotation_id, note_html, note_text, page_no, note, row_index FROM annotation WHERE type='highlight' ORDER BY row_index";
 			break;
 	}
 	var db = Ti.Database.open('namesake');
@@ -30,10 +30,11 @@ function ToolsTable(_args) {
 	var i = 0;
 
 	while(rs.isValidRow()){
-		var row = new ToolsTableRow({type: type, index: i, noteHtml: rs.fieldByName('note_html'), noteText: rs.fieldByName('note_text'), 
+		var row = new ToolsTableRow({type: type, id: rs.fieldByName('annotation_id'), index: i, rowIndex: rs.fieldByName('row_index'), 
+					noteHtml: rs.fieldByName('note_html'), noteText: rs.fieldByName('note_text'), 
 					pageNo : rs.fieldByName('page_no'), note : (type == 'note') ? rs.fieldByName('note') : rs.fieldByName('note_text')});
 
-		tableData.push(row);
+		tableData[row.rowIndex] = row;
 		rs.next();
 		i++;
 	}

@@ -53,7 +53,7 @@ function WebView(_args) {
 		//db.execute('DROP TABLE answer');
 		//db.execute('DROP TABLE annotation');
 		//db.execute('CREATE TABLE IF NOT EXISTS annotation (annotation_id INTEGER PRIMARY KEY, note_text TEXT, note_html TEXT, ' +
-				//	 'note_offset NUMERIC, note_parent_id TEXT, row_index INTEGER, page TEXT, page_no INTEGER, start_id NUMERIC, end_id NUMERIC, type TEXT, note TEXT, highlight_color TEXT, create_date TEXT, modify_date TEXT)');
+					// 'note_offset NUMERIC, note_parent_id TEXT, row_index INTEGER, page TEXT, page_no INTEGER, start_id NUMERIC, end_id NUMERIC, type TEXT, note TEXT, highlight_color TEXT, create_date TEXT, modify_date TEXT)');
 		//db.execute('CREATE TABLE IF NOT EXISTS answer (answer_id INTEGER PRIMARY KEY, answer_elementid TEXT, answer_text TEXT, page TEXT, page_no INTEGER, type TEXT, create_date TEXT, modify_date TEXT)');
 		
 		var rs = db.execute('SELECT answer_elementid, answer_text FROM answer WHERE page=?',page);
@@ -74,7 +74,6 @@ function WebView(_args) {
 
 			switch(a.type){
 				case 'note':
-console.log(a.note);
 					Ti.App.fireEvent('app:addNote',a);
 					break;
 				case 'bookmark':
