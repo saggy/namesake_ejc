@@ -2,40 +2,35 @@ function ResponseDialog(_args){
 	var question = _args.question;
 	var answer = _args.answer;
 
-	var self = Ti.UI.createView({
-		height: 350,
-		width: 535,
-		backgroundColor: '#FFFFFF',
-		modal: true
-	})
+	var self = Ti.UI.createWindow({
+		barColor: '#0096DE',
+		title: 'Answer'
+	});
 	
+	var whiteBox = Ti.UI.createView({
+		left: 50,
+		right: 50,
+		top: 50,
+		bottom: 50,
+		backgroundColor: '#FFFFFF'
+	});
+	
+	self.add(whiteBox);	
+		
 	var cancel = Ti.UI.createButton({
-		top: 300,
-		left: 450,
 		title: 'Cancel',
-		style: Ti.UI.iPhone.SystemButtonStyle.BORDERED
+		backgroundColor: 'red'
 	});
 	
 	var done = Ti.UI.createButton({
-		top: 300,
-		left: 375,
 		title: 'Done',
 		style: Ti.UI.iPhone.SystemButtonStyle.Done
 	});
 	
-	var title = Ti.UI.createLabel({
-		height: 50,
-		width: 550,
-		top: 0,
-		text: 'Answer',
-		color: '#FFFFFF',
-  		backgroundColor:'#0096DE',
-  		textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER
-	});
 	var question = Ti.UI.createLabel({
-		height: 50,
-		width: 550,
-		top: 50,
+		left: 10,
+		right: 10,
+		top: 30,
 		text: question,
 		color: '#000000',
   		backgroundColor:'#FFFFFF',
@@ -43,32 +38,30 @@ function ResponseDialog(_args){
 	});
 	
 	var textField = Ti.UI.createTextField({
-		height: 125,
-		width: 450,
-		top: 125,
-		left: 50,
+		height: 200,
+		left: 10,
+		right: 10,
 		borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
 		verticalAlign: Ti.UI.TEXT_VERTICAL_ALIGNMENT_TOP,
 		autocapitalization: Titanium.UI.TEXT_AUTOCAPITALIZATION_NONE,
 		value: answer
 	});
 	
-	self.add(title);
-	self.add(question);
-	self.add(cancel);
-	self.add(done);
-	self.add(textField);
+	whiteBox.add(question);
+	self.setLeftNavButton(cancel);
+	self.setRightNavButton(done);
+	whiteBox.add(textField);
 	
 	done.addEventListener('click', function(e){
 		textField.blur();
-		self.hide();
 		
 		self.fireEvent('done',{text: textField.getValue()});
+		self.close();
 		
 	});
 	cancel.addEventListener('click', function(e){
 		textField.blur();
-		self.hide();
+		self.close();
 	});
 	return self;
 }

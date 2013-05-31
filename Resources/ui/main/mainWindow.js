@@ -186,8 +186,11 @@ function mainWindow() {
 		var answer = findAnswer({id: e.id});
 		
 		var responseDialog = new ResponseDialog({question: e.question, answer: answer.text});
-
-		self.add(responseDialog);
+		
+			
+        responseDialog.open({	        modal:true,
+            							modalTransitionStyle: Ti.UI.iPhone.MODAL_TRANSITION_STYLE_FLIP_HORIZONTAL,
+            							modalStyle: Ti.UI.iPhone.MODAL_PRESENTATION_FORMSHEET});
 
 
 		responseDialog.addEventListener('done', function(ev){
@@ -210,7 +213,9 @@ function mainWindow() {
 		
 		var responseDialog = new ResponseDialog({question: e.question, answer: answer.text});
 
-		self.add(responseDialog);
+        responseDialog.open({	        modal:true,
+            							modalTransitionStyle: Ti.UI.iPhone.MODAL_TRANSITION_STYLE_FLIP_HORIZONTAL,
+            							modalStyle: Ti.UI.iPhone.MODAL_PRESENTATION_FORMSHEET});
 
 
 		responseDialog.addEventListener('done', function(ev){
