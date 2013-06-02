@@ -24,6 +24,11 @@ function ToolsWindow(_args){
 		toolsTabs.push(tab);
 	}
 */
+	var SearchTable = require('ui/toolstabset/search/SearchTable'),
+		searchTable = new SearchTable();
+	self.add(searchTable);
+	searchTable.hide();
+
 	var VideoTable = require('ui/toolstabset/video/VideoTable'),
 		videoTable = new VideoTable();
 	var videoH = 50*(2+video.length);
@@ -70,6 +75,9 @@ function ToolsWindow(_args){
 				break;
 			//search
 			case 4:
+				current = searchTable;
+				searchTable.show();
+				self.setHeight(searchTable.getHeight());
 				break;
 		}
 	});
