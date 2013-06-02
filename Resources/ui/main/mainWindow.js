@@ -138,7 +138,9 @@ function mainWindow() {
 		Ti.App.fireEvent('app:answerquestion', answer);
 	}
 	
-	
+	Ti.App.addEventListener('reload',function(e){
+		webView.reload();
+	});
 	Ti.App.addEventListener('saveannotation',function(e){
 		saveAnnotation(e);
 		if(e.aType == 'note'){
