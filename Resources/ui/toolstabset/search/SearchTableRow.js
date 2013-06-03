@@ -40,7 +40,7 @@ function SearchTableRow(_args){
 	switch(type){
 		case 'book':
 			pageLabelText = 'p. ' + pageNo;
-			pageLabel.addEventListener('click', function(e){
+			self.addEventListener('click', function(e){
 				self.fireEvent('hideTools');
 				Ti.App.fireEvent('gotopage', {pageNo: pageNo});
 
@@ -49,7 +49,7 @@ function SearchTableRow(_args){
 			break;
 		case 'bible':
 			pageLabelText = verse;
-			pageLabel.addEventListener('click', function(e){
+			self.addEventListener('click', function(e){
 				Ti.App.fireEvent('biblepop', {verse: verse});
 			});
 			noteLabelText = verseText;

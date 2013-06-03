@@ -2,7 +2,7 @@ function SearchTableSection(_args){
 	var _parent = _args.parent;
 	var header = _args.section, type = _args.type;
 	var results = _args.results;
-console.log(header);
+
 	var self = Ti.UI.createTableViewSection({
 		headerTitle: header
 	});

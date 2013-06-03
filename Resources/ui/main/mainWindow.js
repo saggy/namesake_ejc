@@ -70,13 +70,6 @@ function mainWindow() {
 	});
 	// add webview
 	self.add(webView);
-	Ti.App.addEventListener('closebible', function(e){
-	
-		var page = webView.getPage();
-		self.remove(webView);
-		webView = new WebView({page: page});
-		self.add(webView);
-	});
 
 	
 	function saveAnnotation(a){

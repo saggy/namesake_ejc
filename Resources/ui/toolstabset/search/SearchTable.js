@@ -24,7 +24,30 @@ function SearchTable(_args) {
 	var tableSections = [];
 	var SearchTableSection = require('ui/toolstabset/search/SearchTableSection');
 	searchBar.addEventListener('return',function(e){
+
+		
 		var searchTerm = searchBar.getValue();
+		
+		function formatText(text){
+			var textArr = text.split(' ');
+			var tempArr = [];
+			for(var i = 0, len = textArr.length; i < len; i++ ){
+				var temp = textArr.shift();
+				tempArr.push(temp);
+				if(temp.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1){
+					textArr.unshift(tempArr.pop().toUpperCase());
+					var j = 0;
+					while(j < 3 && j < tempArr.length){
+						textArr.unshift(tempArr.pop());
+						j++;
+					}
+					break;
+				}
+			}
+			return textArr.join(' ');
+			
+		}
+		
 		
 		var db = Ti.Database.open('namesake');
 	
@@ -35,7 +58,9 @@ function SearchTable(_args) {
 				case 'book':
 					var rs = db.execute(queries[i], searchTerm, searchLimit);
 					while(rs.isValidRow()){
-						var result = {type: type, pageNo: rs.fieldByName('page_no'), bookText: rs.fieldByName('content') };
+						var text = formatText(rs.fieldByName('content'));
+console.log(text);
+						var result = {type: type, pageNo: rs.fieldByName('page_no'), bookText: text };
 						results.push(result);
 						rs.next();
 					}
@@ -44,7 +69,9 @@ function SearchTable(_args) {
 				case 'bible':
 					var rs = db.execute(queries[i], searchTerm, searchLimit);
 					while(rs.isValidRow()){
-						var result = {type: type, verse: rs.fieldByName('verse'), verseText: rs.fieldByName('verseText') };
+						var text = formatText(rs.fieldByName('verseText'));
+console.log(text);
+						var result = {type: type, verse: rs.fieldByName('verse'), verseText: text  };
 						results.push(result);
 						rs.next();
 					}
