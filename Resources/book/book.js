@@ -7,6 +7,10 @@ var book = [
 		"pages": 208,
 		"toc":
 			[	{
+					"chapter": "Title",
+					"page": 1
+				},
+				{
 					"chapter": "Introduction",
 					"page": 7
 				},

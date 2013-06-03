@@ -80,6 +80,7 @@ function MenuWindow(_args){
 			row.addEventListener('click', function(e){
 				page = toc[this.rowIndex]['page'];
 				changePage(page);
+				self.hide();
 			});
 		}
 		tableData.push(row);
