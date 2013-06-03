@@ -88,6 +88,8 @@ var bible =             [{title:'Genesis', url: '01-Genesis-CEB.html', xml: '01-
     function load(){
    		var params = getQueryParams(document.location.search);
 		scrollToChapterVerse(params.book,params.chapter,params.verse);
+		alert(params.search_term);
+		highlightSearchTerm(params.search_term);
 
     }
 
@@ -117,6 +119,13 @@ var bible =             [{title:'Genesis', url: '01-Genesis-CEB.html', xml: '01-
 		var ref = document.getElementById(id);
 		$("body,html,document").scrollTop($(ref).offset().top);
 		
+	}
+	
+	function highlightSearchTerm(term){
+		var domString = document.body.innerHTML;
+		var regex = new RegExp(">([^<]*)?("+term+")([^>]*)?<","ig");
+
+      	document.body.innerHTML = domString.replace(regex,'>$1<span class="highlighted term" style="background-color:#00FFFF">$2</span>$3<');
 	}
 		
 		//this, '1Sam.1.22!note.g')

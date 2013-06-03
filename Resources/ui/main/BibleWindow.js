@@ -1,5 +1,5 @@
 function BibleWindow(_args){
-	var book = _args.book, chapter = _args.chapter, verse = _args.verse;
+	var book = _args.book, chapter = _args.chapter, verse = _args.verse, searchTerm = _args.searchTerm;
 	
 	var bibleDir = 'CEB/';
 	Ti.include(bibleDir+'bible.js');
@@ -14,8 +14,11 @@ function BibleWindow(_args){
 		}
 	}
 	
-	var url = bibleDir + htmlFile + '?' + 'book=' + book + '&' + 'chapter=' + chapter + '&' + 'verse=' + verse;
-	
+	var url = bibleDir + htmlFile + '?book=' + book + '&chapter=' + chapter + '&verse=' + verse;
+	if(searchTerm != ''){
+		url += '&search_term='+searchTerm.replace(' ','%20');
+	}
+console.log(url);
 	var self = Ti.UI.iPad.createPopover({
             width:500, 
             height:600,

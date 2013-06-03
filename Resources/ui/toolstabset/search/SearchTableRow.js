@@ -3,6 +3,7 @@ function SearchTableRow(_args){
 		verse = typeof(_args.verse) === 'undefined' ? '' : _args.verse, verseText = typeof(_args.verseText) === 'undefined' ? '' : _args.verseText, 
 		url = typeof(_args.url) === undefined ? '' : _args.url, storeTitle = typeof(_args.storeTitle) === 'undefined' ? '' : _args.storeTitle, 
 		imageLoc = typeof(_args.imageLoc) === 'undefined' ? '' : _args.imageLoc;
+	var searchTerm = _args.searchTerm;
 		
 	var self = Ti.UI.createTableViewRow({
 		zIndex:5,
@@ -42,7 +43,7 @@ function SearchTableRow(_args){
 			pageLabelText = 'p. ' + pageNo;
 			self.addEventListener('click', function(e){
 				self.fireEvent('hideTools');
-				Ti.App.fireEvent('gotopage', {pageNo: pageNo});
+				Ti.App.fireEvent('gotopage', {pageNo: pageNo, searchTerm: searchTerm});
 
 			});
 			noteLabelText = bookText;
@@ -50,7 +51,7 @@ function SearchTableRow(_args){
 		case 'bible':
 			pageLabelText = verse;
 			self.addEventListener('click', function(e){
-				Ti.App.fireEvent('biblepop', {verse: verse});
+				Ti.App.fireEvent('biblepop', {verse: verse, searchTerm: searchTerm});
 			});
 			noteLabelText = verseText;
 			break;

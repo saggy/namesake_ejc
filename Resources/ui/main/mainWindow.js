@@ -11,7 +11,7 @@ function mainWindow() {
 	
 	//set variables for database and start page of webview
 	var dbName = 'namesake';
-	var startPage = 1;
+	var startPage = 15;
 	var NOTE = '0', BOOKMARK = '1', HIGHLIGHT = '2';
 
 
@@ -162,7 +162,7 @@ function mainWindow() {
 	Ti.App.addEventListener('biblepop', function(e) { 
 		verse = e.verse.split('.');
 	
-		bibleWindow = new BibleWindow({book:verse[0], chapter:verse[1], verse:verse[2]});
+		bibleWindow = new BibleWindow({book:verse[0], chapter:verse[1], verse:verse[2], searchTerm: typeof(e.searchTerm) === 'undefined' ? '' : e.searchTerm});
 		bibleWindow.addEventListener('hide', function(e){
 			var page = webView.getPage();
 			self.remove(webView);
