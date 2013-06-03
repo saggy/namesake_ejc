@@ -59,7 +59,6 @@ function SearchTable(_args) {
 					var rs = db.execute(queries[i], searchTerm, searchLimit);
 					while(rs.isValidRow()){
 						var text = formatText(rs.fieldByName('content'));
-console.log(text);
 						var result = {type: type, pageNo: rs.fieldByName('page_no'), bookText: text };
 						results.push(result);
 						rs.next();
@@ -70,8 +69,7 @@ console.log(text);
 					var rs = db.execute(queries[i], searchTerm, searchLimit);
 					while(rs.isValidRow()){
 						var text = formatText(rs.fieldByName('verseText'));
-console.log(text);
-						var result = {type: type, verse: rs.fieldByName('verse'), verseText: text  };
+						var result = {type: type, verse: rs.fieldByName('verse'), verseText: text };
 						results.push(result);
 						rs.next();
 					}
@@ -84,7 +82,7 @@ console.log(text);
 			}
 			
 			
-			tableSections[i] = new SearchTableSection({section: sections[i], type: types[i], results: results, parent: _parent});
+			tableSections[i] = new SearchTableSection({section: sections[i], type: types[i], results: results, searchTerm: searchTerm, parent: _parent});
 		}
 		db.close();
 		self.setData(tableSections);
