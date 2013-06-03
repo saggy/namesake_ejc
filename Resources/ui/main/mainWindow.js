@@ -44,7 +44,11 @@ function mainWindow() {
 
 	// show tools
 	toolsButton.addEventListener('click', function(e){
-		toolsWindow.show({view: toolsButton, animated:true});		
+		toolsWindow.show({view: toolsButton, animated:true});	
+		toolsWindow.addEventListener('update', function(e){
+			toolsWindow.hide();
+			toolsWindow.show({view: toolsButton, animated: false});
+		});
 	});
 
 	// add navigation bar

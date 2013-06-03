@@ -1,4 +1,5 @@
 function SearchTable(_args) {
+	var _parent = _args.parent;
 	var searchBar = Ti.UI.createSearchBar({
 		barColor: '#000000',
 		showCancel: true,
@@ -18,17 +19,15 @@ function SearchTable(_args) {
 	var sections = ['Namesake', 'Bible', 'More Titles'];
 	var types = ['book', 'bible', 'store']
 	var queries = ['SELECT * FROM bookSearch WHERE content MATCH ? LIMIT ?', 
-					'SELECT * FROM bibleSearch WHERE verseText LIKE "%?%" LIMIT ?']
+					'SELECT * FROM BS1 WHERE verseText MATCH ? LIMIT ?']
 	
-	
-	var SearchTableSection = require('ui/toolstabset/search/SearchTableSection'),
-			tableSections = [];
-	
+	var tableSections = [];
+	var SearchTableSection = require('ui/toolstabset/search/SearchTableSection');
 	searchBar.addEventListener('return',function(e){
 		var searchTerm = searchBar.getValue();
 		
 		var db = Ti.Database.open('namesake');
-		
+	
 		for(var i = 0, len = sections.length; i < len; i++){
 			var type = types[i];
 			var results = [];
@@ -36,14 +35,14 @@ function SearchTable(_args) {
 				case 'book':
 					var rs = db.execute(queries[i], searchTerm, searchLimit);
 					while(rs.isValidRow()){
-						var result = {type: type, pageNo: 15, bookText: rs.fieldByName('content') };
+						var result = {type: type, pageNo: rs.fieldByName('page_no'), bookText: rs.fieldByName('content') };
 						results.push(result);
 						rs.next();
 					}
 					rs.close();
 					break;
 				case 'bible':
-					var rs = db.execute('SELECT * FROM bibleSearch WHERE verseText LIKE "%'+searchTerm+'%" LIMIT ?', searchLimit);
+					var rs = db.execute(queries[i], searchTerm, searchLimit);
 					while(rs.isValidRow()){
 						var result = {type: type, verse: rs.fieldByName('verse'), verseText: rs.fieldByName('verseText') };
 						results.push(result);
@@ -58,10 +57,12 @@ function SearchTable(_args) {
 			}
 			
 			
-			tableSections[i] = new SearchTableSection({title: sections[i], type: types[i], results: results});
+			tableSections[i] = new SearchTableSection({section: sections[i], type: types[i], results: results, parent: _parent});
 		}
 		db.close();
 		self.setData(tableSections);
+
+		self.fireEvent('search');
 	});
 	self.setData(tableSections);
 	return self;

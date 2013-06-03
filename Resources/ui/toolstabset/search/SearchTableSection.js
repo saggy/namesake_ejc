@@ -1,7 +1,8 @@
 function SearchTableSection(_args){
-	var header = _args.title, type = _args.type;
+	var _parent = _args.parent;
+	var header = _args.section, type = _args.type;
 	var results = _args.results;
-	
+console.log(header);
 	var self = Ti.UI.createTableViewSection({
 		headerTitle: header
 	});
@@ -14,20 +15,26 @@ function SearchTableSection(_args){
 		var result = results[i];
 		switch(type){
 			case 'book':
-				row = new SearchTableRow({pageNo: result.pageNo, bookText: result.bookText});
+			//console.log('Book '+ result.pageNo +' ' + result.bookText);
+				row = new SearchTableRow({type: type, pageNo: result.pageNo, bookText: result.bookText});
 				break;
 			case 'bible':
-				row = new SearchTableRow({verse: result.verse, verseText: result.verseText});
+			//console.log('Bible '+result.verse+ ' '+ result.verseText);
+				row = new SearchTableRow({type: type, verse: result.verse, verseText: result.verseText});
 				break;
 			case 'store':
-				row = new SearchTableRow({storeTitle: result.storeTitle, imageLoc: result.imageLoc});
+			//console.log('Store '+result.storeTitle, result.imageLoc);
+				row = new SearchTableRow({type: type, storeTitle: result.storeTitle, imageLoc: result.imageLoc});
 				break;
 		}
-
-
-		tableData.push(row);
+		row.addEventListener('hideTools', function(e){
+			_parent.hide();
+		});
+		
+		self.add(row);
+		//tableData.push(row);
 	}
-	self.setData(tableData);
+	//self.setData(tableData);
 	
 	return self;
 }

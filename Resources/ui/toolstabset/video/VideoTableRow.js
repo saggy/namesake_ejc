@@ -6,9 +6,10 @@ function VideoTableRow(_args){
 		selectedBackgroundColor : '#0096DE',
 		rowIndex: index,
 		height: 50,
-		width: 400
+		width: 400,
+		leftImage: imageLoc,
 	});
-	
+	/*
 	var image = Ti.UI.createImageView({
 		zIndex: 5,
 		left: 0,
@@ -17,7 +18,7 @@ function VideoTableRow(_args){
 		image: imageLoc,
 		rowIndex: index
 	})
-
+*/
 	var label = Ti.UI.createLabel({
 		zIndex: 5,
 		color: 'black',
@@ -30,7 +31,7 @@ function VideoTableRow(_args){
 		rowIndex: index
 	});
 	
-	self.add(image);
+	//self.add(image);
 	self.add(label);
 
 	return self;

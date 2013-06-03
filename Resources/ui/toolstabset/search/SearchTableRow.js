@@ -9,24 +9,30 @@ function SearchTableRow(_args){
 		className: 'forumEvent',
 		selectedBackgroundColor : '#0096DE',
 		height: 50,
-		width: 400
+		width: 400,
+		leftImage: imageLoc,
+		color: 'black',
+		backgroundColor: 'white'
 	});
 	
 
-	var pageLabel = Ti.UI.createLabel({
-		left: 0,
-		width: 50,
-		backgroundColor: '#000000',
-		color: '#FFFFFF'
-	});
+	if(imageLoc == ''){
+		var pageLabel = Ti.UI.createLabel({
+			left: 0,
+			width: 80,
+			height: 50,
+			backgroundColor: '#0096DE',
+			color: '#FFFFFF',
+			textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER
+		});
+	}
 
 	var noteLabel = Ti.UI.createLabel({
-		color: '#FFFFFF',
-		backgroundColor:'#0096DE',
-		left: 50,
+		color: 'black',
+		backgroundColor:'white',
 		right: 0,
 		top: 0,
-		width: 350,
+		width: 300,
 		height: 50
 	});
 	
@@ -35,7 +41,9 @@ function SearchTableRow(_args){
 		case 'book':
 			pageLabelText = 'p. ' + pageNo;
 			pageLabel.addEventListener('click', function(e){
-				Ti.App.fireEvent('gotopage', {pageNo: self.pageNo});
+				self.fireEvent('hideTools');
+				Ti.App.fireEvent('gotopage', {pageNo: pageNo});
+
 			});
 			noteLabelText = bookText;
 			break;
@@ -47,22 +55,17 @@ function SearchTableRow(_args){
 			noteLabelText = verseText;
 			break;
 		case 'store':
-			pageLabel = Ti.UI.createImageView({
-				left: 0,
-				width: 50,
-				image: imageLoc,
-				text: ''
-			});
-			noteLabelText = verseText;
+			noteLabelText = storeTitle;
 			break;
 	}
 
-	pageLabel.setText(pageLabelText);
-	noteLabel.setText(noteLabelText);
-
+	noteLabel.text = noteLabelText;
 	self.add(noteLabel);
-	self.add(pageLabel);
 
+	if(imageLoc == ''){
+		pageLabel.text = pageLabelText;
+		self.add(pageLabel);
+	}
 
 	return self;
 }

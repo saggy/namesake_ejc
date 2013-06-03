@@ -25,7 +25,7 @@ function ToolsWindow(_args){
 	}
 */
 	var SearchTable = require('ui/toolstabset/search/SearchTable'),
-		searchTable = new SearchTable();
+		searchTable = new SearchTable({parent: self});
 	self.add(searchTable);
 	searchTable.hide();
 
@@ -110,6 +110,11 @@ function ToolsWindow(_args){
 				searchTable.show();
 				self.setHeight(400);
 				self.rightNavButton = emptyView;
+				searchTable.addEventListener('search', function(e){
+					self.fireEvent('update');
+					tBar.index = 4;
+					tBar.fireEvent('click');
+				});
 				break;
 			//default because I fire a click event with no index when the toolbar is first created - and I want that to load the video list, rather than have nothing loaded.
 			default:
