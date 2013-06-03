@@ -14,18 +14,95 @@ function ToolsWindow(_args){
 	var tools = ['Video','Notes','Bookmarks','Highlights','Search'];
 	var ToolsBar = require('ui/toolstabset/ToolsBar'),
 		tBar = new ToolsBar({items: tools});
-	/*
-	var ToolsTab = require('ui/toolstabset/ToolsTab');
-	var toolsTabs = [];
-	for(var i = 0; i < tools.length; i++){
-		var tab = new ToolsTab(tools[i]);
-		tab.setLeft(i*tab.width);
-		toolsWindow.add(tab);
-		toolsTabs.push(tab);
-	}
-*/
+	
+	var SearchBar = require('ui/toolstabset/search/searchBar'),
+		searchBar = new SearchBar({parent: self});
+		
+	searchBar.addEventListener('return',function(e){
+		searchTable.show();
+		var searchLimit = 5;
+		var sections = ['Namesake', 'Bible', 'More Titles'];
+		var types = ['book', 'bible', 'store']
+		var queries = ['SELECT * FROM bookSearch WHERE content MATCH ? LIMIT ?', 
+					'SELECT * FROM BS1 WHERE verseText MATCH ? LIMIT ?']
+	
+		var tableSections = [];
+		var SearchTableSection = require('ui/toolstabset/search/SearchTableSection');
+	
+		var searchTerm = searchBar.getValue();
+		
+		function formatText(text){
+			var textArr = text.split(' ');
+			var tempArr = [];
+			for(var i = 0, len = textArr.length; i < len; i++ ){
+				var temp = textArr.shift();
+				tempArr.push(temp);
+				if(temp.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1){
+					textArr.unshift(tempArr.pop().toUpperCase());
+					var j = 0;
+					while(j < 3 && j < tempArr.length){
+						textArr.unshift(tempArr.pop());
+						j++;
+					}
+					break;
+				}
+			}
+			return textArr.join(' ');
+			
+		}
+		
+		
+		var db = Ti.Database.open('namesake');
+	
+		for(var i = 0, len = sections.length; i < len; i++){
+			var type = types[i];
+			var results = [];
+			switch(type){
+				case 'book':
+					var rs = db.execute(queries[i], searchTerm, searchLimit);
+					while(rs.isValidRow()){
+						var text = formatText(rs.fieldByName('content'));
+		console.log(text);
+						var result = {type: type, pageNo: rs.fieldByName('page_no'), bookText: text };
+						results.push(result);
+						rs.next();
+					}
+					rs.close();
+					break;
+				case 'bible':
+					var rs = db.execute(queries[i], searchTerm, searchLimit);
+					while(rs.isValidRow()){
+						var text = formatText(rs.fieldByName('verseText'));
+		console.log(text);
+						var result = {type: type, verse: rs.fieldByName('verse'), verseText: text  };
+						results.push(result);
+						rs.next();
+					}
+					rs.close();
+					break;
+				case 'store':
+					var result = {type: type, storeTitle: 'Deep Blue Kids Bible', imageLoc: '/images/buttons/dbkb-ipad.png'};
+					results.push(result);
+					break;
+			}
+			
+			
+			tableSections[i] = new SearchTableSection({section: sections[i], type: types[i], results: results, parent: self});
+		}
+		db.close();
+		searchTable.setData(tableSections);
+	});
+	
+	
+	
+	
+	
+	
+		
 	var SearchTable = require('ui/toolstabset/search/SearchTable'),
-		searchTable = new SearchTable({parent: self});
+		searchTable = new SearchTable(searchBar);
+		
+	self.add(searchBar);
 	self.add(searchTable);
 	searchTable.hide();
 
