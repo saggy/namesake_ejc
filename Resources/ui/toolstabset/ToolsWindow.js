@@ -112,8 +112,8 @@ function ToolsWindow(_args){
 				self.rightNavButton = emptyView;
 				searchTable.addEventListener('search', function(e){
 					self.fireEvent('update');
-					tBar.index = 4;
-					tBar.fireEvent('click');
+					//tBar.index = 4;
+					//tBar.fireEvent('click');
 				});
 				break;
 			//default because I fire a click event with no index when the toolbar is first created - and I want that to load the video list, rather than have nothing loaded.
