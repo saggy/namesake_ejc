@@ -1,6 +1,7 @@
 function ToolsTable(_args) {
 	var type = _args.type;
 	var query = '';
+	var _parent = _args.parent;
 	switch(type){
 		case 'note':
 			query = "SELECT annotation_id, note_html, note_text, page_no, note, row_index FROM annotation WHERE type='note' ORDER BY row_index";
@@ -15,46 +16,21 @@ function ToolsTable(_args) {
 	var db = Ti.Database.open('namesake');
 	var rs = db.execute(query);
 	var self = Ti.UI.createView({
-		top: 100,
+		top: 50,
 		right: 0,
-		borderRadius: 10,
 		width: 400,
 		height: 'auto',
-		backgroundColor:'#000000'
+		backgroundColor:'#000000',
+		borderRadius: 0 
 	});
 	
-	var edit = Ti.UI.createButton({
-		zIndex: 3,
-		top: 0,
-		right: 0,
-		title: 'Edit'
-	});
-	edit.addEventListener('click',function(e){
-		table.moving = true;
-		table.editing = true;
-		edit.hide();
-		done.show();
-	});
-	var done = Ti.UI.createButton({
-		zIndex: 3,
-		top: 0,
-		right: 0,
-		title: 'Done',
-		style: Ti.UI.iPhone.SystemButtonStyle.BORDERED
-	});
-	done.addEventListener('click', function(e){
-		table.moving = false;
-		table.editing = false;
-		done.hide();
-		edit.show();
-		
-	});
+
 	var table = Ti.UI.createTableView({
 		height: 'auto',
 		zIndex: 3,
-  		top: 50,
+  		top: 0,
   		right: 0,
-  		borderRadius:10,
+  		borderRadius:0,
   		width:400,
   		backgroundColor: '#FFFFFF',
   		editable: true,
@@ -110,7 +86,7 @@ function ToolsTable(_args) {
 	while(rs.isValidRow()){
 		var row = new ToolsTableRow({type: type, id: rs.fieldByName('annotation_id'), index: i, rowIndex: rs.fieldByName('row_index'), 
 					noteHtml: rs.fieldByName('note_html'), noteText: rs.fieldByName('note_text'), 
-					pageNo : rs.fieldByName('page_no'), note : (type == 'note') ? rs.fieldByName('note') : rs.fieldByName('note_text')});
+					pageNo : rs.fieldByName('page_no'), note : (type == 'note') ? rs.fieldByName('note') : rs.fieldByName('note_text'), parent : _parent});
 
 		tableData[row.rowIndex] = row;
 		rs.next();
@@ -120,13 +96,24 @@ function ToolsTable(_args) {
 	self.rowCount = i;
 	table.setData(tableData);
 	
-	self.add(done);
-	done.hide();
-	self.add(edit);
+	//self.add(done);
+	//done.hide();
+	//self.add(edit);
 	self.add(table);
 	
 	rs.close();
 	db.close();
+	
+	self.addEventListener('editClick',function(e){
+		table.moving = true;
+		table.editing = true;
+	});
+	
+	self.addEventListener('doneClick',function(e){
+		table.moving = false;
+		table.editing = false;
+	});
+	
 	return self;
 };
 

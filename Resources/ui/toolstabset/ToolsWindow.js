@@ -1,13 +1,13 @@
 function ToolsWindow(_args){
-	var self = Ti.UI.createView({
-  		top: 0,
-  		right: 15,
-  		width:400,
-  		height:750
-	});
+
+		var self = Ti.UI.iPad.createPopover({
+            width:400, 
+            height: 600,
+            arrowDirection: Ti.UI.iPad.POPOVER_ARROW_DIRECTION_UP,
+            		backgroundColor: 'black',
+            title: 'Tools'
+            });
 	
-	var CloseButton = require('ui/controls/CloseButton'),
-		closeButton = new CloseButton();
 	var ToolsView = require('ui/toolstabset/ToolsView'),
 		toolsView = new ToolsView();
 
@@ -30,8 +30,8 @@ function ToolsWindow(_args){
 	searchTable.hide();
 
 	var VideoTable = require('ui/toolstabset/video/VideoTable'),
-		videoTable = new VideoTable();
-	var videoH = 50*(2+video.length);
+		videoTable = new VideoTable(self);
+	var videoH = 50*(1+video.length);
 	
 	self.add(videoTable);
 	videoTable.hide()
@@ -42,9 +42,36 @@ function ToolsWindow(_args){
 		
 	var toolsH = 0;
 	var tools = ['video','note','bookmark','highlight']
-
+	var emptyView = Titanium.UI.createView({});
 	
 	var current = videoTable;
+	
+	
+		var edit = Ti.UI.createButton({
+		title: 'Edit'
+	    });
+	edit.addEventListener('click',function(e){
+		//table.moving = true;
+		//table.editing = true;
+		toolsTable.fireEvent('editClick');
+		self.rightNavButton = done;
+	});
+	
+	var done = Ti.UI.createButton({
+		title: 'Done',
+		style: Ti.UI.iPhone.SystemButtonStyle.BORDERED
+	});
+	
+	done.addEventListener('click', function(e){
+		//table.moving = false;
+		//table.editing = false;
+		toolsTable.fireEvent('doneClick');
+		self.rightNavButton = edit;
+		
+	});
+	
+	
+	
 	tBar.addEventListener('click',function(e){
 		current.hide();
 		var idx = tBar.getIndex();
@@ -54,6 +81,7 @@ function ToolsWindow(_args){
 				current = videoTable;
 				videoTable.show();
 				self.setHeight(videoH);
+				self.rightNavButton = emptyView;
 				break;
 			//notes
 			case 1:
@@ -61,15 +89,18 @@ function ToolsWindow(_args){
 			case 2:
 			//highlights
 			case 3:
-				toolsTable = new ToolsTable({type: tools[idx]});
+				self.rightNavButton = edit;
+				toolsTable = new ToolsTable({type: tools[idx], parent: self});
 				toolsTable.addEventListener('resize',function(e){
-					toolsH = 50*(3+toolsTable.rowCount);
+					toolsH = 50*(2+toolsTable.rowCount);
+					toolsH = 400;
 					self.setHeight(toolsH);
 				});
 				
 				self.add(toolsTable);
 				current = toolsTable;
-				toolsH = 50*(3+toolsTable.rowCount);
+				toolsH = 50*(2+toolsTable.rowCount);
+				toolsH = 400;
 				self.setHeight(toolsH);
 				toolsTable.show();
 				break;
@@ -77,17 +108,21 @@ function ToolsWindow(_args){
 			case 4:
 				current = searchTable;
 				searchTable.show();
-				self.setHeight(searchTable.getHeight());
+				self.setHeight(400);
+				self.rightNavButton = emptyView;
+				break;
+			//default because I fire a click event with no index when the toolbar is first created - and I want that to load the video list, rather than have nothing loaded.
+			default:
+				current = videoTable;
+				videoTable.show();
+				self.setHeight(videoH);
+				self.rightNavButton = emptyView;
 				break;
 		}
 	});
 	self.add(tBar);
-	self.add(closeButton);
 	
-	closeButton.addEventListener('click', function(e){
-		self.hide();
-	});
-	
+	tBar.fireEvent('click');
 
 	//self.add(videoButton);
 

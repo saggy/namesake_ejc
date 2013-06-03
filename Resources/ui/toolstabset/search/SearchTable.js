@@ -7,9 +7,9 @@ function SearchTable(_args) {
 	});
 	var self = Ti.UI.createTableView({
 		zIndex: 3,
-  		top: 100,
+  		top: 50,
   		right: 0,
-  		borderRadius:10,
+  		borderRadius:0,
   		width:400,
   		backgroundColor: '#FFFFFF',
   		search: searchBar

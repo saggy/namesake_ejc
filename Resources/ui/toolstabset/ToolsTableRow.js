@@ -1,6 +1,8 @@
 function ToolsTableRow(_args){
 	var type = _args.type, id = _args.id, rowIndex = _args.rowIndex, noteHtml = _args.noteHtml, noteText = _args.noteText, 
 			pageNo = _args.pageNo, note = _args.note;
+	var _parent = _args.parent;
+	
 	var self = Ti.UI.createTableViewRow({
 		className: 'forumEvent',
 		selectedBackgroundColor : '#0096DE',
@@ -15,28 +17,33 @@ function ToolsTableRow(_args){
 	});
 	
 
-	var pageLabel = Ti.UI.createLabel({
+	var pageLabel = Ti.UI.createView({
 		left: 0,
-		width: 50,
-		backgroundColor: '#000000',
-		color: '#FFFFFF',
-		text: 'p. '+ pageNo,
+		width: 80,
 		id: id,
 		rowIndex: rowIndex,
 		noteHtml: noteHtml,
 		noteText: noteText,
 		pageNo: pageNo,
-		note: note
+		note: note,
+		backgroundColor: '#0096DE'
+	});
+	
+	var pageNum = Ti.UI.createLabel({
+		backgroundColor: '#0096DE',
+		color: '#FFFFFF',
+		text: 'p. ' +pageNo
 	});
 
+	pageLabel.add(pageNum);
+	
 	var noteLabel = Ti.UI.createLabel({
-		color: '#FFFFFF',
-		backgroundColor:'#0096DE',
+		color: 'black',
+		backgroundColor:'white',
 		text: note,
-		left: 50,
 		right: 0,
 		top: 0,
-		width: 350,
+		width: 300,
 		height: 50,
 		id: id,
 		rowIndex: rowIndex,
@@ -46,13 +53,16 @@ function ToolsTableRow(_args){
 		note: note
 	});
 	
-	pageLabel.addEventListener('click', function(e){
+	self.addEventListener('click', function(e){
+		_parent.hide();
 		Ti.App.fireEvent('gotopage', {pageNo: self.pageNo});
 	});
 
+/*
 		noteLabel.addEventListener('click', function(e){
 		Ti.App.fireEvent('gotopage', {pageNo: self.pageNo});
 		});
+		*/
 	
 	self.add(noteLabel);
 	self.add(pageLabel);

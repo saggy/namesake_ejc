@@ -13,14 +13,15 @@ function VideoTableRow(_args){
 		zIndex: 5,
 		left: 0,
 		width: 100,
+		height: 46,
 		image: imageLoc,
 		rowIndex: index
 	})
 
 	var label = Ti.UI.createLabel({
 		zIndex: 5,
-		color: '#FFFFFF',
-		backgroundColor: '#FF0000',
+		color: 'black',
+		backgroundColor: 'white',
 		text: title,
 		right: 0,
 		top: 0,
