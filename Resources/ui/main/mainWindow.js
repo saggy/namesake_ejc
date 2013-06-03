@@ -170,8 +170,13 @@ function mainWindow() {
 		verse = e.verse.split('.');
 	
 		bibleWindow = new BibleWindow({book:verse[0], chapter:verse[1], verse:verse[2]});
-		
-	var pHeight = Ti.Platform.displayCaps.platformHeight;
+		bibleWindow.addEventListener('hide', function(e){
+			var page = webView.getPage();
+			self.remove(webView);
+			webView = new WebView({page: page});
+			self.add(webView);
+		});
+		var pHeight = Ti.Platform.displayCaps.platformHeight;
 	
 		
 		var invisView = Titanium.UI.createButton({
