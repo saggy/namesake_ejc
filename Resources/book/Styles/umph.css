@@ -129,6 +129,10 @@ hr{color:#000;}
    text-align: center;
 }
 
+#center {
+	width: 768px;
+}
+
 .PoetryText1 {
     font-family: Palatino;
     font-size: 16px;

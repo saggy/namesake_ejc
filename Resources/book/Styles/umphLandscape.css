@@ -129,6 +129,19 @@ hr{color:#000;}
    text-align: center;
 }
 
+#center {
+	width: 1024px;
+      top: 0px;
+ }
+
+#page1Title {
+   margin-top:1em;
+}
+
+#page1Image {
+	width: 400px;
+}
+
 .PoetryText1 {
     font-family: Palatino;
     font-size: 16px;
