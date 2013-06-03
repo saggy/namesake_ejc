@@ -154,6 +154,35 @@ e&&e.document?e.document.compatMode==="CSS1Compat"&&e.document.documentElement["
   </script>
   <script charset="utf-8"  type="text/javascript">
   //<![CDATA[
+  
+function load(){
+	params = getQueryParams(document.location.search);
+	//highlightSearchTerm(params.search_term);
+}
+
+function getQueryParams(qs) {
+    qs = qs.split("+").join(" ");
+
+    var params = {}, tokens,
+        re = /[?&]?([^=]+)=([^&]*)/g;
+
+    while (tokens = re.exec(qs)) {
+        params[decodeURIComponent(tokens[1])]
+            = decodeURIComponent(tokens[2]);
+    }
+
+    return params;
+}
+	
+function highlightSearchTerm(term){
+	alert(term);
+	term = term.slice(0,1) + '</span>' + term.slice(1,term.length);
+
+	var domString = document.body.innerHTML;
+	var regex = new RegExp(">([^<]*)?("+term+")([^>]*)?<","ig");
+
+  	document.body.innerHTML = domString.replace(regex,'>$1<span class="highlighted term" style="background-color:#00FFFF">$2</span>$3<');
+}
 function biblepop(verse)
 {
 	Ti.App.fireEvent('biblepop',{verse: verse});
@@ -272,7 +301,7 @@ Ti.App.addEventListener('app:addNote', function(e){
   </script>
 </head>
 
-<body>
+<body onload="load();">
   <div id="wrapper" style="height: 100%;">
     <div style="width: 180px; height: 924px; float: right; padding: 5px; background-image: url(../Images/sidebar.png); background-attachment: fixed;">
       <p class="noindentp" style="margin-top: 200px; font-family: TrebuchetMS; margin-left: 10px;"><span style="display: table-cell; vertical-align: middle; line-height: 30px;"><em><span id='1'>“</span>For <span id='2'>I</span> <span id='3'>k</span>now <span id='4'>t</span>he <span id='5'>p</span>lans <span id='6'>I</span> <span id='7'>h</span>ave <span id='8'>f</span>or <span id='9'>y</span>ou,” <span id='10'>d</span>eclares <span id='11'>t</span>he <span style="font-variant:small-caps;"><span id='12'>L</span>ord</span><span id='13'>,</span> <span id='14'>“</span>plans <span id='15'>t</span>o <span id='16'>p</span>rosper <span id='17'>y</span>ou <span id='18'>a</span>nd <span id='19'>n</span>ot <span id='20'>t</span>o <span id='21'>h</span>arm <span id='22'>y</span>ou, <span id='23'>p</span>lans <span id='24'>t</span>o <span id='25'>g</span>ive <span id='26'>y</span>ou <span id='27'>h</span>ope <span id='28'>a</span>nd <span id='29'>a</span> <span id='30'>f</span>uture.”</em><br />

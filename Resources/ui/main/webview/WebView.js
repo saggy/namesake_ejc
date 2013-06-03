@@ -1,12 +1,15 @@
 function WebView(_args) {
 	var bookDir = 'book/Text/';
 	var cPage = _args.page;
+	var searchTerm = typeof(_args.searchTerm) === 'undefined' ? '' : _args.searchTerm;
 	
+	var url = bookDir+'Page0001.xhtml';
+
 	// code for popupmenu options
 	var NOTE = '0', BOOKMARK = '1', HIGHLIGHT = '2';
 	var self = Ti.UI.createWebView({
 		top : 0,
-		url : bookDir+'Page0001.xhtml',
+		url : url,
 		page: 1,
 		maxPages: 1000, //power of 10
 		scalesPageToFit:true,
@@ -31,6 +34,11 @@ function WebView(_args) {
 		self.setUrl(pageString);
 		self.page = page;
 
+	}
+	self.searchPage = function(page, term){
+		self.goToPage(page);
+		self.url +='&search_term='+term.join(' ','%20');
+console.log(self.url);
 	}
 
 	self.getPage = function(){

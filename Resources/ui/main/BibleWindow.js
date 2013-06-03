@@ -18,7 +18,7 @@ function BibleWindow(_args){
 	if(searchTerm != ''){
 		url += '&search_term='+searchTerm.replace(' ','%20');
 	}
-console.log(url);
+
 	var self = Ti.UI.iPad.createPopover({
             width:500, 
             height:600,

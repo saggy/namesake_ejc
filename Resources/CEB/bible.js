@@ -88,7 +88,6 @@ var bible =             [{title:'Genesis', url: '01-Genesis-CEB.html', xml: '01-
     function load(){
    		var params = getQueryParams(document.location.search);
 		scrollToChapterVerse(params.book,params.chapter,params.verse);
-		alert(params.search_term);
 		highlightSearchTerm(params.search_term);
 
     }
