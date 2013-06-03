@@ -62,7 +62,7 @@ function ToolsWindow(_args){
 					var rs = db.execute(queries[i], searchTerm, searchLimit);
 					while(rs.isValidRow()){
 						var text = formatText(rs.fieldByName('content'));
-		console.log(text);
+		//console.log(text);
 						var result = {type: type, pageNo: rs.fieldByName('page_no'), bookText: text };
 						results.push(result);
 						rs.next();
@@ -73,7 +73,7 @@ function ToolsWindow(_args){
 					var rs = db.execute(queries[i], searchTerm, searchLimit);
 					while(rs.isValidRow()){
 						var text = formatText(rs.fieldByName('verseText'));
-		console.log(text);
+		//console.log(text);
 						var result = {type: type, verse: rs.fieldByName('verse'), verseText: text  };
 						results.push(result);
 						rs.next();
@@ -87,7 +87,7 @@ function ToolsWindow(_args){
 			}
 			
 			
-			tableSections[i] = new SearchTableSection({section: sections[i], type: types[i], results: results, parent: self});
+			tableSections[i] = new SearchTableSection({section: sections[i], type: types[i], results: results, searchTerm: searchTerm, parent: self});
 		}
 		db.close();
 		searchTable.setData(tableSections);
@@ -187,11 +187,6 @@ function ToolsWindow(_args){
 				searchTable.show();
 				self.setHeight(400);
 				self.rightNavButton = emptyView;
-				searchTable.addEventListener('search', function(e){
-					self.fireEvent('update');
-					//tBar.index = 4;
-					//tBar.fireEvent('click');
-				});
 				break;
 			//default because I fire a click event with no index when the toolbar is first created - and I want that to load the video list, rather than have nothing loaded.
 			default:
