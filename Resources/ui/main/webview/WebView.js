@@ -3,7 +3,7 @@ function WebView(_args) {
 	var cPage = _args.page;
 	var searchTerm = typeof(_args.searchTerm) === 'undefined' ? '' : _args.searchTerm;
 	
-	var url = bookDir+'Page0001.xhtml';
+	var url = bookDir+'Page0001.html';
 
 	// code for popupmenu options
 	var NOTE = '0', BOOKMARK = '1', HIGHLIGHT = '2';
@@ -30,7 +30,7 @@ function WebView(_args) {
 			}
 		}
 		
-		pageString = bookDir + 'Page' + pageString + page + '.xhtml';
+		pageString = bookDir + 'Page' + pageString + page + '.html';
 		self.setUrl(pageString);
 		self.page = page;
 
