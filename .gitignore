@@ -7,3 +7,17 @@ build.log
 *.prefs
 
 *.prefs
+
+*.prefs
+
+.settings/com.appcelerator.titanium.core.prefs
+
+.settings/com.appcelerator.titanium.mobile.prefs
+
+.settings/com.appcelerator.titanium.mobile.prefs
+
+.settings/com.appcelerator.titanium.core.prefs
+
+.settings/com.appcelerator.titanium.mobile.prefs
+
+.settings/com.appcelerator.titanium.mobile.prefs
