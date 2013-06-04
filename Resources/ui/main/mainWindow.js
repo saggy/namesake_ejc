@@ -100,7 +100,7 @@ function mainWindow() {
 		if(results.isValidRow()){
 			result.id = results.fieldByName('answer_id');
 			result.text = results.fieldByName('answer_text'); 
-			result.answered = result.text != '';
+			result.answered = true;
 		}
 		results.close();
 		db.close();
@@ -160,10 +160,12 @@ function mainWindow() {
 	
 		bibleWindow = new BibleWindow({book:verse[0], chapter:verse[1], verse:verse[2], searchTerm: typeof(e.searchTerm) === 'undefined' ? '' : e.searchTerm});
 		bibleWindow.addEventListener('hide', function(e){
+			
 			var page = webView.getPage();
-			self.remove(webView);
+			webView.hide();
 			webView = new WebView({page: page});
 			self.add(webView);
+			//webView.reload();
 		});
 		var pHeight = Ti.Platform.displayCaps.platformHeight;
 	
