@@ -1,3 +1,9 @@
 # Build folder and log file
 build/
 build.log
+
+.settings/com.appcelerator.titanium.core.prefs
+
+*.prefs
+
+*.prefs
