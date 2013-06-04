@@ -11,7 +11,7 @@ function mainWindow() {
 	
 	//set variables for database and start page of webview
 	var dbName = 'namesake';
-	var startPage = 15;
+	var startPage = 1;
 	var NOTE = '0', BOOKMARK = '1', HIGHLIGHT = '2';
 
 
