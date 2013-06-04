@@ -33,7 +33,7 @@ function MenuWindow(_args){
       if (z >= 1 && z <= 208) //hardcoded values for demo
       {
       	self.hide();
-      	changePage(z);
+      	changePage(Number(z));
       } else {
       	var alertDialog = Titanium.UI.createAlertDialog({
     title: 'Page Number',
