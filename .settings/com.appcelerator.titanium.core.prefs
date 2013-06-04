@@ -1,9 +1,4 @@
 eclipse.preferences.version=1
-provisioning_profiles/development/0D63C180-B01F-4599-8B46-BECBBD526888/appid=*
-provisioning_profiles/development/0D63C180-B01F-4599-8B46-BECBBD526888/filepath=/Users/echu/Library/MobileDevice/Provisioning Profiles/0D63C180-B01F-4599-8B46-BECBBD526888.mobileprovision
-provisioning_profiles/development/0D63C180-B01F-4599-8B46-BECBBD526888/name=iOS Team Provisioning Profile\: iOS Wildcard AppID
-provisioning_profiles/development/0D63C180-B01F-4599-8B46-BECBBD526888/uuid=0D63C180-B01F-4599-8B46-BECBBD526888
-provisioning_profiles/development/C21E5382-366E-4A63-B434-0E4DB1148E2F/appid=com.abingdonpress.growProclaimServe
-provisioning_profiles/development/C21E5382-366E-4A63-B434-0E4DB1148E2F/filepath=/Users/echu/Library/MobileDevice/Provisioning Profiles/C21E5382-366E-4A63-B434-0E4DB1148E2F.mobileprovision
-provisioning_profiles/development/C21E5382-366E-4A63-B434-0E4DB1148E2F/name=Grow Profile
-provisioning_profiles/development/C21E5382-366E-4A63-B434-0E4DB1148E2F/uuid=C21E5382-366E-4A63-B434-0E4DB1148E2F
+provisioning_profiles/development/9924A064-FCDC-4286-A622-ADAF4AB0B933/appid=*
+provisioning_profiles/development/9924A064-FCDC-4286-A622-ADAF4AB0B933/name=iOS Team Provisioning Profile\: *
+provisioning_profiles/development/9924A064-FCDC-4286-A622-ADAF4AB0B933/uuid=9924A064-FCDC-4286-A622-ADAF4AB0B933

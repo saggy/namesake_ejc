@@ -15,7 +15,7 @@ function ToolsWindow(_args){
 	var ToolsBar = require('ui/toolstabset/ToolsBar'),
 		tBar = new ToolsBar({items: tools});
 	
-	var SearchBar = require('ui/toolstabset/search/searchBar'),
+	var SearchBar = require('ui/toolstabset/search/SearchBar'),
 		searchBar = new SearchBar({parent: self});
 		
 	searchBar.addEventListener('return',function(e){
