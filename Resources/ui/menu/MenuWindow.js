@@ -12,6 +12,42 @@ function MenuWindow(_args){
 	
 	var emptyView = Titanium.UI.createView({});
 	self.leftNavButton = emptyView
+	
+	var pagerView = Titanium.UI.createView({});
+	var textField = Ti.UI.createTextField({
+  	borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+  	color: '#336699',
+  	width: 100,
+  	keyboardType: Ti.UI.KEYBOARD_NUMBER_PAD
+	});
+	
+	
+	
+	textField.addEventListener('change', function(e) {
+      e.source.value = e.source.value.replace(/[^0-9]+/,""); //you can enter numbers or nothing.
+    });
+    
+    	textField.addEventListener('return', function(e) {
+    	var z =  e.source.value;
+    	e.source.value = '';
+      if (z >= 1 && z <= 208) //hardcoded values for demo
+      {
+      	self.hide();
+      	changePage(z);
+      } else {
+      	var alertDialog = Titanium.UI.createAlertDialog({
+    title: 'Page Number',
+    message: 'Please enter a page number between 1 and 208',
+    buttonNames: ['OK']
+	}).show();
+
+      }
+
+    });
+
+	pagerView.add(textField);
+	self.rightNavButton = pagerView;
+	
 		
 
 	var toc = book[0]['toc'];
