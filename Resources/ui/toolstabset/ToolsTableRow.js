@@ -20,12 +20,6 @@ function ToolsTableRow(_args){
 	var pageLabel = Ti.UI.createView({
 		left: 0,
 		width: 80,
-		id: id,
-		rowIndex: rowIndex,
-		noteHtml: noteHtml,
-		noteText: noteText,
-		pageNo: pageNo,
-		note: note,
 		backgroundColor: '#0096DE'
 	});
 	
@@ -45,12 +39,6 @@ function ToolsTableRow(_args){
 		top: 0,
 		width: 300,
 		height: 50,
-		id: id,
-		rowIndex: rowIndex,
-		noteText: noteHtml,
-		noteText: noteText,
-		pageNo: pageNo,
-		note: note
 	});
 	
 	self.addEventListener('click', function(e){

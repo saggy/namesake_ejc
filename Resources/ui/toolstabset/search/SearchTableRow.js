@@ -51,6 +51,7 @@ function SearchTableRow(_args){
 		case 'bible':
 			pageLabelText = verse;
 			self.addEventListener('click', function(e){
+				self.fireEvent('hideTools');
 				Ti.App.fireEvent('biblepop', {verse: verse, searchTerm: searchTerm});
 			});
 			noteLabelText = verseText;

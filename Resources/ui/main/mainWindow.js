@@ -29,7 +29,11 @@ function mainWindow() {
 	
 	var ToolsWindow = require('ui/toolstabset/ToolsWindow'),
 			toolsWindow = new ToolsWindow();
-	var BibleWindow = require('ui/main/BibleWindow');
+	var BibleWindow = require('ui/main/BibleWindow'),
+			bibleWindow = new BibleWindow();
+	self.add(bibleWindow);
+	bibleWindow.hide();
+
 
 	var MenuWindow = require('ui/menu/MenuWindow'),
 			menuWindow = new MenuWindow({webView: webView});
@@ -158,15 +162,9 @@ function mainWindow() {
 	Ti.App.addEventListener('biblepop', function(e) { 
 		verse = e.verse.split('.');
 	
-		bibleWindow = new BibleWindow({book:verse[0], chapter:verse[1], verse:verse[2], searchTerm: typeof(e.searchTerm) === 'undefined' ? '' : e.searchTerm});
-		bibleWindow.addEventListener('hide', function(e){
-			
-			var page = webView.getPage();
-			webView.hide();
-			webView = new WebView({page: page});
-			self.add(webView);
-			//webView.reload();
-		});
+		bibleWindow.goToVerse({book:verse[0], chapter:verse[1], verse:verse[2], searchTerm: typeof(e.searchTerm) === 'undefined' ? '' : e.searchTerm});
+		bibleWindow.show();
+/*
 		var pHeight = Ti.Platform.displayCaps.platformHeight;
 	
 		
@@ -180,7 +178,7 @@ function mainWindow() {
 		self.add(invisView);
 
 		bibleWindow.show({view: invisView, animated:true});
-		self.remove(invisView);
+		self.remove(invisView);*/
 		
 	});
 	Ti.App.addEventListener('blankfill', function(e) {
