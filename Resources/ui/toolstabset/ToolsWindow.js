@@ -168,17 +168,6 @@ function ToolsWindow(_args){
 			case 3:
 				self.rightNavButton = edit;
 				toolsTable = new ToolsTable({type: tools[idx], parent: self});
-				/*
-				toolsTable.addEventListener('resize',function(e){
-					toolsH = 50*(2+toolsTable.rowCount);
-					toolsH = 400;
-					self.setHeight(toolsH);
-				});
-				
-				self.add(toolsTable);
-				current = toolsTable;
-				toolsH = 50*(2+toolsTable.rowCount);
-				toolsH = 400;*/
 				self.add(toolsTable);
 				toolsTable.show();
 				break;
