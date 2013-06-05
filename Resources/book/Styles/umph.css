@@ -271,3 +271,11 @@ ul.leaders span + span {
     float: right;
     padding-left: 0.33em;
     background: white}
+
+
+.blankfill {
+	display: inline-block;
+  	min-width: 80px;
+	border-bottom:solid #ff0000;
+	text-align: center;
+}
