@@ -59,12 +59,16 @@ function BibleWindow(_args){
 		self.book = book;
 		self.chapter = chapter;
 		self.verse = verse;
+		self.searchTerm = searchTerm;
 		webView.setUrl(url);
 		webView.reload();
 	}
 	webView.addEventListener('load', function(data) 
 	{ 
      Ti.App.fireEvent('gotoVerse', {book: self.book, chapter: self.chapter, verse:self.verse});
+     if(self.searchTerm != ''){
+			Ti.App.fireEvent('highlightSearchTerm', {search_term: self.searchTerm.replace(' ','%20')});
+		}
 	});
 
 	self.add(title);
