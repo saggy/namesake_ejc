@@ -61,11 +61,10 @@ function BibleWindow(_args){
 		self.verse = verse;
 		webView.setUrl(url);
 		webView.reload();
-		Ti.App.fireEvent('gotoVerse', {book: self.book, chapter: self.chapter, verse:self.verse});
 	}
 	webView.addEventListener('load', function(data) 
 	{ 
-    // Ti.App.fireEvent('gotoVerse', {book: self.book, chapter: self.chapter, verse:self.verse});
+     Ti.App.fireEvent('gotoVerse', {book: self.book, chapter: self.chapter, verse:self.verse});
 	});
 
 	self.add(title);
