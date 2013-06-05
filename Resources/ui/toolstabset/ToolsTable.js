@@ -55,7 +55,7 @@ function ToolsTable(_args) {
 		var drop = 'DELETE FROM annotation WHERE annotation_id=?';
 		var index = e.index;
 		var id = e.row.id;
-console.log(JSON.stringify(table.data[0].rows));
+//console.log(JSON.stringify(table.data[0].rows));
 //		table.deleteRow(index);
 		var rowData = table.data[0].rows;
 		database.execute(drop, id);

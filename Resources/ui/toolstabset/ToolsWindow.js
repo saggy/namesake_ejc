@@ -168,6 +168,7 @@ function ToolsWindow(_args){
 			case 3:
 				self.rightNavButton = edit;
 				toolsTable = new ToolsTable({type: tools[idx], parent: self});
+				current = toolsTable;
 				self.add(toolsTable);
 				toolsTable.show();
 				break;
@@ -175,6 +176,7 @@ function ToolsWindow(_args){
 			case 4:
 				current = searchTable;
 				searchTable.show();
+				///searchBar.show();
 				self.setHeight(400);
 				self.rightNavButton = emptyView;
 				break;
