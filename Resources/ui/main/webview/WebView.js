@@ -15,7 +15,7 @@ function WebView(_args) {
 		scalesPageToFit:true,
     	contentWidth:'auto',
     	contentHeight:'auto',
-    	willHandleTouches: false,
+    	willHandleTouches: true,
     	popupMenu: ["Note", "Bookmark", "Highlight"]
 	}); 
 	
@@ -45,7 +45,7 @@ console.log(self.url);
 		return self.page;
 	}
 
-	self.addEventListener('swipe', function(e){
+	Titanium.App.addEventListener('newswipe', function(e){
 		if(e.direction == 'left' && self.page < self.maxPages){
 			self.goToPage(self.page+1);
 		}
