@@ -31,8 +31,26 @@ var themevalues  = new ThemeValues();
 
 })();
 
+var webView;
+var bookDir;
 //events
-
+Ti.App.addEventListener('gotoPage', function(e){
+			var page = e.page;
+				pageString = '';
+		for(var i = webView.maxPages; i > 1; i /= 10){
+			if(page<i){
+				pageString = pageString + '0'; 				
+			}
+			else{
+				break;
+			}
+		}
+		
+		pageString = bookDir + 'Page' + pageString + page + '.html';
+		Ti.API.info(pageString);
+		webView.setUrl(pageString);
+		webView.page = page;
+	});
 
 
 

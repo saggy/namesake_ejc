@@ -1,5 +1,5 @@
 function WebView(_args) {
-	var bookDir = 'book/Text/';
+	bookDir = 'book/Text/';
 	var cPage = _args.page;
 	var searchTerm = typeof(_args.searchTerm) === 'undefined' ? '' : _args.searchTerm;
 	
@@ -15,10 +15,11 @@ function WebView(_args) {
 		scalesPageToFit:true,
     	contentWidth:'auto',
     	contentHeight:'auto',
-    	willHandleTouches: true,
+    	willHandleTouches: false,
     	popupMenu: ["Note", "Bookmark", "Highlight"]
 	}); 
 	
+
 	self.goToPage = function(page){
 		pageString = '';
 		for(var i = self.maxPages; i > 1; i /= 10){
@@ -45,7 +46,7 @@ console.log(self.url);
 		return self.page;
 	}
 
-	Titanium.App.addEventListener('newswipe', function(e){
+	self.addEventListener('swipe', function(e){
 		if(e.direction == 'left' && self.page < self.maxPages){
 			self.goToPage(self.page+1);
 		}

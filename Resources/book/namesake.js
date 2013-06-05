@@ -145,73 +145,9 @@ Ti.App.addEventListener('app:addNote', function(e){
 	}
 });
     
-    addSwipeListener(document.body, function(e) { 
-	Ti.App.fireEvent('newswipe',{direction: e.direction});   	
-    });   
+    
     }
 
 window.onload = siteOnload;
 
-function addSwipeListener(el, listener)
-{
- var startX;
- var dx;
- var direction;
- var verticalThreshold = 15; // not used
-var horizontalThreshold = 50; // pixels?
- 
- function cancelTouch()
- {
-  el.removeEventListener('touchmove', onTouchMove);
-  el.removeEventListener('touchend', onTouchEnd);
-  startX = null;
-  startY = null;
-  direction = null;
-  dx = null;
- }
- 
- function onTouchMove(e)
- {
-  if (e.touches.length > 1)
-  {
-   cancelTouch();
-  }
-  else
-  {
-   dx = e.touches[0].pageX - startX;
-   var dy = e.touches[0].pageY - startY;
-   if (direction == null)
-   {
-    direction = dx;
-    e.preventDefault();
-   }
-   else if ((direction < 0 && dx > 0) || (direction > 0 && dx < 0) || Math.abs(dy) > 15)
-   {
-    cancelTouch();
-   }
-  }
- }
-
-function onTouchEnd(e) {
-    var dir = dx > 0 ? "right" : "left";
-    var distance = Math.abs(dx);
-    cancelTouch();
-    if (distance > horizontalThreshold) {
-        listener({ target: el, direction: dir});
-    }
-}
- 
- function onTouchStart(e)
- {
-  if (e.touches.length == 1)
-  {
-   startX = e.touches[0].pageX;
-   startY = e.touches[0].pageY;
-   el.addEventListener('touchmove', onTouchMove, false);
-   el.addEventListener('touchend', onTouchEnd, false);
-  }
- }
- 
- el.addEventListener('touchstart', onTouchStart, false);
-}
 

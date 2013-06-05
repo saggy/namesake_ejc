@@ -33,7 +33,8 @@ function MenuWindow(_args){
       if (z >= 1 && z <= 208) //hardcoded values for demo
       {
       	self.hide();
-      	changePage(Number(z));
+      	//changePage(Number(z));
+      	Ti.App.fireEvent('gotoPage', {page: Number(z)});
       } else {
       	var alertDialog = Titanium.UI.createAlertDialog({
     title: 'Page Number',
@@ -69,7 +70,8 @@ function MenuWindow(_args){
 
 	for(var i = 0; i < toc.length; i++){
 		var changePage = function(page){
-			webView.goToPage(page);
+			Ti.App.fireEvent('gotoPage', {page: page});
+			//webView.goToPage(page);
 		}
 		var title = (typeof toc[i]['subtitle'] === 'undefined') ? toc[i]['chapter'] : toc[i]['chapter']+ ': '+ toc[i]['subtitle'];
 		
@@ -100,7 +102,8 @@ function MenuWindow(_args){
 					var row2 = new MenuTableRow({ index: j, title: title });
 					row2.addEventListener('click', function(e){
 						page = sections[this.rowIndex]['page'];
-						changePage(page);
+						//changePage(page);
+						Ti.App.fireEvent('gotoPage', {page: page});
 						self.hide();
 					});
 					data.push(row2);
@@ -115,7 +118,8 @@ function MenuWindow(_args){
 			row = new MenuTableRow({index: i, title: title});
 			row.addEventListener('click', function(e){
 				page = toc[this.rowIndex]['page'];
-				changePage(page);
+				//changePage(page);
+			    Ti.App.fireEvent('gotoPage', {page: page});
 				self.hide();
 			});
 		}

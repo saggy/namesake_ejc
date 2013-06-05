@@ -24,7 +24,7 @@ function mainWindow() {
 			infoButton = new InfoButton();
 	var ToolsButton = require('ui/main/navbar/toolsbutton/ToolsButton'),
 			toolsButton = new ToolsButton();
-	var WebView = require('ui/main/webview/WebView'),
+	var WebView = require('ui/main/webview/WebView');
 			webView = new WebView({page: startPage});
 	
 	var ToolsWindow = require('ui/toolstabset/ToolsWindow'),
