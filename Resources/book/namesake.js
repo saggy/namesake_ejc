@@ -38,7 +38,7 @@ function answer(element)
 
 function blankfill(element)
 {
-	Ti.App.fireEvent('blankfill',{id: element.id, correctAnswer: element.getAttribute("correctanswer")});
+	Ti.App.fireEvent('blankfill',{id: element.id, correctAnswer: element.getAttribute("correctanswer"), question: element.getAttribute("question")});
 }
 
 function playvideo(video)
