@@ -7,8 +7,7 @@ function BibleWindow(_args){
 			zIndex: 5,
             width:575, 
             height:600,
-            right: 25,
-            arrowDirection: false,
+            right: -700,
             borderColor: '#0096DE'
             });
 	
@@ -28,7 +27,7 @@ function BibleWindow(_args){
 		zIndex: 6
 	});
 	close.addEventListener('click', function(e){
-		self.hide();
+		self.fireEvent('bibleclose');
 	});
 
 	

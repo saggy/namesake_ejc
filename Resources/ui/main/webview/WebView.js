@@ -39,7 +39,6 @@ function WebView(_args) {
 	self.searchPage = function(page, term){
 		self.goToPage(page);
 		self.url +='&search_term='+term.join(' ','%20');
-console.log(self.url);
 	}
 
 	self.getPage = function(){
@@ -83,7 +82,6 @@ console.log(self.url);
 
 			switch(a.type){
 				case 'note':
-console.log(a.note);
 					Ti.App.fireEvent('app:addNote',a);
 					break;
 				case 'bookmark':
