@@ -146,13 +146,8 @@ Ti.App.addEventListener('app:addNote', function(e){
 });
     
     addSwipeListener(document.body, function(e) { 
-
-	Ti.App.fireEvent('newswipe',{direction: e.direction});
-    	//Ti.App.fireEvent('newswipe', e);
-    	//alert(e.direction); });	
-    	
-    });
-    
+	Ti.App.fireEvent('newswipe',{direction: e.direction});   	
+    });   
     }
 
 window.onload = siteOnload;
