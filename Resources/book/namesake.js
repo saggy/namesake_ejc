@@ -94,6 +94,33 @@ Ti.App.addEventListener('app:addBookmark', function(e){
 	}
 });
 
+Ti.App.addEventListener('app:addHighlight', function(e){
+
+  	var startId = e.startId, endId = e.endId, highlightColor = e.highlightColor;
+	var domString = document.body.innerHTML;
+	//alert(domString);
+	
+	var target = '<span id="'+startId+'">'
+	var startTag = "<span id=\"highlight"+startId+"\" style=\"background-color:"+highlightColor+"\">";
+	var endTag = "</span>";
+	
+	domString = domString.replace(target, startTag + target);
+
+	for(var i = startId+1; i <= endId ; i++){
+		startTag =  "<span id=\"highlight"+i+"\" style=\"background-color:"+highlightColor+"\">";//startTag.replace(i-1,i);
+		target = '<span id="'+i+'">';//target.replace(i-1,i);
+//alert(startTag + ' '+ target);
+		domString = domString.replace(target, endTag+startTag+target);
+	}
+
+	var endId = endId+1;
+	target = '<span id="'+endId+'">';//target.replace(endId, endId+1);
+	domString = domString.replace(target, endTag + target);
+	
+	document.body.innerHTML = domString;
+});
+
+
 Ti.App.addEventListener('app:addNote', function(e){
 	var id = e.startId + '_' + e.endId;
 //alert(e.id);

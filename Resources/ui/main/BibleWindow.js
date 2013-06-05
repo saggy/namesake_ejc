@@ -34,6 +34,10 @@ function BibleWindow(_args){
 		url : url
 	});
 	
+	webView.addEventListener('load', function(data) 
+	{ 
+     Ti.App.fireEvent('gotoVerse', {book: book, chapter: chapter, verse:verse});
+	});
 
 	self.add(webView);
 	return self;

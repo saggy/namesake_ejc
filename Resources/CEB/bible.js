@@ -87,10 +87,16 @@ var bible =             [{title:'Genesis', url: '01-Genesis-CEB.html', xml: '01-
 	
     function load(){
    		var params = getQueryParams(document.location.search);
-		scrollToChapterVerse(params.book,params.chapter,params.verse);
+		//scrollToChapterVerse(params.book,params.chapter,params.verse);
 		highlightSearchTerm(params.search_term);
 
     }
+    
+    Ti.App.addEventListener('gotoVerse', function(params) 
+{ 
+     if (typeof document != 'undefined') scrollToChapterVerse(params.book,params.chapter,params.verse);
+});
+
 
 	function scrollToChapterVerse(ShortBookName, chapter, verse) {
 		var verses = getElementsByAttribute(document.body, "*", "verse", ShortBookName +"." + chapter + "." + verse);
