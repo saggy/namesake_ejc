@@ -157,6 +157,8 @@ function addSwipeListener(el, listener)
  var startX;
  var dx;
  var direction;
+ var verticalThreshold = 15; // not used
+var horizontalThreshold = 50; // pixels?
  
  function cancelTouch()
  {
@@ -165,6 +167,7 @@ function addSwipeListener(el, listener)
   startX = null;
   startY = null;
   direction = null;
+  dx = null;
  }
  
  function onTouchMove(e)
@@ -189,14 +192,14 @@ function addSwipeListener(el, listener)
   }
  }
 
- function onTouchEnd(e)
- {
-  cancelTouch();
-  if (Math.abs(dx) > 50)
-  {
-   listener({ target: el, direction: dx > 0 ? 'right' : 'left' });
-  }
- }
+function onTouchEnd(e) {
+    var dir = dx > 0 ? "right" : "left";
+    var distance = Math.abs(dx);
+    cancelTouch();
+    if (distance > horizontalThreshold) {
+        listener({ target: el, direction: dir});
+    }
+}
  
  function onTouchStart(e)
  {
