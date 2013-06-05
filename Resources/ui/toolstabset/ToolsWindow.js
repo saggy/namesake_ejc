@@ -12,7 +12,7 @@ function ToolsWindow(_args){
 		toolsView = new ToolsView();
 
 	var tools = ['Video','Notes','Bookmarks','Highlights','Search'];
-	var ToolsBar = require('ui/toolstabset/ToolsBar'), 
+	var ToolsBar = require('ui/toolstabset/ToolsBar'),
 		tBar = new ToolsBar({items: tools});
 	
 	var SearchBar = require('ui/toolstabset/search/SearchBar'),
@@ -168,7 +168,17 @@ function ToolsWindow(_args){
 			case 3:
 				self.rightNavButton = edit;
 				toolsTable = new ToolsTable({type: tools[idx], parent: self});
-
+				/*
+				toolsTable.addEventListener('resize',function(e){
+					toolsH = 50*(2+toolsTable.rowCount);
+					toolsH = 400;
+					self.setHeight(toolsH);
+				});
+				
+				self.add(toolsTable);
+				current = toolsTable;
+				toolsH = 50*(2+toolsTable.rowCount);
+				toolsH = 400;*/
 				self.add(toolsTable);
 				toolsTable.show();
 				break;
@@ -176,6 +186,7 @@ function ToolsWindow(_args){
 			case 4:
 				current = searchTable;
 				searchTable.show();
+				self.setHeight(400);
 				self.rightNavButton = emptyView;
 				break;
 			//default because I fire a click event with no index when the toolbar is first created - and I want that to load the video list, rather than have nothing loaded.
