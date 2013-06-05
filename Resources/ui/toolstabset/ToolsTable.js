@@ -26,7 +26,7 @@ function ToolsTable(_args) {
 	
 
 	var table = Ti.UI.createTableView({
-		height: 'auto',
+		height: 400,
 		zIndex: 3,
   		top: 0,
   		right: 0,
@@ -70,8 +70,8 @@ function ToolsTable(_args) {
 		rs.close();
 		
 		self.rowCount--;
-		self.fireEvent('resize',{type: type});
-		Ti.App.fireEvent('reload', {});
+		//self.fireEvent('resize',{type: type});
+		//Ti.App.fireEvent('reload', {});
 		database.close();
 	});
 	
