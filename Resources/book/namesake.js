@@ -74,7 +74,7 @@ Ti.App.addEventListener('app:answerquestion',function(e){
 	});
 	
 Ti.App.addEventListener('app:addBookmark', function(e){
-	var imageSrc = '../../images/buttons/menu.png';
+	var imageSrc = '../../images/buttons/bookmarkIcon.png';
 	var height = 20;
 	var width = 20;
 	var id = 'bookmark' + e.startId + '_' + e.endId;
