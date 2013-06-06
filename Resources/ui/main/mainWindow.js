@@ -2,7 +2,7 @@
 function mainWindow() {
 	// initialized main window
 	var self = Ti.UI.createWindow({
-		title:'Namesake',
+		title:'Namesake - Jessica LaGrone',
 		backgroundColor:'white',
 		tabBarHidden: true,
 		barColor: '#0096DE'//,
