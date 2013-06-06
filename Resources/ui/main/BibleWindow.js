@@ -37,6 +37,18 @@ function BibleWindow(_args){
 		contentWidth: 'auto',
 		contentHeight: 'auto',
 	});
+	
+		var bibleShow = Ti.UI.createAnimation({
+		duration: 1000,
+		right: 25
+	});
+	var bibleHide = Ti.UI.createAnimation({
+		right: -700,
+		duration: 1000
+	})
+	self.addEventListener('bibleclose', function(e){
+		self.animate(bibleHide);
+	});
 	self.goToVerse = function(v){
 		var book = v.book, chapter = v.chapter, verse = v.verse, searchTerm = v.searchTerm;
 		
@@ -69,7 +81,9 @@ function BibleWindow(_args){
      if(self.searchTerm != ''){
 			Ti.App.fireEvent('highlightSearchTerm', {search_term: self.searchTerm.replace(' ','%20')});
 		}
+	self.animate(bibleShow);
 	});
+	
 
 	self.add(title);
 	self.add(close);

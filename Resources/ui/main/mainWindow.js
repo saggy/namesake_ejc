@@ -159,22 +159,12 @@ function mainWindow() {
 		self.add(videoPlayer);
 	});
 
-	var bibleShow = Ti.UI.createAnimation({
-		duration: 1000,
-		right: 25
-	});
-	var bibleHide = Ti.UI.createAnimation({
-		right: -700,
-		duration: 1000
-	})
-	bibleWindow.addEventListener('bibleclose', function(e){
-		bibleWindow.animate(bibleHide);
-	});
+
 	Ti.App.addEventListener('biblepop', function(e) { 
 		verse = e.verse.split('.');
 	
 		bibleWindow.goToVerse({book:verse[0], chapter:verse[1], verse:verse[2], searchTerm: typeof(e.searchTerm) === 'undefined' ? '' : e.searchTerm});
-		bibleWindow.animate(bibleShow);
+
 /*
 		var pHeight = Ti.Platform.displayCaps.platformHeight;
 	

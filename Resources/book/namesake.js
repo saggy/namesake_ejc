@@ -38,7 +38,7 @@ function answer(element)
 
 function blankfill(element)
 {
-	Ti.App.fireEvent('blankfill',{id: element.id, correctAnswer: element.getAttribute("correctanswer"), question: element.getAttribute("question")});
+	Ti.App.fireEvent('blankfill',{id: element.id, correctAnswer: element.getAttribute("correctanswer")});
 }
 
 function playvideo(video)
@@ -74,7 +74,7 @@ Ti.App.addEventListener('app:answerquestion',function(e){
 	});
 	
 Ti.App.addEventListener('app:addBookmark', function(e){
-	var imageSrc = '../../images/buttons/bookmarkIcon.png';
+	var imageSrc = '../../images/buttons/menu.png';
 	var height = 20;
 	var width = 20;
 	var id = 'bookmark' + e.startId + '_' + e.endId;
