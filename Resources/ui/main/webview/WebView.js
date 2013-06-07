@@ -38,7 +38,8 @@ function WebView(_args) {
 	}
 	self.searchPage = function(page, term){
 		self.goToPage(page);
-		self.url +='&search_term='+term.join(' ','%20');
+		self.url +='?search_term='+term.split(' ').join('%20');
+		Ti.App.fireEvent('app:highlightSearchTermWV',{searchTerm: term});
 	}
 
 	self.getPage = function(){

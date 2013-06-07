@@ -145,6 +145,9 @@ function mainWindow() {
 	});
 	
 	Ti.App.addEventListener('gotopage', function(e){
+		if(typeof(e.searchTerm) !== 'undefined'){
+			webView.searchPage(e.pageNo, e.searchTerm);
+		}
 		webView.goToPage(e.pageNo);
 	});
 	

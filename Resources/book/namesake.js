@@ -1,6 +1,8 @@
 function load(){
+	/*
 	params = getQueryParams(document.location.search);
-	//highlightSearchTerm(params.search_term);
+	alert(JSON.stringify(params));
+	highlightSearchTerm(params.search_term);*/
 }
 
 function getQueryParams(qs) {
@@ -18,10 +20,11 @@ function getQueryParams(qs) {
 }
 	
 function highlightSearchTerm(term){
-	alert(term);
 	term = term.slice(0,1) + '</span>' + term.slice(1,term.length);
-
 	var domString = document.body.innerHTML;
+	//var index = domString.toLowerCase().indexOf(term.toLowerCase());
+//alert(index);
+	
 	var regex = new RegExp(">([^<]*)?("+term+")([^>]*)?<","ig");
 
   	document.body.innerHTML = domString.replace(regex,'>$1<span class="highlighted term" style="background-color:#00FFFF">$2</span>$3<');
@@ -68,7 +71,9 @@ function saveNote(note){
 
 function siteOnload() //only adding event listeners after site loads
     {
-    	
+Ti.App.addEventListener('app:highlightSearchTermWV', function(e){
+	highlightSearchTerm(e.searchTerm);
+});
 Ti.App.addEventListener('app:answerquestion',function(e){
 	document.getElementById(e.elementId).innerHTML=e.text;
 	});
@@ -144,7 +149,6 @@ Ti.App.addEventListener('app:addNote', function(e){
 		$p.attr('note', true)
 	}
 });
-    
     
     }
 
