@@ -20,6 +20,8 @@ function mainWindow() {
 	var PopupMenuWeb = require('com.mywebrank.popupmenuweb');
 	var MenuButton = require('ui/main/navbar/menubutton/MenuButton'),
 			menuButton = new MenuButton();
+	var	SettingsButton = require('ui/main/navbar/menubutton/MenuButton'),
+			settingsButton = new SettingsButton();
 	var InfoButton = require('ui/main/navbar/infobutton/InfoButton'),
 			infoButton = new InfoButton();
 	var ToolsButton = require('ui/main/navbar/toolsbutton/ToolsButton'),
@@ -29,6 +31,9 @@ function mainWindow() {
 	
 	var ToolsWindow = require('ui/toolstabset/ToolsWindow'),
 			toolsWindow = new ToolsWindow();
+	var SettingsWindow = require('ui/settings/SettingsWindow'),
+			settingsWindow = new SettingsWindow();
+
 	var BibleWindow = require('ui/main/BibleWindow'),
 			bibleWindow = new BibleWindow();
 	self.add(bibleWindow);
@@ -50,11 +55,16 @@ function mainWindow() {
 	toolsButton.addEventListener('click', function(e){
 		toolsWindow.show({view: toolsButton, animated:true});	
 	});
+	
+	settingsButton.addEventListener('click', function(e){
+		settingsWindow.show({view: settingsButton, animated:true});
+	});
 
 	// add navigation bar
 
-	var rightNav = Ti.UI.createView({ width: 90, height: 38 });
+	var rightNav = Ti.UI.createView({ width: 135, height: 38 });
 	rightNav.add(infoButton);
+	rightNav.add(settingsButton);
 	rightNav.add(toolsButton);
 	
 	self.setLeftNavButton(menuButton);

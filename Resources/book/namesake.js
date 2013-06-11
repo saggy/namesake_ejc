@@ -20,14 +20,14 @@ function getQueryParams(qs) {
 }
 	
 function highlightSearchTerm(term){
-	term = term.slice(0,1) + '</span>' + term.slice(1,term.length);
+	term = term.slice(0,1) + '<\/span>' + term.slice(1,term.length);
 	var domString = document.body.innerHTML;
 	//var index = domString.toLowerCase().indexOf(term.toLowerCase());
 //alert(index);
 	
-	var regex = new RegExp(">([^<]*)?("+term+")([^>]*)?<","ig");
+	var regex = new RegExp(term,"ig");
 
-  	document.body.innerHTML = domString.replace(regex,'>$1<span class="highlighted term" style="background-color:#00FFFF">$2</span>$3<');
+  	document.body.innerHTML = domString.replace(regex,'<span class="highlighted term" style="background-color:#00FFFF">'+term+'</span>');
 }
 function biblepop(verse)
 {
