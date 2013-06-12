@@ -32,6 +32,7 @@ function ToolsWindow(_args){
 		var searchTerm = searchBar.getValue();
 		
 		function formatText(text){
+
 			var textArr = text.split(' ');
 			var tempArr = [];
 			for(var i = 0, len = textArr.length; i < len; i++ ){
@@ -49,6 +50,7 @@ function ToolsWindow(_args){
 			}
 			return textArr.join(' ');
 			
+			
 		}
 		
 		
@@ -59,10 +61,12 @@ function ToolsWindow(_args){
 			var results = [];
 			switch(type){
 				case 'book':
+					
 					var rs = db.execute(queries[i], searchTerm, searchLimit);
 					while(rs.isValidRow()){
 						var text = formatText(rs.fieldByName('content'));
 		//console.log(text);
+		//Ti.API.log('page_no: ' + rs.fieldByName('page_no') +', content: ' + rs.fieldByName('content'));
 						var result = {type: type, pageNo: rs.fieldByName('page_no'), bookText: text };
 						results.push(result);
 						rs.next();
