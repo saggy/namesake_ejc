@@ -60,9 +60,9 @@ function WebView(_args) {
 		var page = self.getUrl().split('/').splice(-3).join('/');
 		//var db = Ti.Database.open(dbName);
 		//db.execute('DROP TABLE answer');
-		//db.execute('DROP TABLE annotation');
+	//db.execute('DROP TABLE annotation');
 		//db.execute('CREATE TABLE IF NOT EXISTS annotation (annotation_id INTEGER PRIMARY KEY, note_text TEXT, note_html TEXT, ' +
-				// 'note_offset NUMERIC, note_parent_id TEXT, row_index INTEGER, page TEXT, page_no INTEGER, start_id NUMERIC, end_id NUMERIC, type TEXT, note TEXT, highlight_color TEXT, create_date TEXT, modify_date TEXT)');
+			//	 'note_offset NUMERIC, note_parent_id TEXT, row_index INTEGER, page TEXT, page_no INTEGER, start_id NUMERIC, end_id NUMERIC, type TEXT, note TEXT, highlight_color INTEGER, create_date TEXT, modify_date TEXT)');
 		//db.execute('CREATE TABLE IF NOT EXISTS answer (answer_id INTEGER PRIMARY KEY, answer_elementid TEXT, answer_text TEXT, page TEXT, page_no INTEGER, type TEXT, create_date TEXT, modify_date TEXT)');
 		
 		var rs = db.execute('SELECT answer_elementid, answer_text FROM answer WHERE page=?',page);
@@ -78,8 +78,11 @@ function WebView(_args) {
 
 		rs = db.execute('SELECT annotation_id, type, start_id, end_id, note, note_html, note_text, highlight_color FROM annotation WHERE page=?',page);
 		while(rs.isValidRow()){
+console.log(settings[HIGHLIGHT_COLOR].data[rs.fieldByName('highlight_color')].value );
+			var highlightColor = settings[HIGHLIGHT_COLOR].data[rs.fieldByName('highlight_color')].value;
 			var a = {id: rs.fieldByName('annotation_id'), type: rs.fieldByName('type'), startId : rs.fieldByName('start_id'), endId : rs.fieldByName('end_id'),
-						noteText : rs.fieldByName('note_text'), noteHtml : rs.fieldByName('note_html'), note: rs.fieldByName('note'), highlightColor : rs.fieldByName('highlight_color') };
+						noteText : rs.fieldByName('note_text'), noteHtml : rs.fieldByName('note_html'), note: rs.fieldByName('note'), 
+						highlightColor : highlightColor, hcIndex : rs.fieldByName('highlight_color')};
 
 			switch(a.type){
 				case 'note':
@@ -152,7 +155,6 @@ function WebView(_args) {
 				break;
 			case HIGHLIGHT:
 				annotation.aType = 'highlight';
-				annotation.highlightColor = '#FFFF00';
 				Ti.App.fireEvent('saveannotation', annotation);
 				//Ti.App.fireEvent('app:addHighlight', annotation);
 				self.reload();

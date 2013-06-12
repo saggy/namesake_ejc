@@ -1,28 +1,5 @@
 function SettingsWindow(_args){
-	var options = [
-	{ title: 'Font Size',
-		data:[
-			{ title : 'Small',
-				value : .75 },
-			{ title: 'Regular',
-				value : 1 },
-			{ title: 'Large',
-				value : 1.5 }
-			]
-	}, 
-	{
-		title: 'Highlight Color',
-		data : [
-			{ title: 'Green',
-				value: '#22FF08'},
-			{ title: 'Yellow',
-				value: '#FFEF1D'},
-			{ title: 'Blue',
-				value: '#2AEEFE'},
-			{ title: 'Red',
-				value: '#FC8A96'}
-		]
-	}];
+	var options = settings;
 
 	
 	var defaultH = options.length*50;
@@ -66,9 +43,16 @@ function SettingsWindow(_args){
 				switch(title){
 					case 'Highlight Color':
 						row2 = new SettingsTableRow({index: j, title: data[j].title, backgroundColor: data[j].value, children: false});
+						row2.addEventListener('click', function(e){
+							self.fireEvent('changeHighlight', {index: this.rowIndex});
+						});
 						break;
 					case 'Font Size':
 						row2 = new SettingsTableRow({index: j, title: data[j].title, sizeFactor: data[j].value, children: false});
+						row2.addEventListener('click', function(e){
+							self.fireEvent('changeFontSize', {index: this.rowIndex});
+						});
+						break;
 						break;
 				}
 				tData.push(row2);
@@ -82,7 +66,7 @@ function SettingsWindow(_args){
 	}
 	settingsTable.setData(tableData);
 	
-	
+	self.settings = options;
 	self.add(settingsTable);		
 
 	return self;

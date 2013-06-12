@@ -31,10 +31,10 @@ function SettingsTableRow(_args){
 				height: 50
 			});
 			self.add(color);
+			self.highlightColor = bgColor;
 			label.setLeft(60);
 		}
 		self.add(label);
-	
 	}	
 	if(children){
 		/*var MoreButton = require('ui/controls/MoreButton'),

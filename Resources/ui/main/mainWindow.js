@@ -14,8 +14,11 @@ function mainWindow() {
 	var startPage = 1;
 	var NOTE = '0', BOOKMARK = '1', HIGHLIGHT = '2';
 
+	Ti.include('ui/settings/settings.js');
 
-
+	var highlightColor = 1; //yellow
+	var fontSize = 1; //regular
+	
 	//import view elements
 	var PopupMenuWeb = require('com.mywebrank.popupmenuweb');
 	var MenuButton = require('ui/main/navbar/menubutton/MenuButton'),
@@ -60,6 +63,12 @@ function mainWindow() {
 		settingsWindow.show({view: settingsButton, animated:true});
 	});
 
+	settingsWindow.addEventListener('changeHighlight', function(e){
+		highlightColor = e.index;
+	});
+	settingsWindow.addEventListener('changeFontSize', function(e){
+		fontSize = e.index;
+	});
 	// add navigation bar
 
 	var rightNav = Ti.UI.createView({ width: 135, height: 38 });
@@ -96,7 +105,7 @@ function mainWindow() {
 		var query = 'INSERT INTO annotation (note_text, note_html, page, page_no, start_id, end_id, type, note, row_index, highlight_color, create_date, modify_date) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)';
 		var editQuery = 'UPDATE annotation SET note=?, modify_date=? WHERE annotation_id=?';
 		if(a.id == null){
-			db.execute(query, a.noteText, a.noteHtml, a.page, a.pageNo, a.startId, a.endId, a.aType, a.note, a.rowIndex, a.highlightColor, a.created, a.modified);
+			db.execute(query, a.noteText, a.noteHtml, a.page, a.pageNo, a.startId, a.endId, a.aType, a.note, a.rowIndex, highlightColor, a.created, a.modified);
 		}
 		else{
 			db.execute(editQuery, a.note, a.modified, a.id);
@@ -177,22 +186,6 @@ function mainWindow() {
 		verse = e.verse.split('.');
 	
 		bibleWindow.goToVerse({book:verse[0], chapter:verse[1], verse:verse[2], searchTerm: typeof(e.searchTerm) === 'undefined' ? '' : e.searchTerm});
-
-/*
-		var pHeight = Ti.Platform.displayCaps.platformHeight;
-	
-		
-		var invisView = Titanium.UI.createButton({
-   			top: pHeight / 2,
-   			right: 0,
-   			width: 1,
-  			height: 1
-		});
-		
-		self.add(invisView);
-
-		bibleWindow.show({view: invisView, animated:true});
-		self.remove(invisView);*/
 		
 	});
 	Ti.App.addEventListener('blankfill', function(e) {
