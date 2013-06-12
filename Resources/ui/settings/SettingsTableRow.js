@@ -1,5 +1,6 @@
 function SettingsTableRow(_args){
 	var index = _args.index, title = typeof(_args.title) === 'undefined' ? '' : _args.title, bgColor = typeof(_args.backgroundColor) === 'undefined' ? '' : _args.backgroundColor, children = _args.children;
+	var sizeFactor = (typeof(_args.sizeFactor) === 'undefined') ? '' : _args.sizeFactor;
 	var self = Ti.UI.createTableViewRow({
 		zIndex: 4,
 		className: 'forumEvent',

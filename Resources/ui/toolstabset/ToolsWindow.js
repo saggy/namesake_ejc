@@ -32,27 +32,63 @@ function ToolsWindow(_args){
 		var searchTerm = searchBar.getValue();
 		
 		function formatText(text){
-
+			if(text.toLowerCase().indexOf(searchTerm.toLowerCase()) === -1){
+console.log('error');
+				return false;
+			}
 			var textArr = text.split(' ');
+			var searchArr = searchTerm.split(' ');
 			var tempArr = [];
 			for(var i = 0, len = textArr.length; i < len; i++ ){
 				var temp = textArr.shift();
 				tempArr.push(temp);
-				if(temp.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1){
-					textArr.unshift('<b>' + tempArr.pop() + '</b>'); //here
-					var j = 0;
-					while(j < 3 && j < tempArr.length){
-						textArr.unshift(tempArr.pop());
-						j++;
+				if(temp.toLowerCase().indexOf(searchArr[0].toLowerCase()) !== -1){
+	//console.log(searchArr.length);
+					if(searchArr.length == 1){
+						textArr.unshift('<b>' + tempArr.pop() + '</b>'); //here
+						
+						textArr = tempArr.slice(-3).concat(textArr);
+
+						break;
 					}
-					break;
+					else{
+						var tempArr2 = [];
+						temp = tempArr.pop();
+						textArr.unshift(temp);
+						var match = false;
+						for(var j = 0, len2 = searchArr.length; j < len2; j++){
+							i++;
+							var temp2 = textArr.shift();
+							tempArr2.push('<b>'+temp2+'</b>');
+							if(searchArr[j].indexOf(temp2) !== -1){
+								match = true;
+							}
+							else{
+								match = false;
+								while(j >= 0){
+									tempArr.push(tempArr2.shift());
+									j--;
+								}
+								break;
+							}
+						}
+						
+						if(tempArr2.length == searchArr.length && match){
+							tempArr2 = tempArr.slice(-2).concat(tempArr2);
+							textArr = tempArr2.concat(textArr);
+							
+				console.log(textArr.join(' '));
+							break;
+						}
+					}
 				}
 			}
 			return textArr.join(' ');
-			
-			
 		}
 		
+		function trim(text){
+			return text.replace(/^\s+|\s+$/g,'');
+		}
 		
 		var db = Ti.Database.open('namesake');
 	
@@ -61,25 +97,32 @@ function ToolsWindow(_args){
 			var results = [];
 			switch(type){
 				case 'book':
-					
+					searchTerm = trim(searchTerm);
 					var rs = db.execute(queries[i], searchTerm, searchLimit);
 					while(rs.isValidRow()){
+				//console.log(rs.fieldByName('content'));
 						var text = formatText(rs.fieldByName('content'));
 		//console.log(text);
 		//Ti.API.log('page_no: ' + rs.fieldByName('page_no') +', content: ' + rs.fieldByName('content'));
-						var result = {type: type, pageNo: rs.fieldByName('page_no'), bookText: text };
-						results.push(result);
+						if(text){
+							var result = {type: type, pageNo: rs.fieldByName('page_no'), bookText: text };
+							results.push(result);
+						}
 						rs.next();
 					}
 					rs.close();
 					break;
 				case 'bible':
+					searchTerm = trim(searchTerm);
 					var rs = db.execute(queries[i], searchTerm, searchLimit);
 					while(rs.isValidRow()){
+						
 						var text = formatText(rs.fieldByName('verseText'));
 		//console.log(text);
-						var result = {type: type, verse: rs.fieldByName('verse'), verseText: text  };
-						results.push(result);
+						if(text){
+							var result = {type: type, verse: rs.fieldByName('verse'), verseText: text  };
+							results.push(result);
+						}
 						rs.next();
 					}
 					rs.close();

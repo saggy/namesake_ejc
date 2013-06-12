@@ -37,7 +37,7 @@ function SettingsWindow(_args){
         });
 
 	var emptyView = Titanium.UI.createView({});
-	self.setRightNaveButton(emptyView);
+	self.setRightNavButton(emptyView);
 	
 	var backButton = Titanium.UI.createImageView({height: 38, width: 44, top: 0, left:0, backgroundImage: 'images/buttons/backArrow.png'}); 
 
@@ -65,18 +65,15 @@ function SettingsWindow(_args){
 				
 				switch(title){
 					case 'Highlight Color':
-						row2 = new SettingsTableRow({index: j, backgroundColor: data[j].value, children: false});
-						self.setHeight(50*len2);
+						row2 = new SettingsTableRow({index: j, title: data[j].title, backgroundColor: data[j].value, children: false});
 						break;
 					case 'Font Size':
-					console.log(data[j].value);
-						row2 = new SettingsTableRow({index: j, title: data[j].title, children: false});
-						self.setHeight(50*len2);
+						row2 = new SettingsTableRow({index: j, title: data[j].title, sizeFactor: data[j].value, children: false});
 						break;
 				}
 				tData.push(row2);
 			}
-			
+			self.setHeight(50*data.length);
 			settingsTable.setData(tData);
 			
 		});
