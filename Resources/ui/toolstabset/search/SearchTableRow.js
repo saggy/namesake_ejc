@@ -27,15 +27,27 @@ function SearchTableRow(_args){
 			textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER
 		});
 	}
-
-	var noteLabel = Ti.UI.createLabel({
+	
+	
+	var noteLabel = styledLabel.createLabel({
 		color: 'black',
 		backgroundColor:'white',
 		right: 0,
-		top: 0,
+		top: 3,
 		width: 300,
-		height: 50
+		height:44
 	});
+	
+	var noteClickable = Ti.UI.createView({
+		opacity: .1,
+		backgroundColor: '#E5E4E2',
+		left: 0,
+		top: 0,
+		width: 400,
+		height:50,
+		zIndex: 1
+	});
+	
 	
 	var pageLabelText='', noteLabelText='';
 	switch(type){
@@ -61,8 +73,9 @@ function SearchTableRow(_args){
 			break;
 	}
 
-	noteLabel.text = noteLabelText;
+	noteLabel.html = noteLabelText;
 	self.add(noteLabel);
+	self.add(noteClickable);
 
 	if(imageLoc == ''){
 		pageLabel.text = pageLabelText;

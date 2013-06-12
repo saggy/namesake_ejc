@@ -41,6 +41,7 @@
     <modules>
         <module platform="iphone" version="0.1">com.mywebrank.popupmenuweb</module>
         <module platform="iphone" version="2.1">com.dmarie.sql</module>
+        <module platform="iphone">ti.styledlabel</module>
     </modules>
     <deployment-targets>
         <target device="blackberry">false</target>

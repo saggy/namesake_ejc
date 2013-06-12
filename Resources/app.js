@@ -31,6 +31,7 @@ var themevalues  = new ThemeValues();
 
 })();
 
+var styledLabel = require('ti.styledlabel');
 var webView;
 var bookDir;
 //events

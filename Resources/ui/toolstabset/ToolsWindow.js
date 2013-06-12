@@ -38,7 +38,7 @@ function ToolsWindow(_args){
 				var temp = textArr.shift();
 				tempArr.push(temp);
 				if(temp.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1){
-					textArr.unshift(tempArr.pop().toUpperCase());
+					textArr.unshift('<b>' + tempArr.pop() + '</b>'); //here
 					var j = 0;
 					while(j < 3 && j < tempArr.length){
 						textArr.unshift(tempArr.pop());
