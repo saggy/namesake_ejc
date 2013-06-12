@@ -4,14 +4,14 @@ function SettingsTableRow(_args){
 	var self = Ti.UI.createTableViewRow({
 		zIndex: 4,
 		className: 'forumEvent',
-		backgroundColor: (bgColor != '') ? bgColor : 'white',
+		backgroundColor: 'white',
 		selectedBackgroundColor : '#0096DE',
 		height: 50,
 		width: 350
 	});
 
 	if(title != ''){
-		var chapter = Ti.UI.createLabel({
+		var label = Ti.UI.createLabel({
 			zIndex: 5,
 			color: 'black',
 			backgroundColor: 'white',
@@ -22,7 +22,18 @@ function SettingsTableRow(_args){
 			height: 50
 		});
 	
-		self.add(chapter);
+		if(bgColor != ''){
+			var color = Ti.UI.createLabel({
+				backgroundColor: bgColor,
+				left: 0,
+				top: 0,
+				width: 50,
+				height: 50
+			});
+			self.add(color);
+			label.setLeft(60);
+		}
+		self.add(label);
 	
 	}	
 	if(children){
