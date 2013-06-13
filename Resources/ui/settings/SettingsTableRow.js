@@ -7,7 +7,8 @@ function SettingsTableRow(_args){
 		backgroundColor: 'white',
 		selectedBackgroundColor : '#0096DE',
 		height: 50,
-		width: 350
+		width: 350,
+		hasCheck: _args.hasCheck
 	});
 
 	if(title != ''){

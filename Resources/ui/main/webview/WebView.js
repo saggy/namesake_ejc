@@ -78,7 +78,7 @@ function WebView(_args) {
 
 		rs = db.execute('SELECT annotation_id, type, start_id, end_id, note, note_html, note_text, highlight_color FROM annotation WHERE page=?',page);
 		while(rs.isValidRow()){
-console.log(settings[HIGHLIGHT_COLOR].data[rs.fieldByName('highlight_color')].value );
+//console.log(settings[HIGHLIGHT_COLOR].data[rs.fieldByName('highlight_color')].value );
 			var highlightColor = settings[HIGHLIGHT_COLOR].data[rs.fieldByName('highlight_color')].value;
 			var a = {id: rs.fieldByName('annotation_id'), type: rs.fieldByName('type'), startId : rs.fieldByName('start_id'), endId : rs.fieldByName('end_id'),
 						noteText : rs.fieldByName('note_text'), noteHtml : rs.fieldByName('note_html'), note: rs.fieldByName('note'), 
