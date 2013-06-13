@@ -67,7 +67,10 @@ function mainWindow() {
 		highlightColor = e.index;
 	});
 	settingsWindow.addEventListener('changeFontSize', function(e){
+		var prev = fontSize;
 		fontSize = e.index;
+		var font = {previous: settings[FONT_SIZE].data[prev].value, current: settings[FONT_SIZE].data[fontSize].value};
+		Ti.App.fireEvent('app:changeFontSizeWV', font);
 	});
 	// add navigation bar
 
