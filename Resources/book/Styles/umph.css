@@ -35,6 +35,7 @@ font-size: 16px;
 padding:2px; 
 text-indent:25px; 
 margin:0px;
+text-align: justify;
 }
 
 table
@@ -49,12 +50,29 @@ font-family: abbey;
 font-size: 36px;
 }
 
+.CHD1
+{
+font-family: abbey;
+font-size: 36px;
+text-align: center;
+}
+
 h3
 {
 font-family: abbey;
 font-size: 24px;
 color:#00AAA6;
 margin-top:2em;
+}
+
+.SUB1
+{
+font-family: abbey;
+font-size: 24px;
+color:#00AAA6;
+margin-top:2em;
+text-align:center;
+margin-bottom: .5em;
 }
 
 h4
@@ -70,6 +88,15 @@ h5
 font-family: Palatino;
 font-size: 30px;
 font-weight: normal;
+}
+
+.CHD2
+{
+font-family: Palatino;
+font-size: 30px;
+font-weight: normal;
+text-align: center;	
+margin-top: 10px;
 }
 
 ul, li {
@@ -114,6 +141,23 @@ hr{color:#000;}
 .noindentp {
     text-indent:0em;
 }
+.para-style-override-32 {
+	 text-indent:0em;
+	 line-height: 180%;
+}
+
+.para-style-override-34 {
+	 text-indent:0em;
+	 line-height: 180%;
+}
+
+.para-style-override-31 {
+	min-height: 20px;
+}
+
+.para-style-override-33 {
+	text-align: right;
+}
 .noindent
 {
     text-indent:0em;
@@ -134,6 +178,19 @@ hr{color:#000;}
 }
 
 .PoetryText1 {
+    font-family: Palatino;
+    font-size: 16px;
+	text-align: left;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:0.1in;
+	margin-bottom:.0001pt;
+	text-indent:-0.1in;
+	font-style:italic;
+}
+
+.char-style-override-17{
     font-family: Palatino;
     font-size: 16px;
 	text-align: left;
@@ -206,6 +263,22 @@ hr{color:#000;}
 	margin-left: 2em;
 }
 
+.plainlist {
+	text-indent:0em;
+    font-family: Palatino;
+	font-size: 16px;
+	margin-left: 2em;
+}
+
+.char-style-override-21 {
+	text-indent:0em;
+    font-family: Palatino;
+	font-weight: bold;
+	font-size: 16px;
+	margin-left: 2em;
+	text-align: justify;
+	display: block;
+}
 
 .answer {
     min-height: 4em;
@@ -278,6 +351,16 @@ ul.leaders span + span {
   	min-width: 80px;
 	border-bottom:solid #ff0000;
 	text-align: center;
+}
+
+.char-style-override-18 {
+	vertical-align: super;
+	font-size: 10px;
+	margin-right: -8px;
+}
+
+.para-style-override-21 {
+	text-align: right;
 }
 
 

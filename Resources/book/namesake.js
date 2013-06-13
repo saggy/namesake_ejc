@@ -4,7 +4,7 @@ function load(page){
 	alert(JSON.stringify(params));
 	highlightSearchTerm(params.search_term);*/
 	//add id's to every element (or change id)
-   spanPage('page18');
+   spanPage(page);
 }
 
 
@@ -209,9 +209,14 @@ var elements = document.body.getElementsByTagName('p');
 			counter = counter + 1;
 			var str = elements[i].innerHTML;
 			var result = str.replace(regex, function(a) {
-					    var m = (/<(\w+)([^>]*)>([^<]*)<\/\w+>/).exec(a);      
+					    var m = (/<(\w+)([^>]*)>([^<]*)<\/\w+>/).exec(a); 
+					
+					    if (m !== null) {
+					    if(typeof m[2].test === 'function') { 
 					    if (m !== null && m[1] === "span" && m[2].test(/id=/)) 
 					        return a;
+					       }}
+					       
 					    if (m !== null)
 					        return "<" + m[1] + m[2] + ">" + m[3].replace(regex, arguments.callee) + "</" + m[1] + ">";
 					
@@ -222,7 +227,7 @@ var elements = document.body.getElementsByTagName('p');
 		}
 		
 } catch(err) {
-	
+	  //alert(elements[i].innerHTML);
 	  alert(err.message); 
 }
 		
