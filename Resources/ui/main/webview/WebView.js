@@ -99,7 +99,7 @@ function WebView(_args) {
 		}
 		rs.close();
 		db.close();
-		
+/*		
 		if(Ti.App.Properties.hasProperty('fontSize')){
 			if(typeof(self.fontSize) === 'undefined'){
 				var prev = DEFAULT_FONT_SIZE;
@@ -125,8 +125,8 @@ console.log('e - p: ' + prev + ' c:' +curr);
 console.log(settings[FONT_SIZE].data[curr].value);
 				Ti.App.fireEvent('app:changeFontSizeWV', { previous : settings[FONT_SIZE].data[prev].value,
 					current : settings[FONT_SIZE].data[curr].value });
-			}*/
-		}
+			}
+		}*/
 
 	});
 	function parseIds(html){
