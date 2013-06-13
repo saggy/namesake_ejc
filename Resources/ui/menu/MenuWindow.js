@@ -95,9 +95,9 @@ function MenuWindow(_args){
 				});
 
 				var sections = toc[this.rowIndex]['sections'];
-				self.setHeight(50*(sections.length-2));
+				self.setHeight(50*(sections.length));
 				var data = [];
-				for(var j = 1; j < sections.length-1; j++){
+				for(var j = 0; j < sections.length; j++){ 
 					title = (typeof sections[j]['subtitle'] === 'undefined') ? sections[j]['section'] : sections[j]['section']+ ': '+sections[j]['subtitle'];
 					var row2 = new MenuTableRow({ index: j, title: title });
 					row2.addEventListener('click', function(e){
