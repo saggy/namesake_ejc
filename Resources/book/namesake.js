@@ -1,8 +1,56 @@
-function load(){
+function load(page){
 	/*
 	params = getQueryParams(document.location.search);
 	alert(JSON.stringify(params));
 	highlightSearchTerm(params.search_term);*/
+	//add id's to every element (or change id)
+	
+// STEP 1 - add/change ID tags for LI and P 
+// However remember that today's PopupMenuWeb change the UIMenuController entries for the entire webview, not by element tag name
+// so you will likely want to expand this to H1-H4 tags as well.
+var counter = 0;
+
+var elements = document.body.getElementsByTagName('p');
+
+for (var i = 0; i < elements.length; i++) {
+	counter = counter + 1;
+	elements[i].id = page + 'p' + counter;
+}
+
+counter = 0;
+elements = document.body.getElementsByTagName('li');
+for (var i = 0; i < elements.length; i++) {
+	counter = counter + 1;
+    elements[i].id = page + 'ul' + counter; 
+}
+
+	
+// STEP 2 - add span tags programmatically for each element with an id.
+
+var counter = 0;
+var id = 0;
+var regex = /(<.+?<\/.+?>|\S+)/g;
+
+
+var elements = document.body.getElementsByTagName('p');
+
+		for (var i = 0; i < elements.length; i++) {
+			counter = counter + 1;
+			var str = elements[i].innerHTML;
+			var result = str.replace(regex, function(a) {
+					    var m = (/<(\w+)([^>]*)>([^<]*)<\/\w+>/).exec(a);      
+					    if (m !== null && m[1] === "span" && m[2].test(/id=/)) 
+					        return a;
+					    if (m !== null)
+					        return "<" + m[1] + m[2] + ">" + m[3].replace(regex, arguments.callee) + "</" + m[1] + ">";
+					
+					    return "<span id='" + (++id) + "'>" + a.charAt(0) + "</span>" + a.substring(1);
+			});
+		
+			elements[i].innerHTML = result
+			
+		}
+
 }
 
 function getQueryParams(qs) {
@@ -149,6 +197,8 @@ Ti.App.addEventListener('app:addNote', function(e){
 		$p.attr('note', true)
 	}
 });
+
+
     
     }
 
