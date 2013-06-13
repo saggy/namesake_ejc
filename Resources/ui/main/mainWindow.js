@@ -16,8 +16,9 @@ function mainWindow() {
 
 	Ti.include('ui/settings/settings.js');
 
-	var highlightColor = 1; //yellow
-	var fontSize = 1; //regular
+	var highlightColor = (!Ti.App.Properties.hasProperty('highlightColor')) ? DEFAULT_HIGHLIGHT_COLOR : Ti.App.Properties.getInt('highlightColor'); 
+	var fontSize =  (!Ti.App.Properties.hasProperty('fontSize')) ? DEFAULT_FONT_SIZE : Ti.App.Properties.getInt('fontSize'); 
+	
 	
 	//import view elements
 	var PopupMenuWeb = require('com.mywebrank.popupmenuweb');
@@ -48,6 +49,8 @@ function mainWindow() {
 	var VideoPlayer = require('ui/main/VideoPlayer');
 	var ResponseDialog = require('ui/main/ResponseDialog');
 
+
+
 	// show menu
 	menuButton.addEventListener('click', function(e){
 		//self.add(menuWindow);
@@ -65,13 +68,16 @@ function mainWindow() {
 
 	settingsWindow.addEventListener('changeHighlight', function(e){
 		highlightColor = e.index;
+		Ti.App.Properties.setInt('highlightColor', highlightColor);
 	});
 	settingsWindow.addEventListener('changeFontSize', function(e){
 		var prev = fontSize;
 		fontSize = e.index;
 		var font = {previous: settings[FONT_SIZE].data[prev].value, current: settings[FONT_SIZE].data[fontSize].value};
+		Ti.App.Properties.setInt('fontSize', fontSize);
 		Ti.App.fireEvent('app:changeFontSizeWV', font);
 	});
+
 	// add navigation bar
 
 	var rightNav = Ti.UI.createView({ width: 135, height: 38 });

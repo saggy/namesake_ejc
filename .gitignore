@@ -21,3 +21,5 @@ build.log
 .settings/com.appcelerator.titanium.mobile.prefs
 
 .settings/com.appcelerator.titanium.mobile.prefs
+
+*.lock

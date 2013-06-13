@@ -2,11 +2,11 @@ var settings = [
 	{ title: 'Font Size',
 		data:[
 			{ title : 'Small',
-				value : .75 },
+				value : .9 },
 			{ title: 'Regular',
 				value : 1 },
 			{ title: 'Large',
-				value : 1.5 }
+				value : 1.1 }
 			]
 	}, 
 	{
@@ -24,3 +24,4 @@ var settings = [
 	}];
 	
 	var FONT_SIZE = 0, HIGHLIGHT_COLOR = 1;
+	var DEFAULT_FONT_SIZE = 1, DEFAULT_HIGHLIGHT_COLOR = 1;
