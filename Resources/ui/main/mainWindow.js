@@ -187,7 +187,11 @@ function mainWindow() {
 	Ti.App.addEventListener('playvideo', function(e){
 		url = 'videos/'+e.video;
 		var videoPlayer = new VideoPlayer({url: url});
-		self.add(videoPlayer);
+		//self.add(videoPlayer);
+		videoPlayer.open({	        modal:true,
+            							modalTransitionStyle: Ti.UI.iPhone.MODAL_TRANSITION_STYLE_COVER_VERTICAL ,
+            							modalStyle: Ti.UI.iPhone.MODAL_PRESENTATION_FORMSHEET
+            							});
 	});
 
 
