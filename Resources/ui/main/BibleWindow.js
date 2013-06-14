@@ -8,34 +8,47 @@ function BibleWindow(_args){
             width:575, 
             height:600,
             right: -700,
-            borderColor: '#0096DE'
+            borderColor: '#0096DE',
+            borderRadius: 5
             });
+            
+
+	var ceb = Ti.UI.createLabel({
+		text: 'Common English Bible',
+		color: 'white'
+	});
 	
-	var title = Ti.UI.createLabel({
-		title:'',
-		top: 0,
-		height: 50,
-		width: 575,
-		textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
-		color: '#FFFFFF',
-		backgroundColor: '#0096DE'
+		var title = Ti.UI.createLabel({
+		text: 'Genesis',
+		color: 'white'
 	});
-	var close = Ti.UI.createButton({
-		title: 'Close',
-		right: 0,
-		top: 0,
-		zIndex: 6
+	
+	var close = Titanium.UI.createButton({
+    title: 'Close',
+    style: Titanium.UI.iPhone.SystemButtonStyle.DONE,
 	});
+
 	close.addEventListener('click', function(e){
 		self.fireEvent('bibleclose');
 	});
+	
+	var flexSpace = Titanium.UI.createButton({
+    systemButton:Titanium.UI.iPhone.SystemButton.FLEXIBLE_SPACE
+	});
+	
+	var navBar =  Titanium.UI.iOS.createToolbar({ barColor:'#0096DE', 
+	items:[ceb, flexSpace, title, flexSpace, close],
+	top:0,
+	zIndex: 1
+	 });
 
 	
 	var webView = Ti.UI.createWebView({
 		scalesPageToFit: false,
-		top: 50,
 		contentWidth: 'auto',
 		contentHeight: 'auto',
+		top: 44,
+		zIndex: 2
 	});
 	
 		var bibleShow = Ti.UI.createAnimation({
@@ -85,8 +98,7 @@ function BibleWindow(_args){
 	});
 	
 
-	self.add(title);
-	self.add(close);
+	self.add(navBar);
 	self.add(webView);
 	return self;
 }
