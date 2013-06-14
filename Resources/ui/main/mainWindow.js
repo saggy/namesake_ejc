@@ -2,7 +2,7 @@
 function mainWindow() {
 	// initialized main window
 	var self = Ti.UI.createWindow({
-		title:'Namesake - Jessica LaGrone',
+		title:'Namesake',
 		backgroundColor:'white',
 		tabBarHidden: true,
 		barColor: '#0096DE'//,
@@ -262,6 +262,7 @@ function mainWindow() {
 
 		});
 	});
+	
 
 	return self;
 };

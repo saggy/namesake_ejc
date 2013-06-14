@@ -33,6 +33,7 @@ var themevalues  = new ThemeValues();
 
 var styledLabel = require('ti.styledlabel');
 var webView;
+var pageAuthorView;
 var bookDir;
 //events
 Ti.App.addEventListener('gotoPage', function(e){
@@ -51,6 +52,7 @@ Ti.App.addEventListener('gotoPage', function(e){
 		Ti.API.info(pageString);
 		webView.setUrl(pageString);
 		webView.page = page;
+		pageAuthorView.fireEvent('page', {page: page});
 	});
 
 
