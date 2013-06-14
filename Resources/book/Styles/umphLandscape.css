@@ -141,6 +141,12 @@ hr{color:#000;}
 .noindentp {
     text-indent:0em;
 }
+
+.sidebar {
+    text-indent:0em;
+    text-align: left;
+}
+
 .para-style-override-32 {
 	 text-indent:0em;
 	 line-height: 180%;
@@ -291,7 +297,9 @@ hr{color:#000;}
 
 .answer {
     min-height: 4em;
-	width: 100%;
+	width: 90%;
+	background-color:#FAFAFA; 
+	margin-left: 1.5em;
 }
 
 .answertable {
@@ -368,5 +376,20 @@ ul.leaders span + span {
 
 .para-style-override-21 {
 	text-align: right;
+}
+
+.table-style-override-1 {
+	margin-top: 10px;
+	border: 0px solid black;
+	cellpadding: 10px; 
+	border-collapse: collapse;
+    border-spacing: 0;
+	width: 96%;
+	margin-left: 1em;
+	font-size: 16px;
+}
+
+.para-style-override-20 {
+	margin-top: 10px;
 }
 
