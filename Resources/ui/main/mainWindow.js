@@ -72,10 +72,10 @@ function mainWindow() {
 	});
 	settingsWindow.addEventListener('changeFontSize', function(e){
 		
-		var font = settings[FONT_SIZE].data[e.index].value;
+		var fontSize = settings[FONT_SIZE].data[e.index].value;
 
-		Ti.App.Properties.setInt('fontSize', font);
-		Ti.App.fireEvent('app:changeFontSizeWV', {fontSize: font});
+		Ti.App.Properties.setInt('fontSize', e.index);
+		Ti.App.fireEvent('app:changeFontSizeWV', {fontSize: fontSize});
 
 	});
 

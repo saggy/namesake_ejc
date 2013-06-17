@@ -14,7 +14,7 @@ var tablist = new Tablist();
 var images  = new Images();
 var themevalues  = new ThemeValues();
 
-Ti.App.Properties.setString('fontSize', '16');
+Ti.App.Properties.setString('fontSize', 0);
 
 (function() {
 		
@@ -76,8 +76,8 @@ Ti.App.addEventListener('web:addSearchHighlight', function(e){
 
 Ti.App.addEventListener('web:setFontSize', function(e){
 //
-var fontSize = Ti.App.Properties.getString('fontSize');
-
+var fontIndex = Ti.App.Properties.getString('fontSize');
+var fontSize = settings[FONT_SIZE].data[fontIndex].value;
 Ti.App.fireEvent('app:changeFontSizeWV', { fontSize : fontSize});
 
 });

@@ -198,23 +198,6 @@ Ti.App.addEventListener('app:changeFontSizeWV', function(e){
 			'p','table'];
 	for(var i = 0, len = elems.length; i < len; i++){
 		
-		//textarea 18px
-		//answertable 16px
-		//command 16px
-		//PoetryText 16px
-		//p16px
-		
-		
-		
-		
-		/*
-		var prev = $(elems[i]).css("font-size");
-		if(typeof(prev) !== 'undefined'){
-			prev = parseFloat(prev);
-			prev /= e.previous;
-			var curr = prev * e.current;
-			$(elems[i]).css("font-size", curr+"px");
-			*/
 			if (i==0){
 				$(elems[i]).css("font-size", (e.fontSize + 2) +"px");
 			} else {
@@ -228,6 +211,7 @@ Ti.App.addEventListener('app:changeFontSizeWV', function(e){
 Ti.App.fireEvent('web:addSearchHighlight', {});
 Ti.App.fireEvent('web:setFontSize', {});
 
+    
     }
 
 window.onload = siteOnload;
@@ -313,3 +297,4 @@ try {
 		}
 
 }
+

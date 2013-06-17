@@ -40,6 +40,7 @@ function SettingsWindow(_args){
 			
 			var highlightColor = Ti.App.Properties.hasProperty('highlightColor') ? Ti.App.Properties.getInt('highlightColor') : DEFAULT_HIGHLIGHT_COLOR;
 			var fontSize = Ti.App.Properties.hasProperty('fontSize') ? Ti.App.Properties.getInt('fontSize') : DEFAULT_FONT_SIZE;
+			
 			for(var j = 0, len2 = data.length; j < len2; j++){
 				var row2;
 				
@@ -62,7 +63,7 @@ function SettingsWindow(_args){
 						});
 						break;
 					case 'Font Size':
-						row2 = new SettingsTableRow({index: j, title: data[j].title, sizeFactor: data[j].value, children: false, hasCheck: j==highlightColor});
+						row2 = new SettingsTableRow({index: j, title: data[j].title, sizeFactor: data[j].value, children: false, hasCheck: j==fontSize});
 						row2.addEventListener('click', function(e){
 							self.fireEvent('changeFontSize', {index: this.rowIndex});
 							var data = settingsTable.data[0].rows;
