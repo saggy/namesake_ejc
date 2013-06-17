@@ -2,11 +2,11 @@ var settings = [
 	{ title: 'Font Size',
 		data:[
 			{ title : 'Small',
-				value : .9 },
+				value : 15 },
 			{ title: 'Regular',
-				value : 1 },
+				value : 16 },
 			{ title: 'Large',
-				value : 1.1 }
+				value : 20 }
 			]
 	}, 
 	{

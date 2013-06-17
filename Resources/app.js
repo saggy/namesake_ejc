@@ -14,6 +14,8 @@ var tablist = new Tablist();
 var images  = new Images();
 var themevalues  = new ThemeValues();
 
+Ti.App.Properties.setString('fontSize', '16');
+
 (function() {
 		
    	//determine platform and form factor, not currently used for anything, this is an iPad only application
@@ -69,6 +71,14 @@ Ti.App.addEventListener('web:addSearchHighlight', function(e){
 		
 		currentSearchTerm = '';	
 	}
+
+});
+
+Ti.App.addEventListener('web:setFontSize', function(e){
+//
+var fontSize = Ti.App.Properties.getString('fontSize');
+
+Ti.App.fireEvent('app:changeFontSizeWV', { fontSize : fontSize});
 
 });
 
