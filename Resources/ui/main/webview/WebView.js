@@ -16,8 +16,15 @@ function WebView(_args) {
     	contentWidth:'auto',
     	contentHeight:'auto',
     	willHandleTouches: false,
-    	popupMenu: ["Note", "Bookmark", "Highlight"]
+    	popupMenu: ["Note", "Bookmark", "Highlight"],
+    	pageAuthorView: []
 	}); 
+	
+	
+		var PageAuthorView = require('ui/controls/PageAuthorView');
+			pageAuthorView = new PageAuthorView({page: cPage});
+	
+	self.add(pageAuthorView);
 	
 
 	self.goToPage = function(page){
@@ -34,12 +41,14 @@ function WebView(_args) {
 		pageString = bookDir + 'Page' + pageString + page + '.html';
 		self.setUrl(pageString);
 		self.page = page;
+		pageAuthorView.fireEvent('page', {page: page});
 
 	}
 	self.searchPage = function(page, term){
 		self.goToPage(page);
-		self.url +='?search_term='+term.split(' ').join('%20');
-		Ti.App.fireEvent('app:highlightSearchTermWV',{searchTerm: term});
+		//self.url +='?search_term='+term.split(' ').join('%20');
+		//Ti.App.fireEvent('app:highlightSearchTermWV',{searchTerm: term});
+		currentSearchTerm = term;
 	}
 
 	self.getPage = function(){
@@ -54,6 +63,7 @@ function WebView(_args) {
 			self.goToPage(self.page-1);
 		}
 	});
+	
 	
 	self.addEventListener('load', function(e){
 		var db = Ti.Database.open('namesake');
