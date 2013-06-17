@@ -35,6 +35,7 @@ var styledLabel = require('ti.styledlabel');
 var webView;
 var pageAuthorView;
 var bookDir;
+var currentSearchTerm = '';
 //events
 Ti.App.addEventListener('gotoPage', function(e){
 			var page = e.page;
@@ -56,6 +57,18 @@ Ti.App.addEventListener('gotoPage', function(e){
 	});
 
 
+Ti.App.addEventListener('web:addSearchHighlight', function(e){
+	if (currentSearchTerm.length > 0 ) {
+		
+		var searchTerm = currentSearchTerm;
+		var n = searchTerm.split(' ');
+		
+		for (var i=0; i<n.length; i++) {
+		Ti.App.fireEvent('app:addSearchHighlight', {searchWord: n[i]});
+		}
+		
+		currentSearchTerm = '';	
+	}
 
-
+});
 
