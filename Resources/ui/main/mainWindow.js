@@ -24,7 +24,7 @@ function mainWindow() {
 	var PopupMenuWeb = require('com.mywebrank.popupmenuweb');
 	var MenuButton = require('ui/main/navbar/menubutton/MenuButton'),
 			menuButton = new MenuButton();
-	var	SettingsButton = require('ui/main/navbar/menubutton/MenuButton'),
+	var	SettingsButton = require('ui/main/navbar/settingsbutton/SettingsButton'),
 			settingsButton = new SettingsButton();
 	var InfoButton = require('ui/main/navbar/infobutton/InfoButton'),
 			infoButton = new InfoButton();
