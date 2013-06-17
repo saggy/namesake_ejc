@@ -129,6 +129,43 @@ Ti.App.addEventListener('app:addHighlight', function(e){
 	document.body.innerHTML = domString;
 });
 
+Ti.App.addEventListener('app:addSearchHighlight', function(e){
+
+
+var searchWord = e.searchWord;
+
+var firstLetter = searchWord.charAt(0);
+var restOfWord = searchWord.slice(1); 
+
+var spans = document.getElementsByTagName("span"),
+    index, node, idAttr;
+
+
+for (index = 0; index < spans.length; ++index) {
+    node = spans.item(index);
+    idAttr = node.getAttribute("id");
+    if (idAttr && node.firstChild.data.toLowerCase() == firstLetter.toLowerCase() && 0 == node.nextSibling.nodeValue.indexOf(restOfWord) ) {
+    	
+    	if (node.nextSibling.nodeValue.charAt(restOfWord.length) == ' '||node.nextSibling.nodeValue.charAt(restOfWord.length) == '.'||
+    	    node.nextSibling.nodeValue.charAt(restOfWord.length) == ','||node.nextSibling.nodeValue.charAt(restOfWord.length) == '?'||
+    	    node.nextSibling.nodeValue.charAt(restOfWord.length) == '!'||node.nextSibling.nodeValue.charAt(restOfWord.length) == '"'||
+    	    node.nextSibling.nodeValue.charAt(restOfWord.length) == false) {
+
+		node.style.backgroundColor = '#F4F776';
+
+		var spannode = document.createElement('span');
+    	spannode.style.backgroundColor = '#F4F776';
+    	spannode.appendChild(document.createTextNode(node.nextSibling.nodeValue));
+    	
+    	var newnode = node.parentNode.insertBefore(spannode, node.nextSibling);
+    	node.parentNode.removeChild(newnode.nextSibling);
+    	}
+			
+    }
+}
+
+	
+});
 
 Ti.App.addEventListener('app:addNote', function(e){
 	var id = e.startId + '_' + e.endId;
@@ -170,6 +207,9 @@ Ti.App.addEventListener('app:changeFontSizeWV', function(e){
 	}
 	
 });
+
+Ti.App.fireEvent('web:addSearchHighlight', {});
+
     }
 
 window.onload = siteOnload;
