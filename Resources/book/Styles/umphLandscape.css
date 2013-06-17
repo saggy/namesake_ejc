@@ -103,6 +103,8 @@ ul, li {
 	list-style-type: none;
 }
 
+.highlight { background-color: yellow }
+
 body { padding:5px; color:#000000; height: 100%;}
 img { border: 0 none; }
 a {text-decoration:none;}
@@ -377,6 +379,8 @@ ul.leaders span + span {
 .para-style-override-21 {
 	text-align: right;
 }
+
+
 
 .table-style-override-1 {
 	margin-top: 10px;
