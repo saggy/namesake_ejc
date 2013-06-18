@@ -224,11 +224,12 @@ console.log('error');
 		//table.editing = false;
 		toolsTable.fireEvent('doneClick');
 		self.rightNavButton = edit;
-		
+		webView.reload();
 	});
 	
 	self.addEventListener('refreshTable', function(e) {	
-	tBar.fireEvent('click', {});	
+	tBar.fireEvent('click', {});
+	webView.reload();	
 	});
 	
 	
