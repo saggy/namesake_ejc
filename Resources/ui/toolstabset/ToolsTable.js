@@ -57,7 +57,9 @@ function ToolsTable(_args) {
 		var id = e.row.id;
 //console.log(JSON.stringify(table.data[0].rows));
 //		table.deleteRow(index);
+		if(typeof table.data[0]!='undefined'){
 		var rowData = table.data[0].rows;
+		}
 		database.execute(drop, id);
 		
 		var rs = database.execute('SELECT annotation_id FROM annotation WHERE type=? ORDER BY row_index',type);
