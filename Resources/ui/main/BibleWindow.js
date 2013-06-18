@@ -37,7 +37,7 @@ function BibleWindow(_args){
 	});
 	
 	var navBar =  Titanium.UI.iOS.createToolbar({ barColor:'#0096DE', 
-	items:[ceb, flexSpace, title, flexSpace, close],
+	items:[title, flexSpace, ceb, flexSpace, close],
 	top:0,
 	zIndex: 1
 	 });

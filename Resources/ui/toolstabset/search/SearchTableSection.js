@@ -23,6 +23,10 @@ function SearchTableSection(_args){
 			//console.log('Bible '+result.verse+ ' '+ result.verseText);
 				row = new SearchTableRow({type: type, verse: result.verse, verseText: result.verseText, searchTerm: searchTerm });
 				break;
+			case 'answer':
+			//console.log('Bible '+result.verse+ ' '+ result.verseText);
+				row = new SearchTableRow({type: type, pageNo: result.pageNo, bookText: result.bookText, searchTerm: searchTerm});
+				break;
 			case 'store':
 			//console.log('Store '+result.storeTitle, result.imageLoc);
 				row = new SearchTableRow({type: type, storeTitle: result.storeTitle, imageLoc: result.imageLoc, searchTerm: searchTerm});

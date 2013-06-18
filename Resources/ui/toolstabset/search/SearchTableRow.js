@@ -60,6 +60,15 @@ function SearchTableRow(_args){
 			});
 			noteLabelText = bookText;
 			break;
+		case 'answer':
+			pageLabelText = 'p. ' + pageNo;
+			self.addEventListener('click', function(e){
+				self.fireEvent('hideTools');
+				Ti.App.fireEvent('gotopage', {pageNo: pageNo, searchTerm: searchTerm});
+
+			});
+			noteLabelText = bookText;
+			break;
 		case 'bible':
 			pageLabelText = verse;
 			self.addEventListener('click', function(e){

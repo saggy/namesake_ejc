@@ -20,11 +20,12 @@ function ToolsWindow(_args){
 		
 	searchBar.addEventListener('return',function(e){
 		searchTable.show();
-		var searchLimit = 5;
-		var sections = ['Namesake', 'Bible', 'More Titles'];
-		var types = ['book', 'bible', 'store']
-		var queries = ['SELECT * FROM bookSearch WHERE content MATCH ? LIMIT ?', 
-					'SELECT * FROM BS1 WHERE verseText MATCH ? LIMIT ?']
+		var searchLimit = 15;
+		var sections = ['Namesake', 'Notes', 'Bible'];
+		var types = ['book', 'answer', 'bible']; //More titles is gone because it's not complete for this sprint.
+		var queries = [	'SELECT * FROM bookSearch WHERE content MATCH ? LIMIT ?', 
+						'SELECT * FROM ANNOTATION WHERE type = \'note\' AND NOTE LIKE ? LIMIT ?',
+						'SELECT * FROM BS1 WHERE verseText MATCH ? LIMIT ?']
 	
 		var tableSections = [];
 		var SearchTableSection = require('ui/toolstabset/search/SearchTableSection');
@@ -127,9 +128,22 @@ console.log('error');
 					}
 					rs.close();
 					break;
-				case 'store':
-					var result = {type: type, storeTitle: 'Deep Blue Kids Bible', imageLoc: '/images/buttons/dbkb-ipad.png'};
-					results.push(result);
+				case 'answer':
+					searchTerm = trim(searchTerm);
+					var rs = db.execute(queries[i], '%' + searchTerm +'%', searchLimit);
+					while(rs.isValidRow()){
+				//console.log(rs.fieldByName('content'));
+						var text = formatText(rs.fieldByName('note'));
+						
+		//console.log(text);
+		//Ti.API.log('page_no: ' + rs.fieldByName('page_no') +', content: ' + rs.fieldByName('content'));
+						if(text){
+							var result = {type: type, pageNo: rs.fieldByName('page_no'), bookText: text };
+							results.push(result);
+						}
+						rs.next();
+					}
+					rs.close();
 					break;
 			}
 			
