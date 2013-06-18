@@ -2,15 +2,19 @@ function ToolsTable(_args) {
 	var type = _args.type;
 	var query = '';
 	var _parent = _args.parent;
+	var header = '';
 	switch(type){
 		case 'note':
 			query = "SELECT annotation_id, note_html, note_text, page_no, note, row_index FROM annotation WHERE type='note' ORDER BY row_index";
+			header = 'Note';
 			break;
 		case 'bookmark':
 			query = "SELECT annotation_id, note_html, note_text, page_no, note, row_index FROM annotation WHERE type='bookmark' ORDER BY row_index";
+			header = 'Selected Text';
 			break;
 		case 'highlight':
 			query = "SELECT annotation_id, note_html, note_text, page_no, note, row_index FROM annotation WHERE type='highlight' ORDER BY row_index";
+			header = 'Highlighted Text';
 			break;
 	}
 	var db = Ti.Database.open('namesake');
@@ -24,11 +28,48 @@ function ToolsTable(_args) {
 		borderRadius: 0 
 	});
 	
+		var headerView = Ti.UI.createView({
+		top: 5,
+		left: 0,
+		width: 400,
+		height: 40,
+		backgroundColor:'#0096DE',
+		borderRadius: 5 
+	});
+	
+	self.add(headerView);
+	
+	var label1 = Ti.UI.createLabel({
+  color: 'white',
+  font: { fontSize:18 },
+  //shadowColor: '#aaa',
+  //shadowOffset: {x:2, y:2},
+  text: 'Page',
+  textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
+  left: 5,
+  	top: 5,
+  	width: 75, height: Ti.UI.SIZE
+	});
+	headerView.add(label1);
+	
+		var label2 = Ti.UI.createLabel({
+  color: '#white',
+  font: { fontSize:18 },
+  //shadowColor: '#aaa',
+  //shadowOffset: {x:2, y:2},
+  text: header,
+  textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
+  left: 80,
+  	top: 5,
+  	width: 320, height: Ti.UI.SIZE
+	});
+	headerView.add(label2);
+	
 
 	var table = Ti.UI.createTableView({
 		height: 400,
 		zIndex: 3,
-  		top: 0,
+  		top: 40,
   		right: 0,
   		borderRadius:0,
   		width:400,

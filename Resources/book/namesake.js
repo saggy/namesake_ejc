@@ -205,7 +205,7 @@ Ti.App.addEventListener('app:changeFontSizeWV', function(e){
 			}
 
 		}
-	
+	$('.SUB1').css("font-size", (e.fontSize + 8) +"px");
 });
 
 Ti.App.fireEvent('web:addSearchHighlight', {});
