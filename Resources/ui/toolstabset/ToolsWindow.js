@@ -158,7 +158,7 @@ console.log('error');
 	var videoH = 50*(1+video.length);
 	
 	self.add(videoTable);
-	videoTable.hide()
+	videoTable.hide();
 	
 	
 	var ToolsTable = require('ui/toolstabset/ToolsTable'),
@@ -169,6 +169,25 @@ console.log('error');
 	var emptyView = Titanium.UI.createView({});
 	
 	var current = videoTable;
+	
+		var DefaultNote = require('ui/toolstabset/DefaultNoteView'),
+		defaultNote = new DefaultNote();
+		
+		self.add(defaultNote);
+		defaultNote.hide();
+	
+	var DefaultBookmark = require('ui/toolstabset/DefaultBookmarkView'),
+		defaultBookmark = new DefaultBookmark();
+		
+		self.add(defaultBookmark);
+		defaultBookmark.hide();
+		
+	var DefaultHighlight = require('ui/toolstabset/DefaultHighlightView'),
+		defaultHighlight = new DefaultHighlight();
+		
+		self.add(defaultHighlight);
+		defaultHighlight.hide();
+	
 	
 	
 		var edit = Ti.UI.createButton({
@@ -209,15 +228,45 @@ console.log('error');
 				break;
 			//notes
 			case 1:
+				self.rightNavButton = edit;
+				toolsTable = new ToolsTable({type: tools[idx], parent: self});
+				if (toolsTable.rowCount > 0) {
+				current = toolsTable;
+				self.add(toolsTable);
+				toolsTable.show();	
+				}
+				else {
+				current = defaultNote;
+				defaultNote.show();
+				}
+				break;
 			//bookmarks
 			case 2:
+				self.rightNavButton = edit;
+				toolsTable = new ToolsTable({type: tools[idx], parent: self});
+				if (toolsTable.rowCount > 0) {
+				current = toolsTable;
+				self.add(toolsTable);
+				toolsTable.show();	
+				}
+				else {
+				current = defaultBookmark;
+				defaultBookmark.show();
+				}
+				break;
 			//highlights
 			case 3:
 				self.rightNavButton = edit;
 				toolsTable = new ToolsTable({type: tools[idx], parent: self});
+				if (toolsTable.rowCount > 0) {
 				current = toolsTable;
 				self.add(toolsTable);
-				toolsTable.show();
+				toolsTable.show();	
+				}
+				else {
+				current = defaultHighlight;
+				defaultHighlight.show();	
+				}
 				break;
 			//search
 			case 4:
