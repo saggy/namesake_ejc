@@ -59,6 +59,8 @@ function ToolsTable(_args) {
 //		table.deleteRow(index);
 		if(typeof table.data[0]!='undefined'){
 		var rowData = table.data[0].rows;
+		} else {
+			_parent.fireEvent('refreshTable', {});
 		}
 		database.execute(drop, id);
 		

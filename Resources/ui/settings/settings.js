@@ -6,7 +6,7 @@ var settings = [
 			{ title: 'Large',
 				value : 20 },
 			{ title: 'Extra Large',
-				value : 24 }
+				value : 28 }
 			]
 	}, 
 	{

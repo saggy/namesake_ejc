@@ -227,6 +227,9 @@ console.log('error');
 		
 	});
 	
+	self.addEventListener('refreshTable', function(e) {	
+	tBar.fireEvent('click', {});	
+	});
 	
 	
 	tBar.addEventListener('click',function(e){

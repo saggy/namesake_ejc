@@ -59,7 +59,9 @@ function mainWindow() {
 
 	// show tools
 	toolsButton.addEventListener('click', function(e){
+		toolsWindow.fireEvent('refreshTable', {});
 		toolsWindow.show({view: toolsButton, animated:true});	
+		
 	});
 	
 	settingsButton.addEventListener('click', function(e){
