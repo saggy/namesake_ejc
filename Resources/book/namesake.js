@@ -208,6 +208,15 @@ Ti.App.addEventListener('app:changeFontSizeWV', function(e){
 	$('.SUB1').css("font-size", (e.fontSize + 8) +"px");
 });
 
+Ti.App.addEventListener('app:addUserSelection', function(e){
+	var userSel = window.getSelection();
+	
+	var selRange = userSel.getRangeAt(0);
+	
+	
+	alert(selRange.startContainer.parentNode.parentNode.tagName);
+});
+
 Ti.App.fireEvent('web:addSearchHighlight', {});
 Ti.App.fireEvent('web:setFontSize', {});
 

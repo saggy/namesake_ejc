@@ -165,6 +165,8 @@ console.log(settings[FONT_SIZE].data[curr].value);
 	}
 
 	self.addEventListener('selection', function(e) {
+		
+		Ti.App.fireEvent('app:addUserSelection');
 		var annotation = {};
 		var ids = parseIds(e.html);
 		
