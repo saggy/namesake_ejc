@@ -82,3 +82,8 @@ Ti.App.fireEvent('app:changeFontSizeWV', { fontSize : fontSize});
 
 });
 
+Ti.App.addEventListener('link_click', function(e) {
+    var whereto = e._where;
+    Ti.Platform.openURL(whereto);
+});
+
