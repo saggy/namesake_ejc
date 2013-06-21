@@ -114,10 +114,10 @@ function mainWindow() {
 		a.rowIndex = db.execute('SELECT COUNT(*) FROM annotation WHERE type=?', a.aType).field(0, Ti.Database.FIELD_TYPE_INT);
 		console.log('rowIndex: ', a.rowIndex);
 		
-		var query = 'INSERT INTO annotation (note_text, note_html, page, page_no, start_id, end_id, type, note, row_index, highlight_color, create_date, modify_date) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)';
+		var query = 'INSERT INTO annotation (note_text, note_html, page, page_no, start_id, end_id, type, note, row_index, highlight_color, create_date, modify_date, start_offset, end_offset) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
 		var editQuery = 'UPDATE annotation SET note=?, modify_date=? WHERE annotation_id=?';
 		if(a.id == null){
-			db.execute(query, a.noteText, a.noteHtml, a.page, a.pageNo, a.startId, a.endId, a.aType, a.note, a.rowIndex, highlightColor, a.created, a.modified);
+			db.execute(query, a.noteText, a.noteHtml, a.page, a.pageNo, a.startId, a.endId, a.aType, a.note, a.rowIndex, highlightColor, a.created, a.modified, a.startOffset, a.endOffset);
 		}
 		else{
 			db.execute(editQuery, a.note, a.modified, a.id);

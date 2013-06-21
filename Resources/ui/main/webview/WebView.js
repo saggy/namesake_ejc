@@ -166,9 +166,8 @@ console.log(settings[FONT_SIZE].data[curr].value);
 
 	self.addEventListener('selection', function(e) {
 		
-		Ti.App.fireEvent('app:addUserSelection');
 		var annotation = {};
-		var ids = parseIds(e.html);
+		var ids = '';//parseIds(e.html);
 		
 		annotation.id = null;
 		annotation.noteText = e.text;
@@ -181,6 +180,9 @@ console.log(settings[FONT_SIZE].data[curr].value);
 		annotation.modified = annotation.created;
 		annotation.note = null;
 		annotation.highlightColor = null;
+		annotation.startOffset = null;
+		annotation.endOffset = null;
+	
 	
 		switch(e.index){
 			case NOTE:
@@ -193,12 +195,17 @@ console.log(settings[FONT_SIZE].data[curr].value);
 				Ti.App.fireEvent('saveannotation', annotation);
 				Ti.App.fireEvent('app:addBookmark', annotation);
 				break;
+				
 			case HIGHLIGHT:
 				annotation.aType = 'highlight';
+				annotation.hcIndex = Ti.App.Properties.getInt('highlightColor');
+				annotation.highlightColor = settings[HIGHLIGHT_COLOR].data[annotation.hcIndex].value;
+				Ti.App.fireEvent('app:addUserSelection', annotation);
+				/*
 				Ti.App.fireEvent('saveannotation', annotation);
 				//Ti.App.fireEvent('app:addHighlight', annotation);
 				self.reload();
-				break;
+				break;*/
 		}
 	Ti.API.info(annotation.noteText);
 		Ti.API.info(annotation.noteHtml);
