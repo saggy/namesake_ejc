@@ -4,7 +4,6 @@ function load(page){
 	alert(JSON.stringify(params));
 	highlightSearchTerm(params.search_term);*/
 	//add id's to every element (or change id)
-   spanPage(page);
 }
 
 
@@ -210,7 +209,7 @@ Ti.App.addEventListener('app:addNote', function(e){
 Ti.App.addEventListener('app:changeFontSizeWV', function(e){
 	var elems = ['textarea','.answertable','.command',
 			'.PoetryText1','.PoetryText2','.PoetryText3','.PoetryText4','.PoetryText5',
-			'p','table'];
+			'p','table', '.tocentry', '.char-style-override-21', '.answer', '.blankfill', '.char-style-override-17', '.char-style-override-23'];
 	for(var i = 0, len = elems.length; i < len; i++){
 		
 			if (i==0){
@@ -221,6 +220,15 @@ Ti.App.addEventListener('app:changeFontSizeWV', function(e){
 
 		}
 	$('.SUB1').css("font-size", (e.fontSize + 8) +"px");
+	$('h2').css("font-size", (e.fontSize + 8) +"px");
+	$('h3').css("font-size", (e.fontSize + 8) +"px");
+	$('h4').css("font-size", (e.fontSize + 14) +"px");
+	$('h5').css("font-size", (e.fontSize + 14) +"px");
+	$('.CHD2').css("font-size", (e.fontSize + 14) +"px");
+	$('.weekheading').css("font-size", (e.fontSize + 20) +"px");
+	$('.CHD1').css("font-size", (e.fontSize + 20) +"px");
+	$('.page1Title').css("font-size", (e.fontSize + 60) +"px");
+	$('.char-style-override-20').css("font-size", (e.fontSize -6) +"px");
 });
 
 Ti.App.addEventListener('app:addUserSelection', function(e){
@@ -437,9 +445,21 @@ for (var i = 0; i < elements.length; i++) {
     elements[i].id = page + 'ul' + counter; 
 }
 
+<<<<<<< HEAD
 /*	
-// STEP 2 - add span tags programmatically for each element with an id.
+=======
+counter = 0;
+elements = document.body.getElementsByTagName('tr');
+for (var i = 0; i < elements.length; i++) {
+	counter = counter + 1;
+    elements[i].id = page + 'tr' + counter; 
+}
+}
 
+	
+>>>>>>> f3a4b1922430883bb4bf9294cb9183e4ae8ae364
+// STEP 2 - add span tags programmatically for each element with an id.
+/*
 var counter = 0;
 var id = 0;
 var regex = /(<.+?<\/.+?>|\S+)/g;
@@ -497,4 +517,5 @@ try {
 		}
 */
 }
+*/
 
