@@ -28,17 +28,19 @@ function ResponseDialog(_args){
 	});
 	
 	var question = Ti.UI.createLabel({
-		left: 10,
-		right: 10,
-		top: 30,
+		left: 20,
+		right: 20,
+		top: 0,
+		height: 170,
 		text: question,
 		color: '#000000',
   		backgroundColor:'#FFFFFF',
-  		textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER
+  		textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT
 	});
 	
 	var textField = Ti.UI.createTextField({
-		height: 200,
+		height: 250,
+		bottom: 50,
 		left: 10,
 		right: 10,
 		borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,

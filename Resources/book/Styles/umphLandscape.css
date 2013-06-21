@@ -38,6 +38,7 @@ margin:0px;
 text-align: justify;
 }
 
+
 table
 {
 font-family: century;
@@ -50,6 +51,14 @@ font-family: abbey;
 font-size: 36px;
 }
 
+.weekheading
+{
+font-family: abbey;
+font-size: 36px;
+margin-bottom: 20px;
+margin-top: 20px;
+}
+
 .CHD1
 {
 font-family: abbey;
@@ -58,6 +67,14 @@ text-align: center;
 }
 
 h3
+{
+font-family: abbey;
+font-size: 24px;
+color:#00AAA6;
+margin-top:2em;
+}
+
+.page1Ttile
 {
 font-family: abbey;
 font-size: 24px;
@@ -213,10 +230,25 @@ hr{color:#000;}
 	margin-top:0in;
 	margin-right:0in;
 	margin-bottom:0in;
-	margin-left:0.1in;
 	margin-bottom:.0001pt;
 	text-indent:-0.1in;
 	font-style:italic;
+}
+
+.char-style-override-19 {
+	font-variant:small-caps;
+	font-style:italic;
+}
+
+.char-style-override-20 {
+	vertical-align: super;
+	font-size: 10px;
+	margin-right: -8px;
+}
+
+.char-style-override-23 {
+	font-weight: bold;
+	font-style: italic;
 }
 
 .PoetryText2 {
@@ -373,7 +405,7 @@ ul.leaders span + span {
 .char-style-override-18 {
 	vertical-align: super;
 	font-size: 10px;
-	margin-right: -8px;
+	margin-right: -5px;
 }
 
 .para-style-override-21 {
@@ -397,3 +429,27 @@ ul.leaders span + span {
 	margin-top: 10px;
 }
 
+.para-style-override-4 {
+	margin-left: 80px;
+}
+
+.tocentry {
+	font-family: century; 
+	font-size: 16px;
+}
+
+.sign {
+font-size: 16px;
+color: #a000a0;
+}
+
+.para-style-override-28 {
+	text-align: right;
+	margin-right: 20px;
+}
+
+.para-style-override-30 {
+	margin-left: 20px; 
+	margin-right: 20px; 
+	display: block;
+}
