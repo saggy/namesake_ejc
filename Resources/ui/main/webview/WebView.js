@@ -168,8 +168,27 @@ console.log(settings[FONT_SIZE].data[curr].value);
 	self.addEventListener('selection', function(e) {
 		
 		var annotation = {};
+<<<<<<< HEAD
 		var ids;
 
+=======
+		var ids = '';//parseIds(e.html);
+		
+		annotation.id = null;
+		annotation.noteText = e.text;
+		annotation.noteHtml = e.html;
+		annotation.startId = ids.first;
+		annotation.endId = ids.last;
+		annotation.page = self.getUrl().split('/').slice(-3).join('/');
+		annotation.pageNo = self.getPage();
+		annotation.created = +new Date();
+		annotation.modified = annotation.created;
+		annotation.note = null;
+		annotation.highlightColor = null;
+		annotation.startOffset = null;
+		annotation.endOffset = null;
+	
+>>>>>>> 14669b8b67852716dee7c9ca26d7c92ed48eeed6
 	
 		switch(e.index){
 			case NOTE:
@@ -217,6 +236,7 @@ console.log(settings[FONT_SIZE].data[curr].value);
 				Ti.App.fireEvent('saveannotation', annotation);
 				Ti.App.fireEvent('app:addBookmark', annotation);
 				break;
+				
 			case HIGHLIGHT:
 				Ti.App.fireEvent('app:addUserSelection');
 				ids = parseIds(e.html);
@@ -232,6 +252,7 @@ console.log(settings[FONT_SIZE].data[curr].value);
 				annotation.note = null;
 				annotation.highlightColor = null;
 				annotation.aType = 'highlight';
+<<<<<<< HEAD
 				annotation.anchorNodeId = null;
 				annotation.anchorOffset = null;
 				annotation.focusNodeId = null;
@@ -262,6 +283,16 @@ console.log(settings[FONT_SIZE].data[curr].value);
 				//Ti.App.fireEvent('app:addHighlight', annotation);
 				self.reload();
 				break;
+=======
+				annotation.hcIndex = Ti.App.Properties.getInt('highlightColor');
+				annotation.highlightColor = settings[HIGHLIGHT_COLOR].data[annotation.hcIndex].value;
+				Ti.App.fireEvent('app:addUserSelection', annotation);
+				/*
+				Ti.App.fireEvent('saveannotation', annotation);
+				//Ti.App.fireEvent('app:addHighlight', annotation);
+				self.reload();
+				break;*/
+>>>>>>> 14669b8b67852716dee7c9ca26d7c92ed48eeed6
 		}
 	    //Ti.API.info(annotation.noteText);
 		//Ti.API.info(annotation.noteHtml);

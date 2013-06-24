@@ -193,6 +193,7 @@ function change_font_size (e) {
 				$(elems[i]).css("font-size", e.fontSize+"px");
 			}
 
+<<<<<<< HEAD
 		}
 	$('.SUB1').css("font-size", (e.fontSize + 8) +"px");
 	$('h2').css("font-size", (e.fontSize + 8) +"px");
@@ -204,6 +205,26 @@ function change_font_size (e) {
 	$('.CHD1').css("font-size", (e.fontSize + 20) +"px");
 	$('.page1Title').css("font-size", (e.fontSize + 60) +"px");
 	$('.char-style-override-20').css("font-size", (e.fontSize -6) +"px");
+=======
+  	var startId = e.startId, endId = e.endId, highlightColor = e.highlightColor;
+  	var start = document.getElementById(startId);
+  	var end = document.getElementById(endId);
+  	
+  	var selRange = document.createRange();
+  	selRange.setStart(start.firstChild, e.startOffset);
+  	selRange.setEnd(end.firstChild, e.endOffset);
+
+  	var hSpan = document.createElement("span");
+	hSpan.style.backgroundColor = highlightColor;
+	
+//alert(highlightColor);
+	selRange.surroundContents(hSpan);
+	
+	
+  	/*
+	var domString = document.body.innerHTML;
+	//alert(domString);
+>>>>>>> 14669b8b67852716dee7c9ca26d7c92ed48eeed6
 	
 	
 }
@@ -231,7 +252,15 @@ function add_note (e) {
 		$p.attr('note', true)
 	}
 	
+<<<<<<< HEAD
 }
+=======
+	document.body.innerHTML = domString;*/
+});
+
+Ti.App.addEventListener('app:addSearchHighlight', function(e){
+
+>>>>>>> 14669b8b67852716dee7c9ca26d7c92ed48eeed6
 
 function add_search_highlight(e) {
 	var searchWord = e.searchWord;
@@ -300,11 +329,201 @@ function highlight_search_term_wv (e) {
 	highlightSearchTerm(e.searchTerm);	
 }
 
+<<<<<<< HEAD
 function getQueryParams(qs) {
     qs = qs.split("+").join(" ");
 
     var params = {}, tokens,
         re = /[?&]?([^=]+)=([^&]*)/g;
+=======
+Ti.App.addEventListener('app:addUserSelection', function(e){
+	var userSel = window.getSelection();
+	
+	var selRange = userSel.getRangeAt(0);
+	var start = selRange.startContainer.parentNode;
+	var end = selRange.endContainer.parentNode;
+	
+	e.startId = start.id;
+	e.endId = end.id;
+	e.startOffset = selRange.startOffset;
+	e.endOffset = selRange.endOffset;
+//alert(end.id);
+	if(!(e.startId == e.endId && e.startOffset == e.endOffset)){
+		var hSpan = document.createElement("span");
+		hSpan.style.backgroundColor = e.highlightColor;
+		selRange.surroundContents(hSpan);
+	
+
+		Ti.App.fireEvent('saveannotation', e);
+	}
+});
+Ti.App.addEventListener('app:saveNewHighlight', function(e){
+
+// PART 1 – GET OFFSET
+var sel = window.getSelection();
+var range = sel.getRangeAt(0);
+var FINDME = 'XYSTART15ZZY'; //literal that does not appear in the text of the book
+var newTextNode = document.createTextNode(FINDME);
+range.insertNode(newTextNode);
+var selectedText = e.noteText;
+
+
+/////THIS SECTION IS ESSENTIALLY A
+document.body.innerText;
+var walker1 = document.createTreeWalker(
+        document.body, 
+        NodeFilter.SHOW_TEXT, 
+        null, 
+        false
+    );
+
+    var node1;
+    var textTest1 = '';
+var page;
+    
+    while(node1 = walker1.nextNode()) {
+    
+page = page + node1.nodeValue;
+    }
+///END OF SECTION
+    
+    var startOffset = page.indexOf(FINDME)-9; //why 9?
+    newTextNode.parentNode.removeChild(newTextNode);
+    
+    var rangeLength = selectedText.length;
+    var stopOffset = startOffset + rangeLength;
+    
+   
+//  THIS IS WHERE I imagine that I had retrieved only the page, offset and length of the highlight – and tried to highlight it.
+//   Definitely not working completely, but it would do simple highlights – I don't have time to look at it further.
+
+
+
+    var walker = document.createTreeWalker(
+        document.body, 
+        NodeFilter.SHOW_TEXT, 
+        null, 
+        false
+    );
+
+    var node;
+    var textNodes = [];
+    var textTest = '';
+    var currPos = 0;
+    
+//alert('startOffset: ' + startOffset + ', stopOffset: ' + stopOffset);
+    
+    //ignore leading space
+    
+var newMark;
+var afterText;
+var parentSpan;
+var textSpan;
+
+var x = 1;
+    
+    while(node = walker.nextNode()) {
+
+        //textNodes.push(node.nodeValue);
+        if ((currPos +  node.nodeValue.length) > startOffset && currPos < stopOffset ) {
+        
+//do I need a partial node value?
+        
+if (currPos <= startOffset) {
+        
+//alert('1:  ' + 'currPos: ' + currPos + ', startOffset: ' + startOffset+ ', stopOffset: ' + stopOffset);
+        
+textTest = node.nodeValue.substring(startOffset - currPos, stopOffset - currPos);
+        
+//highlight this
+        
+try {
+         
+        
+  afterText = node.nodeValue.substring(stopOffset - currPos, node.nodeValue.length);
+        
+  newMark = document.createElement('mark');
+        
+  parentSpan = document.createElement('span'); //adding unnecessary, but unharmful span tags, because I don't know how to do pure text nodes
+        
+  textSpan = document.createElement('span');
+        
+  newMark.appendChild(document.createTextNode(node.nodeValue.substring(startOffset - currPos, stopOffset - currPos)));
+        
+  textSpan.appendChild(document.createTextNode(afterText));
+          
+        
+  parentSpan.appendChild(newMark);
+        
+  parentSpan.appendChild(textSpan);
+          
+          
+        
+  node.parentNode.replaceChild(parentSpan, node);
+
+
+          
+        
+} catch (e) {
+        
+alert(e.error);
+        
+}
+        
+}
+         
+        
+/*
+        
+try {
+        
+if  (currPos > startOffset && (currPos + node.nodeValue.length) < stopOffset){
+         
+        
+  newMark = document.createElement('mark');
+        
+  newMark.appendChild(document.createTextNode(node.nodeValue));
+        
+  node.parentNode.replaceChild(newMark, node);
+          
+        
+textTest = textTest + node.nodeValue;
+        
+}
+        
+if  (currPos > startOffset && (currPos + node.nodeValue.length) >= stopOffset){
+        
+textTest = textTest + node.nodeValue.substring(startOffset - currPos, stopOffset - currPos);
+         
+        
+  newMark = document.createElement('mark');
+        
+  newMark.appendChild(document.createTextNode(node.nodeValue));
+        
+  node.parentNode.replaceChild(newMark, node);
+          
+        
+} 
+        
+} catch (e) {
+        
+alert(e.error);
+        
+}
+        
+*/
+
+         
+        }
+        
+        currPos = currPos + node.nodeValue.length;
+    }
+
+
+});
+Ti.App.fireEvent('web:addSearchHighlight', {});
+Ti.App.fireEvent('web:setFontSize', {});
+>>>>>>> 14669b8b67852716dee7c9ca26d7c92ed48eeed6
 
     while (tokens = re.exec(qs)) {
         params[decodeURIComponent(tokens[1])]
@@ -339,9 +558,20 @@ function blankfill(element)
 	Ti.App.fireEvent('blankfill',{id: element.id, correctAnswer: element.getAttribute("correctanswer"), question: element.getAttribute("question")});
 }
 
+<<<<<<< HEAD
 function playvideo(video)
 {
 	Ti.App.fireEvent('playvideo',{video: video});
+=======
+<<<<<<< HEAD
+/*	
+=======
+counter = 0;
+elements = document.body.getElementsByTagName('tr');
+for (var i = 0; i < elements.length; i++) {
+	counter = counter + 1;
+    elements[i].id = page + 'tr' + counter; 
+>>>>>>> 14669b8b67852716dee7c9ca26d7c92ed48eeed6
 }
 
 function findEnclosingP(id){
@@ -353,6 +583,7 @@ function findEnclosingP(id){
 	return $p;
 }
 
+<<<<<<< HEAD
 function saveNote(note){
 
 	var annotation = JSON.parse(note.getAttribute('annotation'));
@@ -364,6 +595,12 @@ function saveNote(note){
 }
 
 function spanPage () {
+=======
+	
+>>>>>>> f3a4b1922430883bb4bf9294cb9183e4ae8ae364
+// STEP 2 - add span tags programmatically for each element with an id.
+/*
+>>>>>>> 14669b8b67852716dee7c9ca26d7c92ed48eeed6
 var counter = 0;
 var id = 0;
 var regex = /(<.+?<\/.+?>|\S+)/g;
@@ -419,6 +656,7 @@ try {
 		} catch(err) {
 	  		alert(err.message); 
 		}
+<<<<<<< HEAD
 
 	
 }
@@ -632,6 +870,9 @@ var x = 0;
 	
 	
 	
+=======
+*/
+>>>>>>> 14669b8b67852716dee7c9ca26d7c92ed48eeed6
 }
 
 
