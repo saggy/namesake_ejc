@@ -10,7 +10,6 @@ function mainWindow() {
 	});
 	
 	//set variables for database and start page of webview
-	var dbName = 'namesake';
 	var startPage = 1;
 	var NOTE = '0', BOOKMARK = '1', HIGHLIGHT = '2';
 
@@ -167,12 +166,6 @@ function mainWindow() {
 	
 	Ti.App.addEventListener('reload',function(e){
 		webView.reload();
-	});
-	Ti.App.addEventListener('saveannotation',function(e){
-		saveAnnotation(e);
-		if(e.aType == 'note'){
-			webView.reload();
-		}
 	});
 	
 	Ti.App.addEventListener('gotopage', function(e){

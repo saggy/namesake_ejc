@@ -1,8 +1,9 @@
 function PageAuthorView(_args) {
-	var self = Ti.UI.createView({height: 50, width: '90%', bottom: 10,  borderRadius: 10, backgroundColor: 'transparent', opacity: 0.0}); 
+	//var self = Ti.UI.createView({height: 50, width: '90%', bottom: 10,  borderRadius: 10, backgroundColor: 'transparent', opacity: 0.1}); 
+	var self = Ti.UI.createView({height: 50, width: 75, bottom: 10, right:10, borderRadius: 10, backgroundColor: '#DBDBDB'}); 
 	
-	var pageView = Ti.UI.createView({height: 50, width: 75, bottom: 0, right:0, borderRadius: 10, backgroundColor: '#DBDBDB'}); 
-	var authorView = Ti.UI.createView({height: 50, width: 250, bottom: 0, borderRadius: 10, backgroundColor: '#DBDBDB'});
+	//var pageView = Ti.UI.createView({height: 50, width: 75, bottom: 0, right:0, borderRadius: 10, backgroundColor: '#DBDBDB'}); 
+	//var authorView = Ti.UI.createView({height: 50, width: 250, bottom: 0, borderRadius: 10, backgroundColor: '#DBDBDB'});
 	
 	
 	var pageNum = Titanium.UI.createLabel({
@@ -27,11 +28,12 @@ function PageAuthorView(_args) {
    width:'auto'
 });
 
-   authorView.add(Author);
+   //authorView.add(Author);
 
-	pageView.add(pageNum);
+	//pageView.add(pageNum);
+	self.add(pageNum);
 	
-	self.add(pageView);
+	//self.add(pageView);
 	//self.add(authorView);
 	
    self.addEventListener('page', function(e){
@@ -61,13 +63,23 @@ function PageAuthorView(_args) {
 	
 	var pageAuthorHide = Ti.UI.createAnimation({
 		duration: 500,
-		opacity: 0.0,
+		opacity: 0.1,
 		curve: Titanium.UI.ANIMATION_CURVE_EASE_IN
 	});
 	
 	var animationHandler = function() {
  
 	};
+	
+		self.addEventListener('dblclick',function()
+	{
+	   self.animate(pageAuthorShow);
+	});
+	
+	Ti.App.addEventListener('web:showPageNum',function()
+	{
+	   self.animate(pageAuthorShow);
+	});
 
 	return self;
 };

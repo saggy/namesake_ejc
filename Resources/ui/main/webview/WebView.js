@@ -6,7 +6,7 @@ function WebView(_args) {
 	var url = bookDir+'Page0001.html';
 
 	// code for popupmenu options
-	var NOTE = '0', BOOKMARK = '1', HIGHLIGHT = '2';
+	var NOTE = '0', BOOKMARK = '1', HIGHLIGHT = '2', NEW = '3';
 	var self = Ti.UI.createWebView({
 		top : 0,
 		url : url,
@@ -16,7 +16,7 @@ function WebView(_args) {
     	contentWidth:'auto',
     	contentHeight:'auto',
     	willHandleTouches: false,
-    	popupMenu: ["Note", "Bookmark", "Highlight"],
+    	popupMenu: ["Note", "Bookmark", "Highlight", "New Highlight"],
     	pageAuthorView: []
 	}); 
 	
@@ -28,6 +28,7 @@ function WebView(_args) {
 	
 
 	self.goToPage = function(page){
+		Ti.App.fireEvent('app:unload', {});
 		pageString = '';
 		for(var i = self.maxPages; i > 1; i /= 10){
 			if(page<i){
@@ -102,7 +103,7 @@ function WebView(_args) {
 					Ti.App.fireEvent('app:addBookmark',a);
 					break;
 				case 'highlight':
-					Ti.App.fireEvent('app:addHighlight', a);
+					//Ti.App.fireEvent('app:addHighlight', a);
 					break;
 			}
 			rs.next();
@@ -166,48 +167,109 @@ console.log(settings[FONT_SIZE].data[curr].value);
 
 	self.addEventListener('selection', function(e) {
 		
-		Ti.App.fireEvent('app:addUserSelection');
 		var annotation = {};
-		var ids = parseIds(e.html);
-		
-		annotation.id = null;
-		annotation.noteText = e.text;
-		annotation.noteHtml = e.html;
-		annotation.startId = ids.first;
-		annotation.endId = ids.last;
-		annotation.page = self.getUrl().split('/').slice(-3).join('/');
-		annotation.pageNo = self.getPage();
-		annotation.created = +new Date();
-		annotation.modified = annotation.created;
-		annotation.note = null;
-		annotation.highlightColor = null;
+		var ids;
+
 	
 		switch(e.index){
 			case NOTE:
+				Ti.App.fireEvent('app:addUserSelection');
+				ids = parseIds(e.html);
+				annotation.id = null;
+				annotation.noteText = e.text;
+				annotation.noteHtml = e.html;
+				annotation.startId = ids.first;
+				annotation.endId = ids.last;
+				annotation.page = self.getUrl().split('/').slice(-3).join('/');
+				annotation.pageNo = self.getPage();
+				annotation.created = +new Date();
+				annotation.modified = annotation.created;
+				annotation.note = null;
+				annotation.highlightColor = null;
+				annotation.anchorNodeId = null;
+				annotation.anchorOffset = null;
+				annotation.focusNodeId = null;
+				annotation.focusOffset = null;
+				annotation.aType = 'note';
 				annotation.aType = 'note';
 				Ti.App.fireEvent('app:addNote', annotation);
 
 				break;
 			case BOOKMARK:
+				Ti.App.fireEvent('app:addUserSelection');
+				ids = parseIds(e.html);
+				annotation.id = null;
+				annotation.noteText = e.text;
+				annotation.noteHtml = e.html;
+				annotation.startId = ids.first;
+				annotation.endId = ids.last;
+				annotation.page = self.getUrl().split('/').slice(-3).join('/');
+				annotation.pageNo = self.getPage();
+				annotation.created = +new Date();
+				annotation.modified = annotation.created;
+				annotation.note = null;
+				annotation.highlightColor = null;
 				annotation.aType = 'bookmark';
+				annotation.anchorNodeId = null;
+				annotation.anchorOffset = null;
+				annotation.focusNodeId = null;
+				annotation.focusOffset = null;
 				Ti.App.fireEvent('saveannotation', annotation);
 				Ti.App.fireEvent('app:addBookmark', annotation);
 				break;
 			case HIGHLIGHT:
+				Ti.App.fireEvent('app:addUserSelection');
+				ids = parseIds(e.html);
+				annotation.id = null;
+				annotation.noteText = e.text;
+				annotation.noteHtml = e.html;
+				annotation.startId = ids.first;
+				annotation.endId = ids.last;
+				annotation.page = self.getUrl().split('/').slice(-3).join('/');
+				annotation.pageNo = self.getPage();
+				annotation.created = +new Date();
+				annotation.modified = annotation.created;
+				annotation.note = null;
+				annotation.highlightColor = null;
 				annotation.aType = 'highlight';
+				annotation.anchorNodeId = null;
+				annotation.anchorOffset = null;
+				annotation.focusNodeId = null;
+				annotation.focusOffset = null;
+				
 				Ti.App.fireEvent('saveannotation', annotation);
 				//Ti.App.fireEvent('app:addHighlight', annotation);
 				self.reload();
 				break;
+			case NEW:
+				annotation.aType = 'highlight';
+				annotation.noteText = e.text;
+				annotation.startId = 0;
+				annotation.endId = 0;
+				annotation.page = self.getUrl().split('/').slice(-3).join('/');
+				annotation.pageNo = self.getPage();
+				annotation.created = +new Date();
+				annotation.modified = annotation.created;
+				annotation.anchorNodeId = null;
+				annotation.anchorOffset = null;
+				annotation.focusNodeId = null;
+				annotation.focusOffset = null;
+				annotation.anchorNodeType = '';
+				annotation.focusNodeType = '';
+				annotation.highlightColor = settings[HIGHLIGHT_COLOR].data[Ti.App.Properties.getInt('highlightColor')].value;
+				annotation.hcIndex = highlightColor;
+				Ti.App.fireEvent('app:saveNewHighlight', annotation);
+				//Ti.App.fireEvent('app:addHighlight', annotation);
+				self.reload();
+				break;
 		}
-	Ti.API.info(annotation.noteText);
-		Ti.API.info(annotation.noteHtml);
-		Ti.API.info(annotation.type);
-		Ti.API.info(annotation.startId);
-		Ti.API.info(annotation.endId);
-		Ti.API.info(annotation.note);
-		Ti.API.info(annotation.page);
-		Ti.API.info(annotation.pageNo);
+	    //Ti.API.info(annotation.noteText);
+		//Ti.API.info(annotation.noteHtml);
+		//Ti.API.info(annotation.type);
+		Ti.API.info('select event of Webview;  page: ' + annotation.page + ', startId: ' + annotation.startId + ', endId: ' + annotation.endId);
+		//Ti.API.info(annotation.note);
+		//Ti.API.info(annotation.page);
+		//Ti.API.info(annotation.pageNo);
 	
 		//alert(JSON.stringify(e));
 	});

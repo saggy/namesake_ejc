@@ -398,6 +398,9 @@ ul.leaders span + span {
 	text-align: right;
 }
 
+mark {
+	background-color: 'yellow'
+}
 .char-style-override-23 {
 	font-weight: bold;
 	font-style: italic;

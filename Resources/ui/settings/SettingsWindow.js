@@ -48,7 +48,9 @@ function SettingsWindow(_args){
 					case 'Highlight Color':
 						row2 = new SettingsTableRow({index: j, title: data[j].title, backgroundColor: data[j].value, children: false, hasCheck: j==highlightColor});
 						row2.addEventListener('click', function(e){
-							self.fireEvent('changeHighlight', {index: this.rowIndex});
+							Ti.App.Properties.setInt('highlightColor', this.rowIndex);
+							highlightColor = this.rowIndex;
+							
 							var data = settingsTable.data[0].rows;
 							
 							for(var k = 0, len3 = data.length; k < len3; k++){
