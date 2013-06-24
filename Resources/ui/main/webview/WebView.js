@@ -168,10 +168,8 @@ console.log(settings[FONT_SIZE].data[curr].value);
 	self.addEventListener('selection', function(e) {
 		
 		var annotation = {};
-<<<<<<< HEAD
 		var ids;
 
-=======
 		var ids = '';//parseIds(e.html);
 		
 		annotation.id = null;
@@ -188,7 +186,6 @@ console.log(settings[FONT_SIZE].data[curr].value);
 		annotation.startOffset = null;
 		annotation.endOffset = null;
 	
->>>>>>> 14669b8b67852716dee7c9ca26d7c92ed48eeed6
 	
 		switch(e.index){
 			case NOTE:
@@ -252,7 +249,6 @@ console.log(settings[FONT_SIZE].data[curr].value);
 				annotation.note = null;
 				annotation.highlightColor = null;
 				annotation.aType = 'highlight';
-<<<<<<< HEAD
 				annotation.anchorNodeId = null;
 				annotation.anchorOffset = null;
 				annotation.focusNodeId = null;
@@ -283,7 +279,7 @@ console.log(settings[FONT_SIZE].data[curr].value);
 				//Ti.App.fireEvent('app:addHighlight', annotation);
 				self.reload();
 				break;
-=======
+
 				annotation.hcIndex = Ti.App.Properties.getInt('highlightColor');
 				annotation.highlightColor = settings[HIGHLIGHT_COLOR].data[annotation.hcIndex].value;
 				Ti.App.fireEvent('app:addUserSelection', annotation);
@@ -292,7 +288,7 @@ console.log(settings[FONT_SIZE].data[curr].value);
 				//Ti.App.fireEvent('app:addHighlight', annotation);
 				self.reload();
 				break;*/
->>>>>>> 14669b8b67852716dee7c9ca26d7c92ed48eeed6
+
 		}
 	    //Ti.API.info(annotation.noteText);
 		//Ti.API.info(annotation.noteHtml);
