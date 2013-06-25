@@ -20,14 +20,15 @@ window.onunload = unload;
 	}
 			
 function load() {
-	//l();
+	l();
 	Ti.App.addEventListener('app:highlightSearchTermWV', highlight_search_term_wv);
 	Ti.App.addEventListener('app:answerquestion', answerquestion);
 	Ti.App.addEventListener('app:addBookmark', add_bookmark);
-	//Ti.App.addEventListener('app:saveNewHighlight', save_new_highlight);
 	
-	Ti.App.addEventListener('app:saveNewHighlight', strange_brew);
+	//Ti.App.addEventListener('app:saveNewHighlight', save_new_highlight);
 	//Ti.App.addEventListener('app:addHighlight', add_highlight);
+	Ti.App.addEventListener('app:saveNewHighlight', strange_brew);
+
 	Ti.App.addEventListener('app:addHighlight', strange_brew_add_highlight);
 	Ti.App.addEventListener('app:addSearchHighlight', add_search_highlight);
 	Ti.App.addEventListener('app:addNote', add_note);
@@ -67,6 +68,34 @@ function l() {
 for (var i=0, max=all.length; i < max; i++) {
      // Do something with the element here
      all[i].setAttribute("i", i);
+     var onClick = all[i].getAttribute('onclick');
+     if(typeof(onClick) !== 'undefined' && onClick != null){
+     	switch(onClick){
+			case 'answer(this)':
+				all[i].className = 'answer';
+				break;
+			case 'blankfill(this)':
+				all[i].className = 'blankfill';
+				break;
+		}
+	}
+	
+	var elClass = all[i].className;
+	if(typeof(elClass) !== 'undefined' && elClass != null){
+		switch(elClass){
+			case 'answer':
+				all[i].id = 'a'+i;
+				break;
+			case 'blankfill':
+				all[i].id = 'bf'+i;
+				var blanks = all[i].innerHTML.length;
+				all[i].style.minWidth = blanks + 'em';
+				all[i].innerHTML = '';
+				break;
+		}
+	}
+	
+	
 }
 }
 

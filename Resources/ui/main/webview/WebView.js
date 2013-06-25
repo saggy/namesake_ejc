@@ -110,34 +110,6 @@ function WebView(_args) {
 		}
 		rs.close();
 		db.close();
-/*		
-		if(Ti.App.Properties.hasProperty('fontSize')){
-			if(typeof(self.fontSize) === 'undefined'){
-				var prev = DEFAULT_FONT_SIZE;
-				var curr = Ti.App.Properties.getInt('fontSize');
-console.log('i - p: ' + prev + ' c:' +curr);
-				Ti.App.fireEvent('app:changeFontSizeWV', { previous : settings[FONT_SIZE].data[prev].value,
-					current : settings[FONT_SIZE].data[curr].value });
-				self.fontSize = curr;
-			}
-			else if( self.fontSize != Ti.App.Properties.getInt('fontSize')){
-				var prev = self.fontSize;
-				var curr = Ti.App.Properties.getInt('fontSize');
-console.log('i - p: ' + prev + ' c:' +curr);
-				Ti.App.fireEvent('app:changeFontSizeWV', { previous : settings[FONT_SIZE].data[prev].value,
-					current : settings[FONT_SIZE].data[curr].value });
-				self.fontSize = curr;
-			}
-/*			
-			else{
-				var prev = DEFAULT_FONT_SIZE;
-				var curr = Ti.App.Properties.getInt('fontSize');
-console.log('e - p: ' + prev + ' c:' +curr);
-console.log(settings[FONT_SIZE].data[curr].value);
-				Ti.App.fireEvent('app:changeFontSizeWV', { previous : settings[FONT_SIZE].data[prev].value,
-					current : settings[FONT_SIZE].data[curr].value });
-			}
-		}*/
 
 	});
 	function parseIds(html){
