@@ -80,7 +80,7 @@ for (var i=0, max=all.length; i < max; i++) {
 				all[i].id = 'bf'+i;
 				var blanks = all[i].innerHTML;
 				var minWidth = (blanks.length/2) + 'em';
-				all[i].style.minWidth = minWidth;
+				if (minWidth> 0) all[i].style.minWidth = minWidth;
 				all[i].innerHTML = '';
 				break;
 		}
