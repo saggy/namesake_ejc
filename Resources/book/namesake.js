@@ -216,6 +216,17 @@ function add_user_selection(e) {
 	}
 }
 
+function user_selection_id(){
+	var userSel = window.getSelection();
+	var selRange = userSel.getRangeAt(0);
+	
+	var node = selRange.startContainer;
+	while(node.nodeName !== 'P'){
+		node = node.parentNode;
+	}
+	return node.id;
+}
+
 function change_font_size (e) {
 		var elems = ['textarea','.answertable','.command',
 			'.PoetryText1','.PoetryText2','.PoetryText3','.PoetryText4','.PoetryText5',
@@ -250,7 +261,7 @@ function add_note (e) {
 	var annotation = JSON.stringify(e);
 	var noteView = "<div id='note" + id + "'><span class='mynotesheader' onclick='saveNote(this)' id='header" + id + "' annotation='"+annotation+
 			"'></span><textarea id='text" + id + "' onblur='saveNote(this)' annotation='"+annotation+"'>"+e.note +"</textarea></div>";
-	var $p = findEnclosingP(e.startId);
+	var $p = $('#'+e.startId);
 	var previous = $p.attr('note');
 	previous = previous ? previous : false;
 	//previous = previous=='true' ? true : false;
@@ -262,7 +273,7 @@ function add_note (e) {
 		/*
 		var pHtml = $p.html();
 		$p.html(pHtml+noteView);*/
-		$p = findEnclosingP(e.startId);
+		$p = $(e.startId);
 		$p.attr('note', true)
 	}
 	
@@ -311,7 +322,7 @@ function add_bookmark (e) {
 	var id = 'bookmark' + e.startId + '_' + e.endId;
 	var imageTag = '<img id="'+id+'" alt="" src="'+imageSrc+'" height="'+height+'" width="'+width+'" />';
 	var id = e.startId;
-	var $p = findEnclosingP(id);
+	var $p = $('#'+e.startId);
 	var pHtml = $p.html();
 	
 	//alert(pHtml);

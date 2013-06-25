@@ -110,8 +110,38 @@ function WebView(_args) {
 		}
 		rs.close();
 		db.close();
+/*		
+		if(Ti.App.Properties.hasProperty('fontSize')){
+			if(typeof(self.fontSize) === 'undefined'){
+				var prev = DEFAULT_FONT_SIZE;
+				var curr = Ti.App.Properties.getInt('fontSize');
+console.log('i - p: ' + prev + ' c:' +curr);
+				Ti.App.fireEvent('app:changeFontSizeWV', { previous : settings[FONT_SIZE].data[prev].value,
+					current : settings[FONT_SIZE].data[curr].value });
+				self.fontSize = curr;
+			}
+			else if( self.fontSize != Ti.App.Properties.getInt('fontSize')){
+				var prev = self.fontSize;
+				var curr = Ti.App.Properties.getInt('fontSize');
+console.log('i - p: ' + prev + ' c:' +curr);
+				Ti.App.fireEvent('app:changeFontSizeWV', { previous : settings[FONT_SIZE].data[prev].value,
+					current : settings[FONT_SIZE].data[curr].value });
+				self.fontSize = curr;
+			}
+/*			
+			else{
+				var prev = DEFAULT_FONT_SIZE;
+				var curr = Ti.App.Properties.getInt('fontSize');
+console.log('e - p: ' + prev + ' c:' +curr);
+console.log(settings[FONT_SIZE].data[curr].value);
+				Ti.App.fireEvent('app:changeFontSizeWV', { previous : settings[FONT_SIZE].data[prev].value,
+					current : settings[FONT_SIZE].data[curr].value });
+			}
+		}*/
 
 	});
+	
+	/*
 	function parseIds(html){
 		var id = {};
 		var els = html.split('<span id=');
@@ -135,7 +165,7 @@ function WebView(_args) {
 		id.first = getId(els[first]);
 		id.last = getId(els[last]);
 		return id;
-	}
+	}*/
 
 	self.addEventListener('selection', function(e) {
 		
@@ -161,13 +191,15 @@ function WebView(_args) {
 	
 		switch(e.index){
 			case NOTE:
-				Ti.App.fireEvent('app:addUserSelection');
-				ids = parseIds(e.html);
+				var id = self.evalJS('user_selection_id()');
+			//console.log(id);
+				//Ti.App.fireEvent('app:addUserSelection');
+				//ids = parseIds(e.html);
 				annotation.id = null;
 				annotation.noteText = e.text;
 				annotation.noteHtml = e.html;
-				annotation.startId = ids.first;
-				annotation.endId = ids.last;
+				annotation.startId = id;
+				annotation.endId = null;
 				annotation.page = self.getUrl().split('/').slice(-3).join('/');
 				annotation.pageNo = self.getPage();
 				annotation.created = +new Date();
@@ -179,18 +211,20 @@ function WebView(_args) {
 				annotation.focusNodeId = null;
 				annotation.focusOffset = null;
 				annotation.aType = 'note';
-				annotation.aType = 'note';
+			
 				Ti.App.fireEvent('app:addNote', annotation);
 
 				break;
 			case BOOKMARK:
-				Ti.App.fireEvent('app:addUserSelection');
-				ids = parseIds(e.html);
+				var id = self.evalJS('user_selection_id()');
+			//console.log(id);
+				//Ti.App.fireEvent('app:addUserSelection');
+				//ids = parseIds(e.html);
 				annotation.id = null;
 				annotation.noteText = e.text;
 				annotation.noteHtml = e.html;
-				annotation.startId = ids.first;
-				annotation.endId = ids.last;
+				annotation.startId = id;
+				annotation.endId = null;
 				annotation.page = self.getUrl().split('/').slice(-3).join('/');
 				annotation.pageNo = self.getPage();
 				annotation.created = +new Date();
