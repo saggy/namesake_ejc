@@ -256,7 +256,7 @@ function change_font_size (e) {
 }
 
 function add_note (e) {
-		var id = e.startId + '_' + e.endId;
+		var id = e.startId;
 //alert(e.id);
 	e.note = (e.note != null) ? e.note : '';
 	var annotation = JSON.stringify(e);
@@ -320,7 +320,7 @@ function add_bookmark (e) {
 		var imageSrc = '../../images/buttons/bookmarkIcon.png';
 	var height = 20;
 	var width = 20;
-	var id = 'bookmark' + e.startId + '_' + e.endId;
+	var id = 'bookmark' + e.startId;
 	var imageTag = '<img id="'+id+'" alt="" src="'+imageSrc+'" height="'+height+'" width="'+width+'" />';
 	var id = e.startId;
 	var $p = $('#'+e.startId);
