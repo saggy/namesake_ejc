@@ -73,13 +73,22 @@ for (var i=0, max=all.length; i < max; i++) {
      	switch(onClick){
 			case 'answer(this)':
 				all[i].className = 'answer';
+				all[i].id = 'a'+i;
 				break;
 			case 'blankfill(this)':
 				all[i].className = 'blankfill';
+				all[i].id = 'bf'+i;
+				var blanks = all[i].innerHTML;
+				var minWidth = (blanks.length/2) + 'em';
+				all[i].style.minWidth = minWidth;
+				all[i].innerHTML = '';
 				break;
 		}
 	}
 	
+	
+	//have no idea, but this doesn't work in desktop Safari, so moved the logic above
+	/*
 	var elClass = all[i].className;
 	if(typeof(elClass) !== 'undefined' && elClass != null){
 		switch(elClass){
@@ -94,6 +103,7 @@ for (var i=0, max=all.length; i < max; i++) {
 				break;
 		}
 	}
+	*/
 	
 	
 }
