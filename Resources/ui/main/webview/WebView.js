@@ -6,7 +6,7 @@ function WebView(_args) {
 	var url = bookDir+'Page0001.html';
 
 	// code for popupmenu options
-	var NOTE = '0', BOOKMARK = '1', HIGHLIGHT = '2', NEW = '3';
+	var NOTE = '0', BOOKMARK = '1', HIGHLIGHT = '2';
 	var self = Ti.UI.createWebView({
 		top : 0,
 		url : url,
@@ -16,7 +16,7 @@ function WebView(_args) {
     	contentWidth:'auto',
     	contentHeight:'auto',
     	willHandleTouches: false,
-    	popupMenu: ["Note", "Bookmark", "Highlight", "New Highlight"],
+    	popupMenu: ["Note", "Bookmark", "Highlight"],
     	pageAuthorView: []
 	}); 
 	
@@ -110,35 +110,6 @@ function WebView(_args) {
 		}
 		rs.close();
 		db.close();
-/*		
-		if(Ti.App.Properties.hasProperty('fontSize')){
-			if(typeof(self.fontSize) === 'undefined'){
-				var prev = DEFAULT_FONT_SIZE;
-				var curr = Ti.App.Properties.getInt('fontSize');
-console.log('i - p: ' + prev + ' c:' +curr);
-				Ti.App.fireEvent('app:changeFontSizeWV', { previous : settings[FONT_SIZE].data[prev].value,
-					current : settings[FONT_SIZE].data[curr].value });
-				self.fontSize = curr;
-			}
-			else if( self.fontSize != Ti.App.Properties.getInt('fontSize')){
-				var prev = self.fontSize;
-				var curr = Ti.App.Properties.getInt('fontSize');
-console.log('i - p: ' + prev + ' c:' +curr);
-				Ti.App.fireEvent('app:changeFontSizeWV', { previous : settings[FONT_SIZE].data[prev].value,
-					current : settings[FONT_SIZE].data[curr].value });
-				self.fontSize = curr;
-			}
-/*			
-			else{
-				var prev = DEFAULT_FONT_SIZE;
-				var curr = Ti.App.Properties.getInt('fontSize');
-console.log('e - p: ' + prev + ' c:' +curr);
-console.log(settings[FONT_SIZE].data[curr].value);
-				Ti.App.fireEvent('app:changeFontSizeWV', { previous : settings[FONT_SIZE].data[prev].value,
-					current : settings[FONT_SIZE].data[curr].value });
-			}
-		}*/
-
 	});
 	
 	/*
@@ -241,6 +212,7 @@ console.log(settings[FONT_SIZE].data[curr].value);
 				break;
 				
 			case HIGHLIGHT:
+			/*
 				Ti.App.fireEvent('app:addUserSelection');
 				ids = parseIds(e.html);
 				annotation.id = null;
@@ -264,7 +236,7 @@ console.log(settings[FONT_SIZE].data[curr].value);
 				//Ti.App.fireEvent('app:addHighlight', annotation);
 				self.reload();
 				break;
-			case NEW:
+			case NEW:*/
 				annotation.aType = 'highlight';
 				annotation.noteText = e.text;
 				annotation.startId = 0;
@@ -285,15 +257,6 @@ console.log(settings[FONT_SIZE].data[curr].value);
 				//Ti.App.fireEvent('app:addHighlight', annotation);
 				self.reload();
 				break;
-
-				annotation.hcIndex = Ti.App.Properties.getInt('highlightColor');
-				annotation.highlightColor = settings[HIGHLIGHT_COLOR].data[annotation.hcIndex].value;
-				Ti.App.fireEvent('app:addUserSelection', annotation);
-				/*
-				Ti.App.fireEvent('saveannotation', annotation);
-				//Ti.App.fireEvent('app:addHighlight', annotation);
-				self.reload();
-				break;*/
 
 		}
 	    //Ti.API.info(annotation.noteText);

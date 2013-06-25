@@ -33,7 +33,7 @@ function load() {
 	Ti.App.addEventListener('app:addSearchHighlight', add_search_highlight);
 	Ti.App.addEventListener('app:addNote', add_note);
 	Ti.App.addEventListener('app:changeFontSizeWV', change_font_size);
-	Ti.App.addEventListener('app:addUserSelection', add_user_selection);
+	//Ti.App.addEventListener('app:addUserSelection', add_user_selection);
 	Ti.App.addEventListener('app:unload', app_unload);
 	
 	Ti.App.fireEvent('web:addSearchHighlight', {});
@@ -128,6 +128,7 @@ function getElementByI(index)
   return matchingElements[0];
 }
 
+/*
 function add_highlight(e) {
 	var opts = {};
 	if (e.focusNodeId && e.anchorNodeId)	 {
@@ -215,7 +216,7 @@ function add_user_selection(e) {
 		Ti.App.fireEvent('saveannotation', e);
 	}
 }
-
+*/
 function user_selection_id(){
 	var userSel = window.getSelection();
 	var selRange = userSel.getRangeAt(0);
@@ -273,7 +274,7 @@ function add_note (e) {
 		/*
 		var pHtml = $p.html();
 		$p.html(pHtml+noteView);*/
-		$p = $(e.startId);
+		$p = $('#'+e.startId);
 		$p.attr('note', true)
 	}
 	
