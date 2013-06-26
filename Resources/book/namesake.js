@@ -20,7 +20,6 @@ window.onunload = unload;
 	}
 			
 function load() {
-	l();
 	Ti.App.addEventListener('app:highlightSearchTermWV', highlight_search_term_wv);
 	Ti.App.addEventListener('app:answerquestion', answerquestion);
 	Ti.App.addEventListener('app:addBookmark', add_bookmark);
