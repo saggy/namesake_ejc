@@ -546,7 +546,7 @@ function strange_brew(annotation) {
     var stopOffset = page.indexOf(AFTER); 
     
     stopNode.parentNode.removeChild(stopNode);	
-
+/*
 	//OK now imagine this was in a different event listener that was being tasked to highlight text nodes, and you had
 	//the text node offset and length from the beginning of the document.
 	
@@ -676,12 +676,11 @@ var x = 0;
         		  }
 
 	}
-	
+	*/
 				annotation.startId = startOffset;
 				annotation.endId = stopOffset;
-
+	//strage_brew_add_highlight(annotation);
 	//Ti.App.fireEvent('web:info', {info: document.body.innerHTML});
-	
 	Ti.App.fireEvent('saveannotation', annotation); 
 	
 	
