@@ -76,13 +76,18 @@ function WebView(_args) {
 			//	 'note_offset NUMERIC, note_parent_id TEXT, row_index INTEGER, page TEXT, page_no INTEGER, start_id NUMERIC, end_id NUMERIC, type TEXT, note TEXT, highlight_color INTEGER, create_date TEXT, modify_date TEXT)');
 		//db.execute('CREATE TABLE IF NOT EXISTS answer (answer_id INTEGER PRIMARY KEY, answer_elementid TEXT, answer_text TEXT, page TEXT, page_no INTEGER, type TEXT, create_date TEXT, modify_date TEXT)');
 		
-		var rs = db.execute('SELECT answer_elementid, answer_text FROM answer WHERE page=?',page);
+		var rs = db.execute('SELECT answer_elementid, answer_text, type FROM answer WHERE page=?',page);
 		
 		
 		while(rs.isValidRow()){
 			var a = { text: rs.fieldByName('answer_text'), elementId: rs.fieldByName('answer_elementid')};
 
-			Ti.App.fireEvent('app:answerquestion',a);
+			if(rs.fieldByName('type') == 'dropdown'){
+				Ti.App.fireEvent('app:loadDropdown', a);	
+			}
+			else{
+				Ti.App.fireEvent('app:answerquestion',a);
+			}
 			rs.next();
 		}
 		rs.close();

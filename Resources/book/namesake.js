@@ -18,15 +18,40 @@ window.onunload = unload;
 		document.execCommand(cmd, ui, val);
 		document.body.contentEditable='false';
 	}
-			
+	
+function saveDropdown(sel){
+	var chosen = sel.options[sel.selectedIndex];
+	if(chosen.value != '0'){
+		dropdown({id: sel.id, text: chosen.text});
+	}
+}
+function loadDropdown(a){
+	var id = a.elementId;
+	var val =  a.text;
+
+	var sel = document.getElementById(id);
+//	sel.selectedIndex = 0;
+
+	for(var i=0, len=sel.options.length; i < len; i++){	
+		if(sel.options[i].text == val){
+			sel.options[i].selected = true;
+			break;
+		}
+	}
+}
+
+function dropdown(sel){
+	Ti.App.fireEvent('dropdown', sel);
+}
+		
 function load() {
 	Ti.App.addEventListener('app:highlightSearchTermWV', highlight_search_term_wv);
 	Ti.App.addEventListener('app:answerquestion', answerquestion);
 	Ti.App.addEventListener('app:addBookmark', add_bookmark);
-	
+	Ti.App.addEventListener('app:loadDropdown', loadDropdown);
 	//Ti.App.addEventListener('app:saveNewHighlight', save_new_highlight);
 	//Ti.App.addEventListener('app:addHighlight', add_highlight);
-	Ti.App.addEventListener('app:saveNewHighlight', strange_brew);
+	Ti.App.addEventListener('app:saveNewHighlight', loadDropdown);
 
 	Ti.App.addEventListener('app:addHighlight', strange_brew_add_highlight);
 	Ti.App.addEventListener('app:addSearchHighlight', add_search_highlight);

@@ -263,6 +263,20 @@ function mainWindow() {
 		});
 	});
 	
+	Ti.App.addEventListener('dropdown', function(e) {
+		var answer = findAnswer({id: e.id});
+		
+		answer.text = e.text;
+		answer.created = +new Date();
+		answer.modified = answer.created;
+		answer.page = webView.getUrl().split('/').splice(-3).join('/');
+		answer.pageNo = webView.getPage();
+		answer.type = 'dropdown';
+		
+		console.log(JSON.stringify(answer));
+		saveAnswer(answer);
+		webView.reload();
+	});
 
 	return self;
 };
