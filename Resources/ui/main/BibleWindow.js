@@ -41,6 +41,22 @@ function BibleWindow(_args){
 	top:0,
 	zIndex: 1
 	 });
+	 
+	 
+	     Ti.App.addEventListener('orient', function (e) {//just re-calculate on orientation change
+    		if(e.portrait===true||e.landscape===true) {
+    			
+    			self.remove(navBar);
+    			
+				navBar =  Titanium.UI.iOS.createToolbar({ barColor:'#0096DE', 
+				items:[title, flexSpace, ceb, flexSpace, close],
+				top:0,
+				zIndex: 1 });
+				
+				self.add(navBar);
+		} else { //do nothing
+			}
+	});
 
 	
 	var webView = Ti.UI.createWebView({
@@ -75,7 +91,14 @@ function BibleWindow(_args){
 			}
 		}
 		
-		title.setText(longBookName + ' ' + chapter);
+		//title.setText(longBookName + ' ' + chapter);
+		title = Ti.UI.createLabel({
+		text: longBookName + ' ' + chapter,
+		color: 'white'
+		});
+		
+		navBar.items = [title, flexSpace, ceb, flexSpace, close];
+				
 		var url = bibleDir + htmlFile + '?book=' + book + '&chapter=' + chapter + '&verse=' + verse;
 		if(searchTerm != ''){
 			url += '&search_term='+searchTerm.replace(' ','%20');
