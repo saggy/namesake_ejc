@@ -38,12 +38,15 @@ function ResponseDialog(_args){
   		textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT
 	});
 	
-	var textField = Ti.UI.createTextField({
+	var textField = Ti.UI.createTextArea({
 		height: 250,
 		bottom: 50,
 		left: 10,
 		right: 10,
-		borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+		borderWidth: 2,
+		borderColor: '#bbb',
+		borderRadius: 5,
+		//borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
 		verticalAlign: Ti.UI.TEXT_VERTICAL_ALIGNMENT_TOP,
 		autocapitalization: Titanium.UI.TEXT_AUTOCAPITALIZATION_NONE,
 		value: _args.answer
