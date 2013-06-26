@@ -152,7 +152,7 @@ Ti.API.info(a.info);
 });
 
 
-// used to load text index on a one time basis
+/* used to load text index on a one time basis
 Ti.App.addEventListener('web:savePageToBookSearch',function(a){
 
 	var db = Ti.Database.open('namesake');
@@ -167,7 +167,7 @@ Ti.App.addEventListener('web:savePageToBookSearch',function(a){
 	
 });
 
-/* used to load text index on a one time basis */
+
 Ti.App.addEventListener('web:resetBookSearch',function(a){
 
 	var db = Ti.Database.open('namesake');
@@ -178,5 +178,5 @@ Ti.App.addEventListener('web:resetBookSearch',function(a){
 	db.close()
 	
 });
-//*/
+*/
 
