@@ -51,7 +51,7 @@ function load() {
 	Ti.App.addEventListener('app:loadDropdown', loadDropdown);
 	//Ti.App.addEventListener('app:saveNewHighlight', save_new_highlight);
 	//Ti.App.addEventListener('app:addHighlight', add_highlight);
-	Ti.App.addEventListener('app:saveNewHighlight', loadDropdown);
+	Ti.App.addEventListener('app:saveNewHighlight', strange_brew);
 
 	Ti.App.addEventListener('app:addHighlight', strange_brew_add_highlight);
 	Ti.App.addEventListener('app:addSearchHighlight', add_search_highlight);

@@ -147,14 +147,10 @@ function WebView(_args) {
 		
 		var annotation = {};
 		var ids;
-
-		var ids = '';//parseIds(e.html);
 		
 		annotation.id = null;
 		annotation.noteText = e.text;
 		annotation.noteHtml = e.html;
-		annotation.startId = ids.first;
-		annotation.endId = ids.last;
 		annotation.page = self.getUrl().split('/').slice(-3).join('/');
 		annotation.pageNo = self.getPage();
 		annotation.created = +new Date();
@@ -176,12 +172,6 @@ function WebView(_args) {
 				annotation.noteHtml = e.html;
 				annotation.startId = id;
 				annotation.endId = null;
-				annotation.page = self.getUrl().split('/').slice(-3).join('/');
-				annotation.pageNo = self.getPage();
-				annotation.created = +new Date();
-				annotation.modified = annotation.created;
-				annotation.note = null;
-				annotation.highlightColor = null;
 				annotation.anchorNodeId = null;
 				annotation.anchorOffset = null;
 				annotation.focusNodeId = null;
@@ -201,12 +191,7 @@ function WebView(_args) {
 				annotation.noteHtml = e.html;
 				annotation.startId = id;
 				annotation.endId = null;
-				annotation.page = self.getUrl().split('/').slice(-3).join('/');
-				annotation.pageNo = self.getPage();
-				annotation.created = +new Date();
-				annotation.modified = annotation.created;
-				annotation.note = null;
-				annotation.highlightColor = null;
+
 				annotation.aType = 'bookmark';
 				annotation.anchorNodeId = null;
 				annotation.anchorOffset = null;
@@ -246,10 +231,7 @@ function WebView(_args) {
 				annotation.noteText = e.text;
 				annotation.startId = 0;
 				annotation.endId = 0;
-				annotation.page = self.getUrl().split('/').slice(-3).join('/');
-				annotation.pageNo = self.getPage();
-				annotation.created = +new Date();
-				annotation.modified = annotation.created;
+
 				annotation.anchorNodeId = null;
 				annotation.anchorOffset = null;
 				annotation.focusNodeId = null;

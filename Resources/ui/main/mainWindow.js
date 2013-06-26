@@ -273,7 +273,6 @@ function mainWindow() {
 		answer.pageNo = webView.getPage();
 		answer.type = 'dropdown';
 		
-		console.log(JSON.stringify(answer));
 		saveAnswer(answer);
 		webView.reload();
 	});
