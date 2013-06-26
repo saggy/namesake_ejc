@@ -240,7 +240,7 @@ function add_note (e) {
 //alert(e.id);
 	e.note = (e.note != null) ? e.note : '';
 	var annotation = JSON.stringify(e);
-	var noteView = "<div id='note" + id + "'><span class='mynotesheader' onclick='saveNote(this)' id='header" + id + "' annotation='"+annotation+
+	var noteView = "<div id='note" + id + "' class='notesdiv'><span class='mynotesheader' onclick='saveNote(this)' id='header" + id + "' annotation='"+annotation+
 			"'></span><textarea id='text" + id + "' onblur='saveNote(this)' annotation='"+annotation+"'>"+e.note +"</textarea></div>";
 	var $p = $('#'+e.startId);
 	var previous = $p.attr('note');
@@ -260,7 +260,7 @@ function add_note (e) {
 	
 }
 
-function add_search_highlight(e) {
+function add_search_highlight(e) { //http://www.nsftools.com/misc/SearchAndHighlight.htm, doesn't use nodes, probably not fast
 	var searchTerm = e.searchWord;
     var highlightStartTag = "<mark>";
     var highlightEndTag = "</mark>";
@@ -292,41 +292,6 @@ function add_search_highlight(e) {
 	document.body.innerHTML = newText;
 }
 
-function add_search_highlight_old(e) {
-	var searchWord = e.searchWord;
-
-var firstLetter = searchWord.charAt(0);
-var restOfWord = searchWord.slice(1); 
-
-var spans = document.getElementsByTagName("span"),
-    index, node, idAttr;
-
-
-for (index = 0; index < spans.length; ++index) {
-    node = spans.item(index);
-    idAttr = node.getAttribute("id");
-    if (idAttr && node.firstChild.data.toLowerCase() == firstLetter.toLowerCase() && 0 == node.nextSibling.nodeValue.indexOf(restOfWord) ) {
-    	
-    	if (node.nextSibling.nodeValue.charAt(restOfWord.length) == ' '||node.nextSibling.nodeValue.charAt(restOfWord.length) == '.'||
-    	    node.nextSibling.nodeValue.charAt(restOfWord.length) == ','||node.nextSibling.nodeValue.charAt(restOfWord.length) == '?'||
-    	    node.nextSibling.nodeValue.charAt(restOfWord.length) == '!'||node.nextSibling.nodeValue.charAt(restOfWord.length) == '"'||
-    	    node.nextSibling.nodeValue.charAt(restOfWord.length) == false) {
-
-		node.style.backgroundColor = '#F4F776';
-
-		var spannode = document.createElement('span');
-    	spannode.style.backgroundColor = '#F4F776';
-    	spannode.appendChild(document.createTextNode(node.nextSibling.nodeValue));
-    	
-    	var newnode = node.parentNode.insertBefore(spannode, node.nextSibling);
-    	node.parentNode.removeChild(newnode.nextSibling);
-    	}
-			
-    }
-}
-
-	
-}
 
 function add_bookmark (e) {
 		var imageSrc = '../../images/buttons/bookmarkIcon.png';
@@ -493,6 +458,8 @@ function strange_brew(annotation) {
 	for (var i=0, max=elements.length; i < max; i++) {
      elements[i].innerHTML = '';
 }
+	//remove notes so that the count isn't put off by user notes
+	$('.notesdiv').remove();
 
 
 		var sel = window.getSelection();
