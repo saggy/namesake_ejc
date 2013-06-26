@@ -151,3 +151,32 @@ Ti.API.info(a.info);
 	
 });
 
+
+// used to load text index on a one time basis
+Ti.App.addEventListener('web:savePageToBookSearch',function(a){
+
+	var db = Ti.Database.open('namesake');
+	
+	var page = a.url.split('/').splice(-3).join('/');
+	var page_no = webView.page;
+	var content=a.content;
+	
+	var query = 'INSERT INTO bookSearch (page, page_no, content) VALUES (?,?,?)';
+	db.execute(query, page, page_no, content);
+	db.close()
+	
+});
+
+/* used to load text index on a one time basis */
+Ti.App.addEventListener('web:resetBookSearch',function(a){
+
+	var db = Ti.Database.open('namesake');
+	
+	
+	var query = 'DELETE from bookSearch;';
+	db.execute(query);
+	db.close()
+	
+});
+//*/
+

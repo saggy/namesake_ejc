@@ -45,6 +45,10 @@ function dropdown(sel){
 }
 		
 function load() {
+	//Used on a one time basis
+	//Ti.App.fireEvent('web:resetBookSearch', {});	
+	Ti.App.fireEvent('web:savePageToBookSearch', {content: document.body.innerText, url: document.URL});	
+	
 	Ti.App.addEventListener('app:highlightSearchTermWV', highlight_search_term_wv);
 	Ti.App.addEventListener('app:answerquestion', answerquestion);
 	Ti.App.addEventListener('app:addBookmark', add_bookmark);
