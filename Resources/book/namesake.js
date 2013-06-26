@@ -79,8 +79,8 @@ for (var i=0, max=all.length; i < max; i++) {
 				all[i].className = 'blankfill';
 				all[i].id = 'bf'+i;
 				var blanks = all[i].innerHTML;
-				var minWidth = (blanks.length/2) + 'em';
-				if (minWidth> 0) all[i].style.minWidth = minWidth;
+				var minWidth = (blanks.length/2);
+				if (minWidth> 0) all[i].style.minWidth = minWidth + 'em';
 				all[i].innerHTML = '';
 				break;
 		}
