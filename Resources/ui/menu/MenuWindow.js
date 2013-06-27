@@ -18,10 +18,13 @@ function MenuWindow(_args){
   	borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
   	color: '#336699',
   	width: 100,
-  	keyboardType: Ti.UI.KEYBOARD_NUMBER_PAD
+  	keyboardType: Ti.UI.KEYBOARD_NUMBER_PAD,
+  	value : 'page #'
 	});
 	
-	
+	textField.addEventListener('focus', function(e) {
+		if (e.value == 'page #') textField.value=''; 
+	});
 	
 	textField.addEventListener('change', function(e) {
       e.source.value = e.source.value.replace(/[^0-9]+/,""); //you can enter numbers or nothing.
