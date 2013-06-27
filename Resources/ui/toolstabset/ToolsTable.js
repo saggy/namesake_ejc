@@ -23,7 +23,7 @@ function ToolsTable(_args) {
 		top: 50,
 		right: 0,
 		width: 400,
-		height: 'auto',
+		height: 400,
 		backgroundColor:'#000000',
 		borderRadius: 0 
 	});
@@ -67,7 +67,7 @@ function ToolsTable(_args) {
 	
 
 	var table = Ti.UI.createTableView({
-		height: 400,
+		height: 310,
 		zIndex: 3,
   		top: 40,
   		right: 0,
