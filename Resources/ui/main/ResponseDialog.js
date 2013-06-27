@@ -40,12 +40,13 @@ function ResponseDialog(_args){
 	
 	var textField = Ti.UI.createTextArea({
 		height: 250,
+		width: 420,
 		bottom: 50,
 		left: 10,
-		right: 10,
 		borderWidth: 2,
 		borderColor: '#bbb',
 		borderRadius: 5,
+		font: {fontSize:18},
 		//borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
 		verticalAlign: Ti.UI.TEXT_VERTICAL_ALIGNMENT_TOP,
 		autocapitalization: Titanium.UI.TEXT_AUTOCAPITALIZATION_NONE,

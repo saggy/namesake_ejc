@@ -38,6 +38,8 @@ function MenuWindow(_args){
       	self.hide();
       	//changePage(Number(z));
       	Ti.App.fireEvent('gotoPage', {page: Number(z)});
+      	textField.value = 'page #';
+      	
       } else {
       	var alertDialog = Titanium.UI.createAlertDialog({
     title: 'Page Number',
