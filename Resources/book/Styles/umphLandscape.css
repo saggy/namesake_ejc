@@ -459,3 +459,35 @@ color: #a000a0;
 	 height: 100%;
 
 }
+
+ul.toc li {
+	clear:left;
+	border-bottom:dashed 1px #aaa;
+	height:1.05em;
+	margin-top:10px;
+	position:relative;
+}
+ul.toc a, ol.toc span {
+	background:#fff;
+	padding:0 3px 0 0;
+	float:left;
+	position:absolute;
+	text-decoration:none;
+}
+ul.toc a {
+	padding:0 0 0 3px;
+	right:0;
+}
+ul.toc ol {
+	list-style:lower-roman;
+	margin:1.5em 0 1em 5%;
+	padding:0;
+	background:#fff;
+	float:left;
+	display:block;
+	width:95%;
+}
+
+.toctable {
+	margin-left: 100;
+}
