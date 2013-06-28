@@ -14,7 +14,7 @@ var tablist = new Tablist();
 var images  = new Images();
 var themevalues  = new ThemeValues();
 
-Ti.App.Properties.setString('fontSize', 0);
+if(!Ti.App.Properties.hasProperty('fontSize')){ Ti.App.Properties.setString('fontSize', 0); }
 
 (function() {
 		
@@ -39,7 +39,7 @@ var pageAuthorView;
 var bookDir;
 var currentSearchTerm = '';
 	var dbName = 'namesake';
-	Ti.App.Properties.setInt('highlightColor', 1);
+	if(!Ti.App.Properties.hasProperty('highlightColor')){ Ti.App.Properties.setInt('highlightColor', 1); }
 	var highlightColor = (!Ti.App.Properties.hasProperty('highlightColor')) ? DEFAULT_HIGHLIGHT_COLOR : Ti.App.Properties.getInt('highlightColor'); 
 	
 
